@@ -1,0 +1,2 @@
+img = dicomread('VOLUMEMERGE/VOLUMEMERGE/IRM DE LA COLONNE CERVICO-DORSO-LOMBAIRE/MobiView - 305/IM-0001-0001.dcm');
+imshow(img,[]);
