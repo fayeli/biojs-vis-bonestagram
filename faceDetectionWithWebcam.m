@@ -20,6 +20,7 @@ videoPlayer = vision.VideoPlayer('Position', [100 100 [frameSize(2), frameSize(1
 runLoop = true;
 numPts = 0;
 frameCount = 0;
+xformAccumulateStarted = false;
 
 while runLoop && frameCount < 1000
 
@@ -56,7 +57,7 @@ while runLoop && frameCount < 1000
     if numPts <10
         %Detection mode.
         bbox = faceDetector.step(videoFrameGray);
-        
+        xformAccumulateStarted = false;
         if ~isempty(bbox)
             % Find corner points inside the detected region.
             points = detectMinEigenFeatures(videoFrameGray, 'ROI', bbox(1, :));
@@ -94,10 +95,12 @@ while runLoop && frameCount < 1000
             
             % Overlay medical scan on top of video
             xray_x = bboxPolygon(7);
-            xray_y = bboxPolygon(8) - scaled_dental_img_h;
+            xray_y = bboxPolygon(8) - scaled_dental_img_h * 0.9;
             xray_point = [xray_x xray_y];
             videoFrame = imoverlay(videoFrame, scaled_dental_img, [xray_y xray_x]);
             test = videoFrame;
+            
+            
         end
     else
         % Tracking mode.
@@ -112,6 +115,18 @@ while runLoop && frameCount < 1000
             % and the new points.
             [xform, oldInliers, visiblePoints] = estimateGeometricTransform(...
                 oldInliers, visiblePoints, 'similarity', 'MaxDistance', 4);
+            
+            % Accumulate the transformations to obtain a transformation that
+            % is the total transformation of the first frame until this
+            % frame
+            
+            if (~xformAccumulateStarted)
+                xform_accum = xform;
+                xformAccumulateStarted = true;
+            else
+                T_accum = xform_accum.T * xform.T;
+                xform_accum = affine2d(T_accum);
+            end
             
             % Save some of the transformation for testing
 %             if frameCount == 100
@@ -147,7 +162,7 @@ while runLoop && frameCount < 1000
             xray_point = transformPointsForward(xform, xray_point);
             
             % Apply the transformation to the medical image
-            scaled_dental_img = imwarp(scaled_dental_img, xform);
+            transformed_dental_img = imwarp(scaled_dental_img, xform_accum);
 
             % Convert the box corners into the [x1 y1 x2 y2 x3 y3 x4 y4]
             % format required by insertShape.
@@ -162,7 +177,7 @@ while runLoop && frameCount < 1000
             % Overlay the medical image
             xray_x = floor(xray_point(1));
             xray_y = floor(xray_point(2));
-            videoFrame = imoverlay(videoFrame, scaled_dental_img, [xray_y xray_x]);
+            videoFrame = imoverlay(videoFrame, transformed_dental_img, [xray_y xray_x]);
             
             % Save some points as test points
 %             if frameCount == 100
