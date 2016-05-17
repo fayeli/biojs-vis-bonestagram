@@ -1,3 +1,6 @@
+% Load medical scan image
+dental_img = imread('./dental-x-ray2.jpg');
+
 % Create the face detector object.
 faceDetector = vision.CascadeObjectDetector();
 
@@ -24,29 +27,29 @@ while runLoop && frameCount < 1000
     videoFrame = snapshot(cam);
     
     % Save some raw frames as test images.
-    if frameCount == 100
-        rawFrame100 = videoFrame;
-    end
-    
-    if frameCount == 101
-        rawFrame101 = videoFrame;
-    end
-    
-    if frameCount == 150
-        rawFrame150 = videoFrame;
-    end
-    
-    if frameCount == 151
-        rawFrame151 = videoFrame;
-    end
-    
-    if frameCount == 200
-        rawFrame200 = videoFrame;
-    end
-    
-    if frameCount == 201
-        rawFrame201 = videoFrame;
-    end
+%     if frameCount == 100
+%         rawFrame100 = videoFrame;
+%     end
+%     
+%     if frameCount == 101
+%         rawFrame101 = videoFrame;
+%     end
+%     
+%     if frameCount == 150
+%         rawFrame150 = videoFrame;
+%     end
+%     
+%     if frameCount == 151
+%         rawFrame151 = videoFrame;
+%     end
+%     
+%     if frameCount == 200
+%         rawFrame200 = videoFrame;
+%     end
+%     
+%     if frameCount == 201
+%         rawFrame201 = videoFrame;
+%     end
     
     videoFrameGray = rgb2gray(videoFrame);
     
@@ -72,7 +75,13 @@ while runLoop && frameCount < 1000
             % is needed to be able to transform the bounding box to display
             % the orientation of the face.
             bboxPoints = bbox2points(bbox(1, :));
-
+            
+            % Scale medical scan to fit bounding box
+            w = bbox(3);
+            scaled_dental_img = imresize(dental_img, [NaN w]);
+            scaled_dental_img_h = size(scaled_dental_img,1);
+            scaled_dental_img_w = size(scaled_dental_img,2);
+            
             % Convert the box corners into the [x1 y1 x2 y2 x3 y3 x4 y4]
             % format required by insertShape.
             bboxPolygon = reshape(bboxPoints', 1, []);
@@ -82,6 +91,13 @@ while runLoop && frameCount < 1000
             
             % Display detected corners.
             videoFrame = insertMarker(videoFrame, xyPoints, '+', 'Color', 'white');
+            
+            % Overlay medical scan on top of video
+            xray_x = bboxPolygon(7);
+            xray_y = bboxPolygon(8) - scaled_dental_img_h;
+            xray_point = [xray_x xray_y];
+            videoFrame = imoverlay(videoFrame, scaled_dental_img, [xray_y xray_x]);
+            test = videoFrame;
         end
     else
         % Tracking mode.
@@ -98,33 +114,40 @@ while runLoop && frameCount < 1000
                 oldInliers, visiblePoints, 'similarity', 'MaxDistance', 4);
             
             % Save some of the transformation for testing
-            if frameCount == 100
-                xForm_at_f100 = xform;
-            end
-            
-            if frameCount == 101
-                xForm_at_f101 = xform;
-            end
-    
-            if frameCount == 150
-                xForm_at_f150 = xform;
-            end
-            
-            if frameCount == 151
-                xForm_at_f151 = xform;
-            end
-    
-            if frameCount == 200
-                xForm_at_f200 = xform;
-            end
-            
-            if frameCount == 201
-                xForm_at_f2oo = xform;
-            end
+%             if frameCount == 100
+%                 xForm_at_f100 = xform;
+%             end
+%             
+%             if frameCount == 101
+%                 xForm_at_f101 = xform;
+%             end
+%     
+%             if frameCount == 150
+%                 xForm_at_f150 = xform;
+%             end
+%             
+%             if frameCount == 151
+%                 xForm_at_f151 = xform;
+%             end
+%     
+%             if frameCount == 200
+%                 xForm_at_f200 = xform;
+%             end
+%             
+%             if frameCount == 201
+%                 xForm_at_f2oo = xform;
+%             end
             
             
             % Apply the transformation to the bounding box.
             bboxPoints = transformPointsForward(xform, bboxPoints);
+            
+            % Apply the transformation to the point location of the medical
+            % image
+            xray_point = transformPointsForward(xform, xray_point);
+            
+            % Apply the transformation to the medical image
+            scaled_dental_img = imwarp(scaled_dental_img, xform);
 
             % Convert the box corners into the [x1 y1 x2 y2 x3 y3 x4 y4]
             % format required by insertShape.
@@ -136,36 +159,41 @@ while runLoop && frameCount < 1000
             % Display tracked points.
             videoFrame = insertMarker(videoFrame, visiblePoints, '+', 'Color', 'white');
             
+            % Overlay the medical image
+            xray_x = floor(xray_point(1));
+            xray_y = floor(xray_point(2));
+            videoFrame = imoverlay(videoFrame, scaled_dental_img, [xray_y xray_x]);
+            
             % Save some points as test points
-            if frameCount == 100
-                oldPoints_at_f100 = oldPoints;
-                visiblePoints_at_f100 = visiblePoints;
-            end
-            
-            if frameCount == 101
-                oldPoints_at_f101 = oldPoints;
-                visiblePoints_at_f101 = visiblePoints;
-            end
-    
-            if frameCount == 150
-                oldPoints_at_f150 = oldPoints;
-                visiblePoints_at_f150 = visiblePoints;
-            end
-            
-            if frameCount == 151
-                oldPoints_at_f151 = oldPoints;
-                visiblePoints_at_f151 = visiblePoints;
-            end
-    
-            if frameCount == 200
-                oldPoints_at_f200 = oldPoints;
-                visiblePoints_at_f200 = visiblePoints;
-            end
-            
-            if frameCount == 201
-                oldPoints_at_f201 = oldPoints;
-                visiblePoints_at_f201 = visiblePoints;
-            end
+%             if frameCount == 100
+%                 oldPoints_at_f100 = oldPoints;
+%                 visiblePoints_at_f100 = visiblePoints;
+%             end
+%             
+%             if frameCount == 101
+%                 oldPoints_at_f101 = oldPoints;
+%                 visiblePoints_at_f101 = visiblePoints;
+%             end
+%     
+%             if frameCount == 150
+%                 oldPoints_at_f150 = oldPoints;
+%                 visiblePoints_at_f150 = visiblePoints;
+%             end
+%             
+%             if frameCount == 151
+%                 oldPoints_at_f151 = oldPoints;
+%                 visiblePoints_at_f151 = visiblePoints;
+%             end
+%     
+%             if frameCount == 200
+%                 oldPoints_at_f200 = oldPoints;
+%                 visiblePoints_at_f200 = visiblePoints;
+%             end
+%             
+%             if frameCount == 201
+%                 oldPoints_at_f201 = oldPoints;
+%                 visiblePoints_at_f201 = visiblePoints;
+%             end
             
             % Reset the points.
             oldPoints = visiblePoints;
@@ -174,29 +202,29 @@ while runLoop && frameCount < 1000
     end
     
     % Save some annotated frames as test images.
-    if frameCount == 100
-        annotatedFrame100 = videoFrame;
-    end
-    
-    if frameCount == 101
-        annotatedFrame101 = videoFrame;
-    end
-    
-    if frameCount == 150
-        annotatedFrame150 = videoFrame;
-    end
-    
-    if frameCount == 151
-        annotatedFrame151 = videoFrame;
-    end
-    
-    if frameCount == 200
-        annotatedFrame200 = videoFrame;
-    end
-    
-    if frameCount == 201
-        annotatedFrame201 = videoFrame;
-    end
+%     if frameCount == 100
+%         annotatedFrame100 = videoFrame;
+%     end
+%     
+%     if frameCount == 101
+%         annotatedFrame101 = videoFrame;
+%     end
+%     
+%     if frameCount == 150
+%         annotatedFrame150 = videoFrame;
+%     end
+%     
+%     if frameCount == 151
+%         annotatedFrame151 = videoFrame;
+%     end
+%     
+%     if frameCount == 200
+%         annotatedFrame200 = videoFrame;
+%     end
+%     
+%     if frameCount == 201
+%         annotatedFrame201 = videoFrame;
+%     end
     
     % Display the annotated video frame using the video player object.
     step(videoPlayer, videoFrame);
