@@ -22,8 +22,33 @@ while runLoop && frameCount < 1000
 
     % Get the next frame.
     videoFrame = snapshot(cam);
+    
+    % Save some raw frames as test images.
+    if frameCount == 100
+        rawFrame100 = videoFrame;
+    end
+    
+    if frameCount == 101
+        rawFrame101 = videoFrame;
+    end
+    
+    if frameCount == 150
+        rawFrame150 = videoFrame;
+    end
+    
+    if frameCount == 151
+        rawFrame151 = videoFrame;
+    end
+    
+    if frameCount == 200
+        rawFrame200 = videoFrame;
+    end
+    
+    if frameCount == 201
+        rawFrame201 = videoFrame;
+    end
+    
     videoFrameGray = rgb2gray(videoFrame);
-    frameCount = frameCount +1;
     
     if numPts <10
         %Detection mode.
@@ -71,7 +96,33 @@ while runLoop && frameCount < 1000
             % and the new points.
             [xform, oldInliers, visiblePoints] = estimateGeometricTransform(...
                 oldInliers, visiblePoints, 'similarity', 'MaxDistance', 4);
-
+            
+            % Save some of the transformation for testing
+            if frameCount == 100
+                xForm_at_f100 = xform;
+            end
+            
+            if frameCount == 101
+                xForm_at_f101 = xform;
+            end
+    
+            if frameCount == 150
+                xForm_at_f150 = xform;
+            end
+            
+            if frameCount == 151
+                xForm_at_f151 = xform;
+            end
+    
+            if frameCount == 200
+                xForm_at_f200 = xform;
+            end
+            
+            if frameCount == 201
+                xForm_at_f2oo = xform;
+            end
+            
+            
             % Apply the transformation to the bounding box.
             bboxPoints = transformPointsForward(xform, bboxPoints);
 
@@ -84,17 +135,77 @@ while runLoop && frameCount < 1000
 
             % Display tracked points.
             videoFrame = insertMarker(videoFrame, visiblePoints, '+', 'Color', 'white');
-
+            
+            % Save some points as test points
+            if frameCount == 100
+                oldPoints_at_f100 = oldPoints;
+                visiblePoints_at_f100 = visiblePoints;
+            end
+            
+            if frameCount == 101
+                oldPoints_at_f101 = oldPoints;
+                visiblePoints_at_f101 = visiblePoints;
+            end
+    
+            if frameCount == 150
+                oldPoints_at_f150 = oldPoints;
+                visiblePoints_at_f150 = visiblePoints;
+            end
+            
+            if frameCount == 151
+                oldPoints_at_f151 = oldPoints;
+                visiblePoints_at_f151 = visiblePoints;
+            end
+    
+            if frameCount == 200
+                oldPoints_at_f200 = oldPoints;
+                visiblePoints_at_f200 = visiblePoints;
+            end
+            
+            if frameCount == 201
+                oldPoints_at_f201 = oldPoints;
+                visiblePoints_at_f201 = visiblePoints;
+            end
+            
             % Reset the points.
             oldPoints = visiblePoints;
             setPoints(pointTracker, oldPoints);
         end
     end
+    
+    % Save some annotated frames as test images.
+    if frameCount == 100
+        annotatedFrame100 = videoFrame;
+    end
+    
+    if frameCount == 101
+        annotatedFrame101 = videoFrame;
+    end
+    
+    if frameCount == 150
+        annotatedFrame150 = videoFrame;
+    end
+    
+    if frameCount == 151
+        annotatedFrame151 = videoFrame;
+    end
+    
+    if frameCount == 200
+        annotatedFrame200 = videoFrame;
+    end
+    
+    if frameCount == 201
+        annotatedFrame201 = videoFrame;
+    end
+    
     % Display the annotated video frame using the video player object.
     step(videoPlayer, videoFrame);
 
     % Check whether the video player window has been closed.
     runLoop = isOpen(videoPlayer);
+    
+    % Increment frame count
+    frameCount = frameCount +1;
 end
 
 
