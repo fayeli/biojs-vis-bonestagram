@@ -93,11 +93,22 @@ while runLoop && frameCount < 1000
             % Display detected corners.
             videoFrame = insertMarker(videoFrame, xyPoints, '+', 'Color', 'white');
             
+            % Find 4 corners' pixel locations of where the medical scan should go on top of video
+            % [x1 y1] is top left corner, and they go clockwise
+            xray_x1 = floor(bboxPolygon(7));
+            xray_y1 = floor(bboxPolygon(8) - scaled_dental_img_h * 0.9);
+            xray_x2 = xray_x1 + scaled_dental_img_w;
+            xray_y2 = xray_y1;
+            xray_x3 = xray_x1;
+            xray_y3 = xray_y1 + scaled_dental_img_h;
+            xray_x4 = xray_x2;
+            xray_y4 = xray_y3;
+            xray_point = [xray_x1 xray_y1; xray_x2 xray_y2; xray_x3 xray_y3 ;xray_x4 xray_y4];
+            
+            % Display the corners of the medial scan
+            videoFrame = insertMarker(videoFrame, xray_point, '+', 'Color', 'red');
             % Overlay medical scan on top of video
-            xray_x = bboxPolygon(7);
-            xray_y = bboxPolygon(8) - scaled_dental_img_h * 0.9;
-            xray_point = [xray_x xray_y];
-            videoFrame = imoverlay(videoFrame, scaled_dental_img, [xray_y xray_x]);
+            videoFrame = imoverlay(videoFrame, scaled_dental_img, [xray_y1 xray_x1]);
             test = videoFrame;
             
             
@@ -175,9 +186,9 @@ while runLoop && frameCount < 1000
             videoFrame = insertMarker(videoFrame, visiblePoints, '+', 'Color', 'white');
             
             % Overlay the medical image
-            xray_x = floor(xray_point(1));
-            xray_y = floor(xray_point(2));
-            videoFrame = imoverlay(videoFrame, transformed_dental_img, [xray_y xray_x]);
+            xray_x1 = floor(xray_point(1,1));
+            xray_y1 = floor(xray_point(1,2));
+            videoFrame = imoverlay(videoFrame, transformed_dental_img, [xray_y1 xray_x1]);
             
             % Save some points as test points
 %             if frameCount == 100
