@@ -78,6 +78,10 @@
 			.nohide {
 				display : block;
 			}
+
+			#pt_select_canvas{
+				border:1px solid #d3d3d3;
+			}
 		</style>
 	</head>
 	<body>
@@ -118,26 +122,55 @@
 				<option value="5">Audrey</option>
 				<option value="6">Cage</option>
 			</select>
-			<div id="container">
-				<canvas id="myCanvas" width="540" height="720"></canvas>
+			<div>
+				<canvas id="view_canvas" width="540" height="720"></canvas>
+				<canvas id="pt_select_canvas" width="550" height="740"></canvas>
+				<h2 id="mouse_point">0 | 0</h2>
 			</div>
-			<img id="average" class="masks" src="./media/dental-x-ray.jpg"></img>
+			<img id="average" class="masks" src="./media/average.jpg"></img>
 			<img id="monalisa" class="masks" src="./media/joconde.jpg"></img>
 			<img id="ironman" class="masks" src="./media/ironman.jpg"></img>
 			<img id="sean" class="masks" src="./media/SeanConnery.jpg"></img>
 			<img id="skull" class="masks" src="./media/skullmask.jpg"></img>
 			<img id="audrey" class="masks" src="./media/audrey.jpg"></img>
 			<img id="cage2" class="masks" src="./media/cage.jpg"></img>
+			<img id="xray" class="masks" src="./media/xray.png"></img>
 			<script>
-				var canvas = document.getElementById("myCanvas");
-    			var ctx = canvas.getContext("2d");
+				var view_canvas = document.getElementById("view_canvas");
+    			var view_ctx = view_canvas.getContext("2d");
     			var img = document.getElementById("audrey");
-   				ctx.drawImage(img, 0, 0);
-   				ctx.fillStyle = "#98ff98";
+   				view_ctx.drawImage(img, 0, 0);
    				var coords = [[153.74201740403646,257.58838131299683],[153.1357402459916,291.61358072852295],[163.92648670097353,336.6674185987861],[169.05137634628016,385.1975110609068],[187.6238859708483,421.2108262322121],[216.686071409745,444.7519516586696],[252.3126606898006,465.32269819176895],[283.0811558461883,470.8182094669599],[310.01372611356055,468.19451253588267],[343.73964850426626,447.233158556066],[371.3765378504441,422.9947341112305],[387.5627292608278,382.0293105452122],[398.46785237450297,339.09243674243754],[410.7142207166049,294.2191807024135],[411.7724614993711,261.09373588344585],[397.08419909909355,252.94944754715868],[376,241],[347.88483875688155,246],[320.92763554902524,254.63591882122572],[174.20709387641796,237.53266499674754],[201,234],[231,239],[259.80324104447095,248.8385932134204],[203.20895380044172,279.4867045991428],[228.2843062554636,263.77563604011084],[254.37335751351947,287.3518288920658],[225.37155395907916,290.26869393942275],[227.77768051230873,272.55424007173355],[373.6963908872387,283.83985580081185],[349.2543124861655,273.37102031128484],[324.214351960891,292.0051557657032],[352.73999275494873,296.13681628226215],[350.0652800779458,278.7378813418683],[292,283],[262.7314015757042,344.55089637183414],[256.09382016348263,360.28137163294355],[265.43437220076765,373.7185311578347],[292.84018353954804,379.51893631975383],[319.5702417532398,374.9644468251393],[324.6370116978122,365.5029178767047],[318.03834636609736,339.5592633568763],[293,322],[275.91223102812063,365.3241223928343],[310.9988910215482,365.94139857304066],[241.36179100195926,404.57248720067804],[256.244097414399,399.79192498435566],[275.9545526341606,397.2506401446753],[289.6156500062133,402.18658812822247],[305.7363366162922,398.11786374216797],[318.71091994807995,402.09809058994574],[332.1507895390563,406.57790820835453],[317.07898694502654,420.6784334029229],[303.5975014688257,430.191159222479],[287.22005286691325,432.45845823523985],[269.1473100017029,428.92524246489165],[256.3562958006237,421.3232920714367],[269.4689541559383,409.5609803328374],[288.9859238876932,410.32998112652183],[306.1403256243275,411.3077976017484],[307.73772138569666,411.00947047307966],[288.5537974824452,410.51396287362655],[269.7179313684785,409.79854206584145],[293.13908085531165,360.2044576609231],[210.24669344926002,268.1362929595334],[244.33001418358253,272.06529726630106],[237.37014577148472,289.8158253810601],[212.28729137033707,286.8846525992707],[364.4764146636024,276.60992312858446],[332.73309300337735,280.1921291112648],[336.47694784065465,295.57941207015807],[365.2216557008562,291.9943008746264]];
+   				view_ctx.fillStyle = "#98ff98";
+
+   				// display the coordinate points on texture image
    				for (var i = 0; i < coords.length; i++){
-   				 	ctx.fillRect(coords[i][0],coords[i][1],3,3);
+   					view_ctx.fillStyle = "#98ff98";
+   				 	view_ctx.fillRect(coords[i][0],coords[i][1],3,3);
+   				 	//ctx.fillText(i,coords[i][0],coords[i][1]);
    				}
+
+   				var pt_select_canvas = document.getElementById("pt_select_canvas");
+    			var pt_select_ctx = pt_select_canvas.getContext("2d");
+    			var img = document.getElementById("xray");
+   				pt_select_ctx.drawImage(img, 0, 0);
+    			var offsetX= pt_select_canvas.offsetLeft;
+    			var offsetY= pt_select_canvas.offsetTop;
+
+   				// display the coordinates of mouse location
+   				pt_select_ctx.canvas.addEventListener('mousemove', function(e){
+   					var mouseX = e.pageX - offsetX;
+   					var mouseY = e.pageY - offsetY;
+   					var mouse_point = document.getElementById('mouse_point');
+        			mouse_point.innerHTML = mouseX+" | "+mouseY;
+   				});
+   				// mark the mouse click location
+   				pt_select_ctx.canvas.addEventListener('click', function(e){
+   					var mouseX = e.pageX - offsetX;
+   					var mouseY = e.pageY - offsetY;
+   					pt_select_ctx.fillStyle = "#98ff98";
+   					pt_select_ctx.fillRect(mouseX,mouseY,3,3);
+   				});
 
 
 
