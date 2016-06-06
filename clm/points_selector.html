@@ -90,9 +90,12 @@
    				var mouseX;
    				var mouseY;
    				var i;
+   				var dragging;
+   				var dragIndex;
+   				var dragHoldX;
+   				var dragHoldY;
 
 
-   				// show the coordinates of mouse location
    				ctx.canvas.addEventListener('mousemove', function(e){
    					// get mouse position on canvas
    					mouseX = e.pageX - offsetX;
@@ -100,7 +103,34 @@
    					// update the mouse coordinates dislayed on webpage
    					var mouse_coord = document.getElementById('mouse_coord');
    					mouse_coord.innerHTML = mouseX+" | "+mouseY;
-   				})
+
+   					// when dragging a coordinate point
+   					if (dragging){
+   						var coordX;
+   						var coordY;
+   						var minX = radius;
+						var maxX = canvas.width - radius;
+						var minY = radius;
+						var maxY = canvas.height - radius;
+
+   						// get mouse position on canvas
+   						mouseX = e.pageX - offsetX;
+   						mouseY = e.pageY - offsetY;
+
+   						// clamp the x y coordinates within the canvas
+   						coordX = mouseX - dragHoldX;
+   						coordX = (coordX < minX) ? minX : ((coordX > maxX) ? maxX : coordX);
+   						coordY = mouseY - dragHoldY;
+   						coordY = (coordY < minY) ? minY : ((coordY > maxY) ? maxY : coordY);
+
+   						// update the coordinates array
+   						coords[dragIndex][0] = coordX;
+   						coords[dragIndex][1] = coordY;
+
+   						// redraw on canvas
+   						drawCoordinates();
+   					}
+   				});
 
    				ctx.canvas.addEventListener('mousedown', function(e){
    					// get mouse click position on canvas
@@ -109,17 +139,39 @@
    					// determine which coordinate point was clicked
    					for (i = 0; i < coords.length; i++){
    						if (isHit(coords[i][0],coords[i][1],mouseX, mouseY)){
-   							console.log("Coordinate point " + i + " was clicked");
+   							// console.log("Coordinate point " + i + " was clicked");
+   							// start dragging
+   							dragging = true;
+   							// keep track of which coordinate point is being dragged
+   							dragIndex = i;
+   							// keep track of the mouse holding position
+   							dragHoldX = mouseX - coords[i][0];
+   							dragHoldY = mouseY - coords[i][1];
    						}
    					}
 
+   					// code below prevents the mouse down from having an effect on the main browser window:
+					if (e.preventDefault) {
+						e.preventDefault();
+					} //standard
+					else if (e.returnValue) {
+						e.returnValue = false;
+					} //older IE
+					return false;
+   				});
+	
 
-   				})
+				// stop dragging when mouse is up
+				ctx.canvas.addEventListener('mouseup', function(e){
+					if (dragging){
+						dragging = false;
+					}
+				})
 
    				// calculate whether the mouse click (x2, y2) is within the circle marker of the coordinate point (x1, y1)
    				function isHit(x1, y1, x2, y2){
    					var distance = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
-   					return (distance < radius*radius);
+   					return (distance < (radius+3) * (radius+3));
    				}
 								
 				// display the coordinate points on canvas
