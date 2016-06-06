@@ -95,9 +95,14 @@
 								
 				// display the coordinate points on canvas
    				function drawCoordinates(){
+   					var radius = 3;
    					for (var i = 0; i < coords.length; i++){
-   					ctx.fillStyle = "#98ff98";
-   				 	ctx.fillRect(coords[i][0],coords[i][1],3,3);
+   					ctx.fillStyle = "#ff9900";
+   					ctx.beginPath();
+   					ctx.arc(coords[i][0],coords[i][1], radius, 0, 2*Math.PI, false);
+   					ctx.closePath();
+   					ctx.fill();
+   				 	//ctx.fillRect(coords[i][0],coords[i][1],3,3);
    				}
 				}			
 			</script>
