@@ -182,13 +182,61 @@
    					ctx.clearRect(0,0,canvas.width,canvas.height);
    					// redraw image 
    					ctx.drawImage(img, 0, 0);
-   					// draw circle markers for the coodridnates 
+   					
+   					var currentX;
+   					var currentY;
+   					var prevX = coords[0][0];
+   					var prevY = coords[0][1];
+   					var mouthLeftCornerX = coords[44][0];
+   					var mouthLeftCornerY = coords[44][1];
+   					var mouthRightCornerX = coords[50][0];
+   					var mouthRightCornerY = coords[50][1];
+
    					for (i = 0; i < coords.length; i++){
+   						currentX = coords[i][0];
+   						currentY = coords[i][1];
+
+   						// break apart some line segments
+   						if (i == 15 || i == 19 || i == 23 || i == 44 || i == 56 || i == 59 || i == 62) {
+   							prevX = currentX;
+   							prevY = currentY;
+   						}
+
    						ctx.fillStyle = "#ff9900";
+   						ctx.strokeStyle = "#ff9900";
+   						
+   						// draw circle markers for the coodridnates 
    						ctx.beginPath();
-   						ctx.arc(coords[i][0],coords[i][1], radius, 0, 2*Math.PI, false);
+   						ctx.arc(currentX, currentY, radius, 0, 2*Math.PI, false);
    						ctx.closePath();
    						ctx.fill();
+
+   						// draw line connecting the markers
+   						ctx.beginPath();
+   						ctx.moveTo(prevX, prevY);
+   						ctx.lineTo(currentX,currentY);
+   						ctx.closePath();
+   						ctx.stroke();
+
+   						// draw line segments of the mouth
+   						if ( i == 55 || i == 56 || i == 61){
+   							ctx.beginPath();
+   							ctx.moveTo(currentX, currentY);
+   							ctx.lineTo(mouthLeftCornerX, mouthLeftCornerY);
+   							ctx.closePath();
+   							ctx.stroke();
+   						}
+   						if ( i == 58 || i == 59){
+   							ctx.beginPath();
+   							ctx.moveTo(currentX, currentY);
+   							ctx.lineTo(mouthRightCornerX, mouthRightCornerY);
+   							ctx.closePath();
+   							ctx.stroke();
+   						}
+
+
+   						prevX = currentX;
+   						prevY = currentY;
    					}
    					// display the coords array in html
 					document.getElementById("coords_display").innerHTML = "var coords = " + JSON.stringify(coords) + ";";
