@@ -182,13 +182,19 @@
                   var mouthLeftCornerY = coords[44][1];
                   var mouthRightCornerX = coords[50][0];
                   var mouthRightCornerY = coords[50][1];
+                  var nostrilLeftX = coords[36][0];
+                  var nostrilLeftY = coords[36][1];
+                  var nostrilMidX = coords[37][0];
+                  var nostrilMidY = coords[37][1];
+                  var nostrilRightX = coords[38][0];
+                  var nostrilRightY = coords[38][1];
 
                   for (i = 0; i < coords.length; i++){
                      currentX = coords[i][0];
                      currentY = coords[i][1];
 
-                     // break apart some line segments
-                     if (i == 15 || i == 19 || i == 23 || i == 44 || i == 56 || i == 59 || i == 62) {
+                     // break apart those that shouln't be line segment
+                     if (i == 15 || i == 19 || i == 23 || i == 27 || i == 32 || i == 33 || i == 34 || i == 37 || i == 38 || i == 41 || i == 42 || i == 43 || i == 44 || i == 56 || i == 59 || i >= 62) {
                         prevX = currentX;
                         prevY = currentY;
                      }
@@ -209,6 +215,25 @@
                      ctx.closePath();
                      ctx.stroke();
 
+                     // draw line segments of the nose
+                     if (i == 42) {
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilLeftX, nostrilLeftY);
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilMidX, nostrilMidY);
+                        ctx.closePath();
+                        ctx.stroke();
+                     } else if ( i == 43){
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilMidX, nostrilMidY);
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilRightX, nostrilRightY);
+                        ctx.closePath();
+                        ctx.stroke();
+                     }
+
                      // draw line segments of the mouth
                      if ( i == 55 || i == 56 || i == 61){
                         ctx.beginPath();
@@ -225,14 +250,29 @@
                         ctx.stroke();
                      }
 
-
                      prevX = currentX;
                      prevY = currentY;
                   }
+                  // draw nose bridge
+                  var noseBridgeTopX = coords[33][0];
+                  var noseBridgeTopY = coords[33][1];
+                  var noseBridgeMidX = coords[41][0];
+                  var noseBridgeMidY = coords[41][1];
+                  var noseBridgeBotX = coords[62][0];
+                  var noseBridgeBotY = coords[62][1];
+                  ctx.beginPath();
+                  ctx.moveTo(noseBridgeTopX, noseBridgeTopY);
+                  ctx.lineTo(noseBridgeMidX, noseBridgeMidY);
+                  ctx.moveTo(noseBridgeMidX, noseBridgeMidY);
+                  ctx.lineTo(noseBridgeBotX, noseBridgeBotY);
+                  ctx.closePath();
+                  ctx.stroke();
+
                   // display the coords array in html
                document.getElementById("coords_display").innerHTML = "var coords = " + JSON.stringify(coords) + ";";
             }
          }
+
          window.onload = main;
       </script>
    </head>
