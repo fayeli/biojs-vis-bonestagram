@@ -14,24 +14,13 @@
 			}
 			
 			
-			#overlay, #webgl {
+			#overlay, #webgl, #handoverlay {
 				position: absolute;
 				top: 0px;
 				left: 0px;
 				-o-transform : scaleX(-1);
 				-webkit-transform : scaleX(-1);
 				transform : scaleX(-1);
-				-ms-filter : fliph; /*IE*/
-				filter : fliph; /*IE*/
-			}
-
-			#handoverlay {
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				-o-transform : scaleX(1);
-				-webkit-transform : scaleX(1);
-				transform : scaleX(1);
 				-ms-filter : fliph; /*IE*/
 				filter : fliph; /*IE*/
 			}
@@ -227,7 +216,7 @@
 					//ctrack.start(vid);
 					findHandColour(vid);
 					// start tracking hand
-					//trackHand(vid);
+					trackHand(vid);
 					// start drawing face grid
 					//drawGridLoop();
 				}
@@ -241,7 +230,7 @@
 				var box_w = 150;
 				var box_h = 175;
 				// extract the image data of the hand bounding box
-				var image_data = ctx.getImageData(video.width-(50+150), 70, box_w, box_h);
+				var imageData = ctx.getImageData(200, 70, box_w, box_h);
 				var r;
 				var g;
 				var b;
@@ -249,7 +238,7 @@
 				var s;
 				var v;
 				// Cast to normal non clamped array
-				var rgb_array = Array.prototype.slice.call(image_data.data);
+				var rgb_array = Array.prototype.slice.call(imageData.data);
 				//console.log(rgb_array);
 				var hsv_array = [];
 				for ( var i = 0; i < rgb_array.length; i +=4)
@@ -265,11 +254,25 @@
 				}
 				//console.log(hsv_array);
 
-				// get the colour of one of the middle pixel
+				// get the colour of one of the middle pixel (hand)
 				var x = Math.round(box_w / 2);
 				var y = Math.round((box_h * 2) / 3); //  two third down of the bounding box
 				[r, g, b, h, s, v] = getPixel(x,y,box_w,rgb_array,hsv_array);
 				console.log([r,g,b,h,s,v]);
+				
+				// filter pixels by similar hue to that of the hand
+				for ( var i = 0; i < hsv_array.length; i +=4){
+					if (hsv_array[i] > h + 15 || hsv_array[i] < h - 15 ){
+						// set filtered out pixels to black
+						imageData.data[i] = 0;
+						imageData.data[i+1] = 0;
+						imageData.data[i+2] = 0;	
+					} 
+				}
+
+
+				// draw filtered image
+				handoverlayCC.putImageData(imageData, 0, 0);
 				//ctx.clearRect(0, 0, 400, 300);
 				//ctx.putImageData(image_data, 0, 0);
 				//var dataURL = canvas.toDataURL('image/png');
@@ -277,10 +280,10 @@
 			}
 
 			function getPixel(x,y,w,rgb_array,hsv_array){
-				console.log(x);
-				console.log(y);
+				//console.log(x);
+				//console.log(y);
 				var i = ((y * w) + x) * 4;
-				console.log(i);
+				//console.log(i);
 				var r = rgb_array[i];
 				var g = rgb_array[i+1];
 				var b = rgb_array[i+2];
@@ -345,9 +348,11 @@
 				handoverlayCC.clearRect(0, 0, 400, 300);
 				handoverlayCC.setLineDash([7, 7]);
 				handoverlayCC.strokeStyle="white";
-				handoverlayCC.rect(50, 70, 150, 175);
+				handoverlayCC.rect(200, 70, 150, 175);
 				handoverlayCC.stroke();
 			}
+
+			
 		
 			function drawGridLoop() {
 					// get position of face
