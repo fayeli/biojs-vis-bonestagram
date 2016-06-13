@@ -25,6 +25,17 @@
 				filter : fliph; /*IE*/
 			}
 
+			#handoverlay {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				-o-transform : scaleX(1);
+				-webkit-transform : scaleX(1);
+				transform : scaleX(1);
+				-ms-filter : fliph; /*IE*/
+				filter : fliph; /*IE*/
+			}
+
 			#videoel {
 				-o-transform : scaleX(-1);
 				-webkit-transform : scaleX(-1);
@@ -81,8 +92,6 @@
 
 			}
 		</style>
-	</head>
-	<body>
 		<script src="./ext_js/dat.gui.min.js"></script>
 		<script src="./ext_js/utils.js"></script>
 		<script src="./ext_js/jsfeat-min.js"></script>
@@ -100,29 +109,21 @@
 		<script src="./js/mossefilter.js"></script>
 		<script src="./ext_js/Stats.js"></script>
 		<script src="./js/face_deformer.js"></script>
-		<div id="content">
-			<h2>Bonestagram</h2>
-			<p>DICOM visualisation made fun<p/>
-			<div id="container">
-				<video id="videoel" width="400" height="300" preload="auto">
-				</video>
-				<canvas id="overlay" width="400" height="300"></canvas>
-				<canvas id="webgl" width="400" height="300"></canvas>
-			</div>
-			<br/>
-			<input class="btn" type="button" value="wait, loading video" disabled="disabled" onclick="startVideo()" id="startbutton"></input>
-			<img id="xray" class="masks" src="./media/xray.png"></img>
-			<h5> Dev Tools</h5>
-			<ul>
-				<li><a href="points_inspector.html">Points Inspector Tool</a></li>
-				<li><a href="points_selector.html">Points Selector Tool</a></li>	
-			</ul>
-			<script>
-				var vid = document.getElementById('videoel');
-				var overlay = document.getElementById('overlay');
-				var overlayCC = overlay.getContext('2d');
+		<script>
+			var vid;
+			var overlay;
+			var overlayCC;
+			var handoverlay;
+			var handoverlayCC;
+			var ctrack;
+			var main = function() {
+				vid = document.getElementById('videoel');
+				overlay = document.getElementById('overlay');
+				overlayCC = overlay.getContext('2d');
+				handoverlay = document.getElementById('handoverlay');
+				handoverlayCC = handoverlay.getContext('2d');
 				
-				var ctrack = new clm.tracker();
+				ctrack = new clm.tracker();
 				ctrack.init(pModel);
 				
 				stats = new Stats();
@@ -130,6 +131,9 @@
 				stats.domElement.style.top = '0px';
 				document.getElementById('container').appendChild( stats.domElement );
 				
+				// draw a bounding box for hand initial position
+				drawHandBBox();
+
 				function enablestart() {
 					var startbutton = document.getElementById('startbutton');
 					startbutton.value = "start";
@@ -202,15 +206,6 @@
 
 				vid.addEventListener('canplay', enablestart, false);
 
-				function startVideo() {
-					// start video
-					vid.play();
-					// start tracking
-					ctrack.start(vid);
-					// start drawing face grid
-					drawGridLoop();
-				}
-
 				var positions;
 				var fd = new faceDeformer();
 				fd.init(document.getElementById('webgl'));
@@ -218,8 +213,46 @@
 				//var coords = [[121.92799191984679,184.19216240419755],[118.74113263254269,253.7017373484083],[128.07732840700828,314.0651648786312],[145.50341586402052,377.3404382903117],[175.0470179047746,428.3720278198884],[216.26268310246033,469.2344402538887],[267.42588166495466,502.128073946532],[323.6864139765614,512.5053811316307],[381.1889691089136,499.48530971536445],[429.71357990120225,463.4214900408549],[467.1292936657478,421.537754329594],[493.2308725208873,370.6466670145585],[507.3945907183312,305.3965374123],[514.1098885852615,238.51000761747102],[507.2009944162471,174.7364492942625],[465.59705810723074,136.75665747531139],[432.10874975324265,125],[384.15174446143584,125],[351.54488594535763,135.22963355336668],[162.16177451030518,144.72103952617107],[194.70376235949394,126],[241,130],[277.5198647210173,137.82992220884094],[192.5627380181407,182.35373455399292],[225.1658086004223,166.85817167285668],[262.9021389237093,184.72604899079232],[224.82421319031323,193.62679469584918],[224.9386274222809,179.73191446260716],[443.75218061508883,177.1556294105885],[407.36102478935464,162.1785032964798],[367.3426762945685,181.37362678808685],[405.2498567443763,188.75927101523848],[404.863153412407,173.65270066194788],[314, 170],[277.2539320006613,252.0592473714927],[258.790607031229,284.0832945003201],[276.64778558874696,304.54255347445314],[317.4772090972725,307.7859653833357],[364.4959193923387,299.6561959465791],[377.27275089177823,279.043842539653],[357.1140334647449,250.14961061471956],[324,222],[296.770695143374,295.6331974142146],[350.24114846328195,290.942330984987],[248.8532880314441,372.38004806995957],[272.1557077756945,356.35352520595814],[302.9902196911147,350.59821534914704],[323.11457426149127,353.0358352022737],[338.3055779254553,347.5427982113969],[366.49269601972713,353.1538257295358],[392.63652105652415,368.4911974180641],[375.0778975047938,391.4413420753004],[352.32935954043757,405.19247889714825],[320.19499419206926,411.930992226806],[288.9192573286629,407.35752671668797],[267.61253113280924,394.527019223827],[286.6817714614754,382.82667526139215],[320.16223074694074,385.86502934549657],[359.1212544588326,380.7487964985724],[361.7270998810554,365.15603335898066],[322.91210334135167,367.2901736762333],[280.7920218316411,368.2798825278876],[320.66814785515174,277.11007275979364],[206.36606604411398,171.6086547538323],[247.5375468161923,170.29657636660522],[246.36866333618227,191.67729410789994],[205.19888043799355,189.99033691329964],[429.0603263358775,166.1691180598579],[386.8504393293843,166.2774220754911],[384.7938981921405,186.5701136634426],[426.9983448269614,184.45786533091854]];
 				var currentMask = 0;
 				var animationRequest;
+
+				document.addEventListener("clmtrackrIteration", function(event) {
+					stats.update();
+				}, false);
+
+				}
+
+			function startVideo() {
+					// start video
+					vid.play();
+					// start tracking
+					//ctrack.start(vid);
+					// start tracking hand
+					//trackHand(vid);
+					// start drawing face grid
+					//drawGridLoop();
+				}
+
+			function trackHand(video) {
+					var canvas = document.createElement('canvas');
+					canvas.width = video.width;
+					canvas.height = video.height;
+					var ctx = canvas.getContext('2d');
+					ctx.drawImage(video, 0, 0, video.width, video.height);
+					var image_data = ctx.getImageData(0, 0, video.width, video.height);
+
+					var gray_img = new jsfeat.matrix_t(video.width, video.height, jsfeat.U8_t | jsfeat.C1_t);
+					var code = jsfeat.COLOR_RGBA2GRAY
+					jsfeat.imgproc.grayscale(image_data.data, video.width, video.height, gray_img, code);
+				}
+
+			function drawHandBBox() {
+				handoverlayCC.clearRect(0, 0, 400, 300);
+				handoverlayCC.setLineDash([7, 7]);
+				handoverlayCC.strokeStyle="white";
+				handoverlayCC.rect(50, 70, 150, 175);
+				handoverlayCC.stroke();
+			}
 		
-				function drawGridLoop() {
+			function drawGridLoop() {
 					// get position of face
 					positions = ctrack.getCurrentPosition(vid);
 					overlayCC.clearRect(0, 0, 500, 375);
@@ -235,14 +268,14 @@
 					} else {
 						requestAnimFrame(drawGridLoop);
 					}
-				}
+			}
 					
-				function switchMasks() {
+			function switchMasks() {
 					// get mask
 					fd.load(document.getElementById("xray"), coords, pModel);
-				}
+			}
 				
-				function drawMaskLoop() {
+			function drawMaskLoop() {
 					// get position of face
 					positions = ctrack.getCurrentPosition();
 					overlayCC.clearRect(0, 0, 400, 300);
@@ -251,14 +284,33 @@
 						fd.draw(positions);
 					}
 					animationRequest = requestAnimFrame(drawMaskLoop);
-				}
-							
-				document.addEventListener("clmtrackrIteration", function(event) {
-					stats.update();
-				}, false);
+			}
 
+
+			window.onload = main;			
+				
 					
 			</script>
+	</head>
+	<body>
+		<div id="content">
+			<h2>Bonestagram</h2>
+			<p>DICOM visualisation made fun<p/>
+			<div id="container">
+				<video id="videoel" width="400" height="300" preload="auto">
+				</video>
+				<canvas id="overlay" width="400" height="300"></canvas>
+				<canvas id="webgl" width="400" height="300"></canvas>
+				<canvas id="handoverlay" width="400" height="300"></canvas>
+			</div>
+			<br/>
+			<input class="btn" type="button" value="wait, loading video" disabled="disabled" onclick="startVideo()" id="startbutton"></input>
+			<img id="xray" class="hide" src="./media/xray.png"></img>
+			<h5> Dev Tools</h5>
+			<ul>
+				<li><a href="points_inspector.html">Points Inspector Tool</a></li>
+				<li><a href="points_selector.html">Points Selector Tool</a></li>	
+			</ul>
 		</div>
 	</body>
 </html>
