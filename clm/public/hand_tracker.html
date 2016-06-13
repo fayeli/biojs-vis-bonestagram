@@ -104,6 +104,7 @@
 			var overlayCC;
 			var handoverlay;
 			var handoverlayCC;
+			var handhue;
 			var ctrack;
 			var main = function() {
 				vid = document.getElementById('videoel');
@@ -215,8 +216,7 @@
 					// start tracking
 					//ctrack.start(vid);
 					findHandColour(vid);
-					// start tracking hand
-					trackHand(vid);
+					drawColorThresholdLoop();
 					// start drawing face grid
 					//drawGridLoop();
 				}
@@ -259,10 +259,11 @@
 				var y = Math.round((box_h * 2) / 3); //  two third down of the bounding box
 				[r, g, b, h, s, v] = getPixel(x,y,box_w,rgb_array,hsv_array);
 				console.log([r,g,b,h,s,v]);
+				handhue = h;
 				
 				// filter pixels by similar hue to that of the hand
 				for ( var i = 0; i < hsv_array.length; i +=4){
-					if (hsv_array[i] > h + 15 || hsv_array[i] < h - 15 ){
+					if (hsv_array[i] > handhue + 15 || hsv_array[i] < handhue - 15 ){
 						// set filtered out pixels to black
 						imageData.data[i] = 0;
 						imageData.data[i+1] = 0;
@@ -352,7 +353,52 @@
 				handoverlayCC.stroke();
 			}
 
-			
+			function drawColorThresholdLoop() {
+				var canvas = document.createElement('canvas');
+				canvas.width = vid.width;
+				canvas.height = vid.height;
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(vid, 0, 0, vid.width, vid.height);
+				var imageData = ctx.getImageData(0, 0, vid.width, vid.height);
+				var r;
+				var g;
+				var b;
+				var h;
+				var s;
+				var v;
+				// Cast to normal non clamped array
+				var rgb_array = Array.prototype.slice.call(imageData.data);
+				//console.log(rgb_array);
+				var hsv_array = [];
+				for ( var i = 0; i < rgb_array.length; i +=4)
+				{
+					r = rgb_array[i];
+					g = rgb_array[i+1];
+					b = rgb_array[i+2];
+					[h, s, v] = rgb2hsv(r,g,b);
+					hsv_array[i] = h;
+					hsv_array[i+1] = s*100;
+					hsv_array[i+2] = v*100;
+					hsv_array[i+3] = 255;
+				}
+
+				// filter pixels by similar hue to that of the hand
+				for ( var i = 0; i < hsv_array.length; i +=4){
+					if (hsv_array[i] > handhue + 15 || hsv_array[i] < handhue - 15 ){
+						// set filtered out pixels to black
+						imageData.data[i] = 0;
+						imageData.data[i+1] = 0;
+						imageData.data[i+2] = 0;	
+					} 
+				}
+
+
+				// draw filtered image
+				handoverlayCC.putImageData(imageData, 0, 0);
+				animationRequest = requestAnimFrame(drawColorThresholdLoop);
+
+			}
+
 		
 			function drawGridLoop() {
 					// get position of face
