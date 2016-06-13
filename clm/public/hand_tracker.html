@@ -225,24 +225,98 @@
 					vid.play();
 					// start tracking
 					//ctrack.start(vid);
+					findHandColour(vid);
 					// start tracking hand
 					//trackHand(vid);
 					// start drawing face grid
 					//drawGridLoop();
 				}
 
-			function trackHand(video) {
-					var canvas = document.createElement('canvas');
-					canvas.width = video.width;
-					canvas.height = video.height;
-					var ctx = canvas.getContext('2d');
-					ctx.drawImage(video, 0, 0, video.width, video.height);
-					var image_data = ctx.getImageData(0, 0, video.width, video.height);
-
-					var gray_img = new jsfeat.matrix_t(video.width, video.height, jsfeat.U8_t | jsfeat.C1_t);
-					var code = jsfeat.COLOR_RGBA2GRAY
-					jsfeat.imgproc.grayscale(image_data.data, video.width, video.height, gray_img, code);
+			function findHandColour(video){
+				var canvas = document.createElement('canvas');
+				canvas.width = video.width;
+				canvas.height = video.height;
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(video, 0, 0, video.width, video.height);
+				// extract the image data of the hand bounding box
+				var image_data = ctx.getImageData(video.width-(50+150), 70, 150, 175);
+				var r;
+				var g;
+				var b;
+				var h;
+				var s;
+				var v;
+				// Cast to normal non clamped array
+				var rgb_array = Array.prototype.slice.call(image_data.data);
+				console.log(rgb_array);
+				var hsv_array = rgb_array;
+				for ( var i = 0; i < rgb_array.length; i +=4)
+				{
+					r = rgb_array[i];
+					g = rgb_array[i+1];
+					b = rgb_array[i+2];
+					[h, s, v] = rgb2hsv(r,g,b);
+					hsv_array[i] = h;
+					hsv_array[i+1] = s*100;
+					hsv_array[i+2] = v*100;
 				}
+				console.log(hsv_array);
+				//ctx.clearRect(0, 0, 400, 300);
+				//ctx.putImageData(image_data, 0, 0);
+				//var dataURL = canvas.toDataURL('image/png');
+				//window.open(dataURL);
+			}
+
+			function rgb2hsv (r,g,b) {
+ 				var computedH = 0;
+ 				var computedS = 0;
+ 				var computedV = 0;
+
+ 				//remove spaces from input RGB values, convert to int
+ 				var r = parseInt( (''+r).replace(/\s/g,''),10 ); 
+ 				var g = parseInt( (''+g).replace(/\s/g,''),10 ); 
+ 				var b = parseInt( (''+b).replace(/\s/g,''),10 ); 
+
+ 				if ( r==null || g==null || b==null ||
+     				isNaN(r) || isNaN(g)|| isNaN(b) ) {
+   					alert ('Please enter numeric RGB values!');
+   					return;
+ 				}
+ 				if (r<0 || g<0 || b<0 || r>255 || g>255 || b>255) {
+   					alert ('RGB values must be in the range 0 to 255.');
+   					return;
+ 				}
+ 				r=r/255; g=g/255; b=b/255;
+ 				var minRGB = Math.min(r,Math.min(g,b));
+ 				var maxRGB = Math.max(r,Math.max(g,b));
+
+ 				// Black-gray-white
+ 				if (minRGB==maxRGB) {
+  					computedV = minRGB;
+  					return [0,0,computedV];
+ 				}
+
+ 				// Colors other than black-gray-white:
+ 				var d = (r==minRGB) ? g-b : ((b==minRGB) ? r-g : b-r);
+ 				var h = (r==minRGB) ? 3 : ((b==minRGB) ? 1 : 5);
+ 				computedH = 60*(h - d/(maxRGB - minRGB));
+ 				computedS = (maxRGB - minRGB)/maxRGB;
+ 				computedV = maxRGB;
+ 				return [computedH,computedS,computedV];
+			}
+
+			// function trackHand(video) {
+			// 		var canvas = document.createElement('canvas');
+			// 		canvas.width = video.width;
+			// 		canvas.height = video.height;
+			// 		var ctx = canvas.getContext('2d');
+			// 		ctx.drawImage(video, 0, 0, video.width, video.height);
+			// 		var image_data = ctx.getImageData(0, 0, video.width, video.height);
+
+			// 		var gray_img = new jsfeat.matrix_t(video.width, video.height, jsfeat.U8_t | jsfeat.C1_t);
+			// 		var code = jsfeat.COLOR_RGBA2GRAY
+			// 		jsfeat.imgproc.grayscale(image_data.data, video.width, video.height, gray_img, code);
+			// 	}
 
 			function drawHandBBox() {
 				handoverlayCC.clearRect(0, 0, 400, 300);
