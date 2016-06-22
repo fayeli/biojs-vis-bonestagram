@@ -2,10 +2,44 @@
 <html>
 	<head>
 		<title>Bonestagram</title>
+		<style>			
+			.hide {
+				display : none;
+			}
+			#overlay, #bonestagram_face_overlay {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				-o-transform : scaleX(-1);
+				-webkit-transform : scaleX(-1);
+				transform : scaleX(-1);
+				-ms-filter : fliph; /*IE*/
+				filter : fliph; /*IE*/
+			}
+
+			#bonestagram_video {
+				-o-transform : scaleX(-1);
+				-webkit-transform : scaleX(-1);
+				transform : scaleX(-1);
+				-ms-filter : fliph; /*IE*/
+				filter : fliph; /*IE*/
+			}
+				
+			#bonestagram_container {
+				position : relative;
+			}
+		</style>
 		<!-- After require.js is loaded, we load js/main.js as the entry point to the app-->
 		<script data-main="js/app" src="js/require.js"></script>
 	</head>
 	<body>
 		<h1>Hello World!</h1>
+		<div id="bonestagram_container">
+			<video id="bonestagram_video" width="400" height="300" preload="auto">
+			</video>
+			<canvas id="overlay" width="400" height="300"></canvas>
+			<canvas id="bonestagram_face_overlay" width="400" height="300"></canvas>
+		</div>
+		<img id="bonestagram_img" class="hide" src="./media/xray.png"></img>
 	</body>
 </html>
