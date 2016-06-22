@@ -6,7 +6,7 @@
 			.hide {
 				display : none;
 			}
-			#overlay, #bonestagram_face_overlay {
+			#bonestagram_gl, #bonestagram_face_overlay {
 				position: absolute;
 				top: 0px;
 				left: 0px;
@@ -33,12 +33,12 @@
 		<script data-main="js/app" src="js/require.js"></script>
 	</head>
 	<body>
-		<h1>Hello World!</h1>
+		<h1>Hello Bonestagram!</h1>
 		<div id="bonestagram_container">
 			<video id="bonestagram_video" width="400" height="300" preload="auto">
 			</video>
-			<canvas id="overlay" width="400" height="300"></canvas>
 			<canvas id="bonestagram_face_overlay" width="400" height="300"></canvas>
+			<canvas id="bonestagram_gl" width="400" height="300"></canvas>
 		</div>
 		<img id="bonestagram_img" class="hide" src="./media/xray.png"></img>
 	</body>

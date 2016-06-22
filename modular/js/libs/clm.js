@@ -1,7 +1,7 @@
 "use strict";
 //requires: ccv.js, numeric.js
 
-define(['libs/mosse', 'libs/left_eye_filter', 'libs/right_eye_filter', 'libs/nose_filter', 'numeric', 'libs/svmfilter_fft','libs/svmfilter_webgl'],function(mosse,left_eye_filter,right_eye_filter,nose_filter,numeric,svmfilter_fft,svmfilter_webgl){
+define(['libs/mosse', 'libs/left_eye_filter', 'libs/right_eye_filter', 'libs/nose_filter', 'numeric', 'libs/svmfilter_fft','libs/svmfilter_webgl','libs/jsfeat_face'],function(mosse,left_eye_filter,right_eye_filter,nose_filter,numeric,svmfilter_fft,svmfilter_webgl,jsfeat_face){
 	return {
 	tracker : function(params) {
 		
@@ -905,7 +905,7 @@ define(['libs/mosse', 'libs/left_eye_filter', 'libs/right_eye_filter', 'libs/nos
 				ccv.grayscale(canvas), ccv.cascade, 5, 1
 			);*/
 			
-			var jf = new jsfeat_face(canvas);
+			var jf = new jsfeat_face.jsfeatFace(canvas);
 			var comp = jf.findFace();
 			
 			if (comp.length > 0) {
@@ -1038,7 +1038,8 @@ define(['libs/mosse', 'libs/left_eye_filter', 'libs/right_eye_filter', 'libs/nos
 					return false;
 				}
 			}
-			
+
+			var mosseFilter = new mosse.mosseFilter();
 			if (model.hints && mosseFilter && left_eye_filter && right_eye_filter && nose_filter) {
 				var noseFilterWidth = candidate.width * 4.5/10;
 				var eyeFilterWidth = candidate.width * 6/10;

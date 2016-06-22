@@ -4,7 +4,8 @@ requirejs.config({
     "paths": {
       "app": "app",
       "jquery": "//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min",
-      "numeric": "libs/numeric-1.2.6.min"
+      "numeric": "libs/numeric-1.2.6.min",
+      "jsfeat": "libs/jsfeat-min"
     },
     shim: {
     	"numeric": {
@@ -12,7 +13,16 @@ requirejs.config({
     	},
     	"webgl-utils": {
     		exports: "webglUtils"
-    	}
+    	},
+      "jsfeat":{
+        exports: "jsfeat"
+      },
+      "utils":{
+        exports: "utils"
+      },
+      "frontalface": {
+        exports: "frontalface"
+      }
     }
 });
 
