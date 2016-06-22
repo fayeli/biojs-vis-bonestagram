@@ -77,7 +77,7 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 	var converged = false;
 	var drawFaceLoop = function(){
 		facePos = ctrack.getCurrentPosition(vid);
-		face_overlayCC.clearRect(0, 0, height, width);
+		face_overlayCC.clearRect(0, 0, width, height);
 		if (facePos) {
 			if (converged){
 				// draw mask
@@ -99,13 +99,13 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 		// Public
 		init: function(){
 			console.log("bonestagram init");
-			vid = document.getElementById("bonestagram_video");
+			vid = document.getElementsByClassName("bonestagram_video")[0];
 			height = vid.height;
 			width = vid.width;
 			console.log(height);
 			bonesImg = document.getElementById("bonestagram_img");
-			gl = document.getElementById('bonestagram_gl');
-			face_overlay = document.getElementById("bonestagram_face_overlay");
+			gl = document.getElementsByClassName('bonestagram_gl')[0];
+			face_overlay = document.getElementsByClassName("bonestagram_face_overlay")[0];
 			face_overlayCC = face_overlay.getContext('2d');	
 			checkWebGL();
 			setupCamera();
