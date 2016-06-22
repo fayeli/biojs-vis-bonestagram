@@ -1,5 +1,8 @@
 "use strict";
-var faceDeformer = function() {
+
+define(function(){
+  return {
+  faceDeformer : function() {
   
   var gl, verticeMap;
   var numTriangles;
@@ -290,3 +293,7 @@ var faceDeformer = function() {
     return positions;
   }
 }
+
+
+  }
+}); 
