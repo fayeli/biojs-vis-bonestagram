@@ -97,13 +97,18 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 	// The object return below is exposed to the public
 	return {
 		// Public
-		init: function(){
+		init: function(options){
 			console.log("bonestagram init");
-			vid = document.getElementsByClassName("bonestagram_video")[0];
+			console.log(options);
+			if (typeof options !== "undefined") {
+				vid = options.video[0];
+				bonesImg = options.img[0];
+			} else {
+				vid = document.getElementsByClassName("bonestagram_video")[0];
+				bonesImg = document.getElementsByClassName("bonestagram_img")[0];
+			}
 			height = vid.height;
 			width = vid.width;
-			console.log(height);
-			bonesImg = document.getElementById("bonestagram_img");
 			gl = document.getElementsByClassName('bonestagram_gl')[0];
 			face_overlay = document.getElementsByClassName("bonestagram_face_overlay")[0];
 			face_overlayCC = face_overlay.getContext('2d');	
