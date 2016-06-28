@@ -1,4 +1,4 @@
-define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils'], function(clm, pModel, face_deformer,utils){
+define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils', 'jsfeat'], function(clm, pModel, face_deformer, utils, jsfeat){
 	// Private
 	var vid;
 	var width;
@@ -14,7 +14,16 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 	var fd;
 	var face_overlay;
 	var face_overlayCC;
+	var hand_overlay;
+	var hand_overlayCC;
 	var gl;
+	// Variables for optical flow
+	var curr_img_pyr, prev_img_pyr, point_count, point_status, prev_xy, curr_xy;
+	var op_win_size = 20;
+	var op_max_iterations = 30;
+	var op_epsilon = 0.01;
+	var op_min_eigen = 0.001;
+
 	var checkWebGL = function(){
 		console.log("Checking WebGL support..");
 		var webGLContext;
@@ -94,12 +103,78 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 		}
 		requestAnimFrame(drawFaceLoop);
 	}
+
+	var drawHandLoop = function(){
+		if (vid.readyState === vid.HAVE_ENOUGH_DATA) {
+			hand_overlayCC.drawImage(vid, 0, 0, width, height);
+			var imageData = hand_overlayCC.getImageData(0,0,width,height);
+			// swap flow data
+			var _pt_xy = prev_xy;
+			prev_xy = curr_xy;
+			curr_xy = _pt_xy;
+			var _pyr = prev_img_pyr;
+			prev_img_pyr = curr_img_pyr;
+			curr_img_pyr = _pyr;
+
+			// grayscale
+			jsfeat.imgproc.grayscale(imageData.data, width, height, curr_img_pyr.data[0]);
+
+			// build image pyramid
+			curr_img_pyr.build(curr_img_pyr.data[0], true);
+
+			// optical flow 
+			jsfeat.optical_flow_lk.track(prev_img_pyr, curr_img_pyr, prev_xy, curr_xy, point_count, op_win_size|0, op_max_iterations|0, point_status, op_epsilon, op_min_eigen);
+
+			// prune low points
+			var n = point_count;
+			var j = 0;
+			for (var i = 0; i < n; i++){
+				if (point_status[i] == 1){
+					if (j<i){
+						curr_xy[j<<1] = curr_xy[i<<1];
+						curr_xy[(j<<1)+1] = curr_xy[(i<<1)+1];
+					}
+					// draw good points
+					drawCircle(hand_overlayCC, curr_xy[j<<1], curr_xy[(j<<1)+1]);
+					j++;
+				}
+			}
+			point_count = j;
+
+		}
+
+		requestAnimFrame(drawHandLoop);
+	}
+
+	function drawCircle(ctx, x, y) {
+		ctx.fillStyle = "rgb(0,255,0)";
+        ctx.strokeStyle = "rgb(0,255,0)";
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+	function relMouseCoords(event, element) {
+        var totalOffsetX=0,totalOffsetY=0,canvasX=0,canvasY=0;
+        var currentElement = element;
+
+        do {
+            totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+            totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+        } while(currentElement = currentElement.offsetParent)
+
+        canvasX = event.pageX - totalOffsetX;
+        canvasY = event.pageY - totalOffsetY;
+
+        return {x:canvasX, y:canvasY}
+    }
+
+
 	// The object return below is exposed to the public
 	return {
 		// Public
 		init: function(options){
-			console.log("bonestagram init");
-			console.log(options);
 			if (typeof options !== "undefined") {
 				vid = options.video[0];
 				bonesImg = options.img[0];
@@ -112,6 +187,8 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 			gl = document.getElementsByClassName('bonestagram_gl')[0];
 			face_overlay = document.getElementsByClassName("bonestagram_face_overlay")[0];
 			face_overlayCC = face_overlay.getContext('2d');	
+			hand_overlay = document.getElementsByClassName("bonestagram_hand_overlay")[0];
+			hand_overlayCC = hand_overlay.getContext('2d');	
 			checkWebGL();
 			setupCamera();
 			ctrack = new clm.tracker();
@@ -126,7 +203,29 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils']
 			drawFaceLoop();
 		},
 		startHand: function(){
+			console.log('start hand');
+			curr_img_pyr = new jsfeat.pyramid_t(3);
+            prev_img_pyr = new jsfeat.pyramid_t(3);
+            curr_img_pyr.allocate(width, height, jsfeat.U8_t|jsfeat.C1_t);
+            prev_img_pyr.allocate(width, height, jsfeat.U8_t|jsfeat.C1_t);
 
+            console.log(curr_img_pyr);
+         	console.log(prev_img_pyr);
+            point_count = 0;
+            point_status = new Uint8Array(100);
+            prev_xy = new Float32Array(100*2);
+            curr_xy = new Float32Array(100*2);
+
+            // enable click to add tracking points
+            hand_overlay.addEventListener('click', function(e){
+            	var coords = relMouseCoords(e, hand_overlay);
+            	console.log(coords.x+ ' ' + coords.y);
+            	curr_xy[point_count<<1] = coords.x;
+            	curr_xy[(point_count<<1)+1] = coords.y;
+            	point_count++;
+            }, false);
+            
+            drawHandLoop();
 		},
 		setBonesCoords: function(coords){
 			bonesCoords = coords;

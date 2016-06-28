@@ -7,7 +7,7 @@ require(['jquery','app/bonestagram'], function($, bonestagram) {
 		// bonestagram.init(options);
 		bonestagram.init();
 		$('#start_btn').click(function(){
-			bonestagram.startFace();
+			//bonestagram.startFace();
 			bonestagram.startHand();
 		});
 	});

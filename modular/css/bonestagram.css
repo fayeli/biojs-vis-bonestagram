@@ -1,16 +1,17 @@
 .hide {
-				display : none;
-			}
-			.bonestagram_gl, .bonestagram_face_overlay {
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				-o-transform : scaleX(-1);
-				-webkit-transform : scaleX(-1);
-				transform : scaleX(-1);
-				-ms-filter : fliph; /*IE*/
-				filter : fliph; /*IE*/
-			}
+	display : none;
+}
+
+.bonestagram_gl, .bonestagram_face_overlay, .bonestagram_hand_overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	-o-transform : scaleX(-1);
+	-webkit-transform : scaleX(-1);
+	transform : scaleX(-1);
+	-ms-filter : fliph; /*IE*/
+	filter : fliph; /*IE*/
+}
 
 			.bonestagram_video {
 				-o-transform : scaleX(-1);
