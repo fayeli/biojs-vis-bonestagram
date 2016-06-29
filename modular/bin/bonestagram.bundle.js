@@ -182,7 +182,9 @@ var Bonestagram =
 							curr_xy[(j<<1)+1] = curr_xy[(i<<1)+1];
 						}
 						// draw good points
-						drawCircle(hand_overlayCC, curr_xy[j<<1], curr_xy[(j<<1)+1]);
+						var x = curr_xy[j<<1];
+						var y = curr_xy[(j<<1)+1];
+						drawMarker(hand_overlayCC, x, y);
 						j++;
 					}
 				}
@@ -193,13 +195,9 @@ var Bonestagram =
 			requestAnimFrame(drawHandLoop);
 		}
 
-		function drawCircle(ctx, x, y) {
-			ctx.fillStyle = "rgb(0,255,0)";
-	        ctx.strokeStyle = "rgb(0,255,0)";
-	        ctx.beginPath();
-	        ctx.arc(x, y, 4, 0, Math.PI*2, true);
-	        ctx.closePath();
-	        ctx.fill();
+		function drawMarker(ctx, x, y) {
+			ctx.fillStyle = "#98ff98";
+	        ctx.fillRect(x,y,3,3);
 	    }
 
 		function relMouseCoords(event, element) {
@@ -267,7 +265,7 @@ var Bonestagram =
 	            hand_overlay.addEventListener('click', function(e){
 	            	var coords = relMouseCoords(e, hand_overlay);
 	            	console.log(coords.x+ ' ' + coords.y);
-	            	curr_xy[point_count<<1] = coords.x;
+	            	curr_xy[point_count<<1] = width - coords.x;
 	            	curr_xy[(point_count<<1)+1] = coords.y;
 	            	point_count++;
 	            }, false);
