@@ -150,7 +150,10 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils',
 
 	function drawMarker(ctx, x, y) {
 		ctx.fillStyle = "#98ff98";
-        ctx.fillRect(x,y,3,3);
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI*2, true);
+        ctx.closePath();
+        ctx.fill();
     }
 
 	function relMouseCoords(event, element) {
