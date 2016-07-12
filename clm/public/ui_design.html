@@ -6,7 +6,7 @@
 		<style>
 			.bonestagram_container{
   				left: 50%;
-  				transform: translate(-50%, 0);
+  				transform: translate(-50%, 40%);
 			}
 
 			@-webkit-keyframes fadeIn {
@@ -37,6 +37,35 @@
 				-moz-animation-delay: 1.2s;
 				animation-delay: 1.2s;
 			}
+
+			#start_btn{
+				position: absolute;
+				left: 50%;
+				top: 70%;
+				transform: translate(-50%, 0);
+				text-transform: uppercase;
+				background: none;
+				letter-spacing: 2px;
+				padding: 5px 25px;
+				border: 1px #383736 solid;
+				border-radius: 4px;
+				cursor: pointer;
+				outline: 0;
+
+				opacity: 0;
+				-webkit-animation: fadeIn ease-in 1;
+				-moz-animation: fadeIn ease-in 1;
+				animation: fadeIn ease-in 1;
+				-webkit-animation-fill-mode: forwards;
+				-moz-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;
+				-webkit-animation-duration: 0.8s;
+				-moz-animation-duration: 0.8s;
+				animation-duration: 0.8s;
+				-webkit-animation-delay: 2.0s;
+				-moz-animation-delay: 3.5s;
+				animation-delay: 3.5s;
+			}
 		</style>
 		<link rel="stylesheet" href="css/bonestagram.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -59,6 +88,7 @@
 				<canvas class="bonestagram_gl" width="400" height="300"></canvas>
 				<canvas class="bonestagram_hand_overlay" width="400" height="300"></canvas>
 			</div>
+		<button id="start_btn"> Start Visualisation</button>
 		<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
 	</body>
 </html>
