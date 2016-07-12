@@ -33,21 +33,23 @@
 				-webkit-animation-duration: 1s;
 				-moz-animation-duration: 1s;
 				animation-duration: 1s;
-				-webkit-animation-delay: 1.2s;
-				-moz-animation-delay: 1.2s;
-				animation-delay: 1.2s;
+				-webkit-animation-delay: 2.0s;
+				-moz-animation-delay: 2.0s;
+				animation-delay: 2.0s;
 			}
 
 			#start_btn{
 				position: absolute;
 				left: 50%;
 				top: 70%;
-				transform: translate(-50%, 0);
+				transform: translate(-50%, 0);				
+
+				color: #1a1a1a;
 				text-transform: uppercase;
 				background: none;
-				letter-spacing: 2px;
-				padding: 5px 25px;
-				border: 1px #383736 solid;
+				letter-spacing: 3px;
+				padding: 15px 25px;
+				border: 1px #1a1a1a solid;
 				border-radius: 4px;
 				cursor: pointer;
 				outline: 0;
@@ -62,9 +64,36 @@
 				-webkit-animation-duration: 0.8s;
 				-moz-animation-duration: 0.8s;
 				animation-duration: 0.8s;
-				-webkit-animation-delay: 2.0s;
+				-webkit-animation-delay: 3.5s;
 				-moz-animation-delay: 3.5s;
 				animation-delay: 3.5s;
+
+				-webkit-transition: ease-in 0.08s;
+				-moz-transition: ease-in 0.08s;
+				transition: ease-in 0.08s;
+			}
+
+			#start_btn:hover{
+				color: #f5f5f5;
+			}
+
+			#start_btn:before {
+				content: "";
+				position: absolute;
+				background: #1a1a1a;
+				top: 100%;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: -1;
+
+				-webkit-transition: top 0.1s ease-in;
+				-moz-transition: top 0.1s ease-in;
+				transition: top 0.1s ease-in;
+			}
+
+			#start_btn:hover:before {
+				top: 0;
 			}
 		</style>
 		<link rel="stylesheet" href="css/bonestagram.css">
