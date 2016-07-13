@@ -4,11 +4,6 @@
 		<title>Bonestagram</title>
 		<meta charset="utf-8">
 		<style>
-			.bonestagram_container{
-  				left: 50%;
-  				transform: translate(-50%, 40%);
-			}
-
 			@-webkit-keyframes fadeIn {
 				from { opacity:0; }
 				to { opacity:1; }
@@ -22,7 +17,7 @@
 				to { opacity:1; }
 			}
 
-			.fade-in{
+			.fadeIn{
 				opacity: 0;
 				-webkit-animation: fadeIn ease-in 1;
 				-moz-animation: fadeIn ease-in 1;
@@ -37,6 +32,100 @@
 				-moz-animation-delay: 2.0s;
 				animation-delay: 2.0s;
 			}
+
+			@-webkit-keyframes slideUp {
+				0% {
+					-webkit-transform: translate(-50%,100%);
+				}
+				50%{
+					-webkit-transform: translate(-50%,-8%);
+				}
+				65%{
+					-webkit-transform: translate(-50%,4%);
+				}
+				80%{
+					-webkit-transform: translate(-50%,-4%);
+				}
+				95%{
+					-webkit-transform: translate(-50%,2%);
+				}
+				100%{
+					-webkit-transform: translate(-50%,0%);
+				}
+			}
+
+			@-moz-keyframes slideUp {
+				0% {
+					-moz-transform: translate(-50%,100%);
+				}
+				50%{
+					-moz-transform: translate(-50%,-8%);
+				}
+				65%{
+					-moz-transform: translate(-50%,4%);
+				}
+				80%{
+					-moz-transform: translate(-50%,-4%);
+				}
+				95%{
+					-moz-transform: translate(-50%,2%);
+				}
+				100%{
+					-moz-transform: translate(-50%,0%);
+				}
+			}
+
+			@keyframes slideUp {
+				0% {
+					transform: translate(-50%,100%);
+				}
+				50%{
+
+					transform: translate(-50%,-8%);
+				}
+				65%{
+					transform: translate(-50%,4%);
+				}
+				80%{
+					transform: translate(-50%,-4%);
+				}
+				95%{
+					transform: translate(-50%,2%);
+				}
+				100%{
+					opacity: 1;
+					transform: translate(-50%,0%);
+				}
+			}
+
+			.slideUp{
+				-webkit-animation-name: slideUp;
+				-moz-animation-name: slideUp;
+				animation-name: slideUp;
+				
+				-webkit-animation-duration: 1s;
+				-moz-animation-duration: 1s;
+				animation-duration: 1s;
+				
+				-webkit-animation-timing-function: ease;
+				-moz-animation-timing-function: ease;
+				animation-timing-function: ease;
+
+				-webkit-animation-delay: 3.5s;
+				-moz-animation-delay: 3.5s;
+				animation-delay: 3.5s;
+
+				-webkit-animation-fill-mode: forwards;
+				-moz-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;
+			}
+
+
+			.bonestagram_container{
+  				left: 50%;
+  				transform: translate(-50%, 40%);
+			}
+
 
 			#start_btn{
 				position: absolute;
@@ -55,22 +144,6 @@
 				outline: 0;
 
 				opacity: 0;
-				-webkit-animation: fadeIn ease-in 1;
-				-moz-animation: fadeIn ease-in 1;
-				animation: fadeIn ease-in 1;
-				-webkit-animation-fill-mode: forwards;
-				-moz-animation-fill-mode: forwards;
-				animation-fill-mode: forwards;
-				-webkit-animation-duration: 0.8s;
-				-moz-animation-duration: 0.8s;
-				animation-duration: 0.8s;
-				-webkit-animation-delay: 3.5s;
-				-moz-animation-delay: 3.5s;
-				animation-delay: 3.5s;
-
-				-webkit-transition: ease-in 0.08s;
-				-moz-transition: ease-in 0.08s;
-				transition: ease-in 0.08s;
 			}
 
 			#start_btn:hover{
@@ -110,14 +183,14 @@
 		</script>
 	</head>
 	<body>
-			<div class="bonestagram_container fade-in">
+			<div class="bonestagram_container fadeIn">
 				<video class="bonestagram_video" width="400" height="300" preload="auto">
 				</video>
 				<canvas class="bonestagram_face_overlay" width="400" height="300"></canvas>
 				<canvas class="bonestagram_gl" width="400" height="300"></canvas>
 				<canvas class="bonestagram_hand_overlay" width="400" height="300"></canvas>
 			</div>
-		<button id="start_btn"> Start Visualisation</button>
+		<button id="start_btn" class="slideUp"> Start Visualisation</button>
 		<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
 	</body>
 </html>
