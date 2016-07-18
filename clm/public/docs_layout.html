@@ -47,12 +47,16 @@
 
 			}
 
-			.header #hamburger {
+			.header .hamburger {
 				width: 10%;
 			}
 
-			.header #header_logo {
-				width: 90%;
+			.header .header_logo {
+				width: 80%;
+			}
+
+			.header .header_logo .md_logo {
+				display: none;
 			}
 
 			.main {
@@ -66,15 +70,45 @@
 				width: 100%;
 			}
 
-			@media screen and (min-width: 500px){
+			@media screen and (min-width: 450px){
+				#container3 {
+					width: 100%;
+				}
+				#container2 {
+					width: 100%;
+				}
+				.header {
+					align-items: flex-start;
+					justify-content: space-between;
+					padding: 10px;
+				}
+				.header .hamburger {
+					display: none;				}
+				.header .header_logo .sm_logo {
+					display: none;
+				}
+				.header .header_logo .md_logo {
+					display: inline-block;
+				}
+				.header .header_logo {
+					width: 250px;
+					height: 250px;
+					margin: auto;
+				}
+				.nav {
+					display: none;
+				}
+			}
+
+			@media screen and (min-width: 900px){
 				#container3 {
 					width: 30%;
 				}
 				#container2 {
 					width: 70%;
 				}
-				.header {
-					display: none;
+				.header .header_logo{
+					margin-top: 0px;
 				}
 			}
 		</style>
@@ -83,8 +117,13 @@
 		<div class="container">
 			<div class="container" id="container3">
 				<div class="header">
-					<div id="hamburger"> <img src="./media/menu.png"></img> </div>
-					<div id="header_logo"><img id="header_logo" src="./media/logo_just_text.png"></img></div>
+					<div class="hamburger">
+						<img src="./media/menu.png"></img>
+					</div>
+					<div class="header_logo">
+						<img class="sm_logo" src="./media/logo_just_text.png"></img>
+						<img class="md_logo" src="./media/logo_transparent_bg.png"></img>
+					</div>
 				</div>
 				<div class="nav">
 					<ul>
