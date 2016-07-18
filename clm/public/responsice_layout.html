@@ -3,6 +3,12 @@
 		<title>Bonestagram</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
+			body {
+				color: white;
+				font-family: "Courier New";
+				margin: auto;
+			}
+
 			img, embed, object, video {
 				max-width: 100%;
 			}
@@ -10,8 +16,39 @@
 				min-width: 48px;
 				min-height: 48px;
 			}
+			.container {
+				display: flex;
+				display: -webkit-flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+
+			}
+			.nav {
+				background: #FF9779;
+				width: 100%;
+			}
+			.main {
+				background: #4C66CC;
+				width: 100%;
+			}
+			.footer {
+				background: #C8FF92;
+				width: 100%;
+			}
 		</style>
 	</head>
 	<body>
+		<div class="container">
+			<div class="nav">
+				<h1>nav</h1>
+			</div>
+			<div class="main">
+				<h1>main</h1>
+			</div>
+			<div class="footer">
+				<h1>footer</h1>
+			</div>
+		</div>
+
 	</body>
 </html>
