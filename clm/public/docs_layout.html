@@ -35,6 +35,7 @@
 				margin-top: 18px;
 				margin-bottom: 18px;
 				font-size: 18px;
+				cursor: pointer
 			}
 
 
@@ -53,6 +54,7 @@
 
 			.header .hamburger {
 				width: 10%;
+				cursor: pointer
 			}
 
 			.header .header_logo {
@@ -84,7 +86,7 @@
 				.header {
 					align-items: flex-start;
 					justify-content: space-between;
-					padding: 10px;
+					
 				}
 				.header .hamburger {
 					display: none;				}
@@ -100,7 +102,18 @@
 					margin: auto;
 				}
 				.nav {
-					display: none;
+					display: block;
+				}
+				.nav ul {
+					display: flex;
+					display: -webkit-flex;
+					flex-flow: row wrap;
+					-webkit-flex-flow: row wrap;
+					justify-content: space-around;
+					padding: 0px;
+				}
+				.nav ul li {
+					font-size: 16px;
 				}
 			}
 
