@@ -5,6 +5,42 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
+			html {
+				height: 100%;
+				margin: 0;
+			}
+			body {
+				color: white;
+				font-family: "Courier New";
+				margin: 0;
+				height: 100%;
+			}
+
+			img, embed, object, video {
+				max-width: 100%;
+			}
+			nav a, button {
+				min-width: 48px;
+				min-height: 48px;
+			}
+
+			.container {
+				display: flex;
+				display: -webkit-flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+				width: 100%;;
+			}
+
+			#container1{
+				height: 100%
+			}
+
+			#container2{
+				background: #4C66CC;
+				height: 100%
+			}
+
 			@-webkit-keyframes fadeIn {
 				from { opacity:0; }
 				to { opacity:1; }
@@ -184,6 +220,7 @@
 		</script>
 	</head>
 	<body>
+		<div class="container" id="container1">
 			<div class="bonestagram_container fadeIn">
 				<video class="bonestagram_video" width="400" height="300" preload="auto">
 				</video>
@@ -191,7 +228,11 @@
 				<canvas class="bonestagram_gl" width="400" height="300"></canvas>
 				<canvas class="bonestagram_hand_overlay" width="400" height="300"></canvas>
 			</div>
-		<button id="start_btn" class="slideUp"> Start Visualisation</button>
-		<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
+			<button id="start_btn" class="slideUp"> Start Visualisation</button>
+			<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
+		</div>
+		<div class="container" id="container2">
+			more stuff
+		</div>
 	</body>
 </html>
