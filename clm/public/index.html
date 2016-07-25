@@ -29,7 +29,7 @@
 				display: -webkit-flex;
 				flex-flow: row wrap;
 				-webkit-flex-flow: row wrap;
-				width: 100%;;
+				width: 100%;
 			}
 
 			#container1{
@@ -49,6 +49,17 @@
 				background: #FF9779;
 				width: 400px;
 				height: 300px;
+			}
+
+			.buttons_container{
+				width: 400px;
+				height: 80px;
+				display: flex;
+				display: -webkit-flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
 			}
 
 			@-webkit-keyframes fadeIn {
@@ -168,7 +179,6 @@
 			}
 
 			#start_btn{			
-				margin: 20px;
 				color: #1a1a1a;
 				text-transform: uppercase;
 				background: none;
@@ -227,11 +237,28 @@
 				<canvas class="bonestagram_gl" width="400" height="300"></canvas>
 				<canvas class="bonestagram_hand_overlay" width="400" height="300"></canvas>
 			</div>
-			<button id="start_btn" class="slideUp"> Start Visualisation</button>
+			<div class="buttons_container">
+				<button id="start_btn" class="slideUp"> Start Visualisation</button>
+				<button id="screenshot_btn" class="slideUp"> Take Screenshot</button>
+			</div>
 			<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
 		</div>
 		<div class="container" id="container2">
-			more stuff
+			<div>
+				What is Bonestagram?
+			</div>
+			<div>
+				Create Your Own Bonestagram
+			</div>
+			<div>
+				FAQ
+			</div>
+			<div>
+				View Documentation
+			</div>
+			<div>
+				More Biological Data Visualisation
+			</div>
 		</div>
 	</body>
 </html>
