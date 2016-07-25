@@ -178,7 +178,7 @@
 				animation-fill-mode: forwards;
 			}
 
-			#start_btn{			
+			.buttons_container button{
 				color: #1a1a1a;
 				text-transform: uppercase;
 				background: none;
@@ -188,7 +188,13 @@
 				border-radius: 4px;
 				cursor: pointer;
 				outline: 0;
+			}
 
+			#screenshot_btn{
+				display: none;
+			}
+
+			#start_btn{			
 				opacity: 0;
 			}
 
@@ -222,8 +228,10 @@
 			var main = function(){
 				Bonestagram.init();
 				$('#start_btn').click(function(){
-				Bonestagram.startFace();
-			});
+					Bonestagram.startFace();
+					$('#start_btn').hide();
+					$('#screenshot_btn').show();
+				});
 			}
 			window.onload = main;
 		</script>
