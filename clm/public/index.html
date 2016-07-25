@@ -157,6 +157,7 @@
 			}
 
 			.slideUp{
+
 				-webkit-animation-name: slideUp;
 				-moz-animation-name: slideUp;
 				animation-name: slideUp;
@@ -178,6 +179,10 @@
 				animation-fill-mode: forwards;
 			}
 
+			#screenshot_btn{
+				display: none;
+			}
+
 			.buttons_container button{
 				color: #1a1a1a;
 				text-transform: uppercase;
@@ -188,21 +193,14 @@
 				border-radius: 4px;
 				cursor: pointer;
 				outline: 0;
-			}
-
-			#screenshot_btn{
-				display: none;
-			}
-
-			#start_btn{			
 				opacity: 0;
 			}
 
-			#start_btn:hover{
+			.buttons_container button:hover{
 				color: #f5f5f5;
 			}
 
-			#start_btn:before {
+			.buttons_container button:before {
 				content: "";
 				position: absolute;
 				background: #1a1a1a;
@@ -217,7 +215,7 @@
 				transition: top 0.1s ease-in;
 			}
 
-			#start_btn:hover:before {
+			.buttons_container button:hover:before {
 				top: 0;
 			}
 		</style>
@@ -230,7 +228,8 @@
 				$('#start_btn').click(function(){
 					Bonestagram.startFace();
 					$('#start_btn').hide();
-					$('#screenshot_btn').show();
+					$('#screenshot_btn').css('display','block');
+					$('#screenshot_btn').addClass('slideUp');
 				});
 			}
 			window.onload = main;
