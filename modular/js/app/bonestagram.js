@@ -231,6 +231,19 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils',
 		},
 		screenshot: function(){
 			console.log('Screenshot!');
+			var screenshot_canvas = document.createElement('canvas');
+			screenshot_canvas.width = width;
+			screenshot_canvas.height = height;
+			var screenshotCC = screenshot_canvas.getContext('2d');
+			screenshotCC.drawImage(vid, 0, 0, width, height);
+			facePos = ctrack.getCurrentPosition(vid);
+			if (facePos) {
+				// draw mask
+				fd.draw(facePos);
+				screenshotCC.drawImage(gl, 0, 0, width, height);
+			}
+			var dataURL = screenshot_canvas.toDataURL();
+			window.location = dataURL;
 		},
 		setBonesCoords: function(coords){
 			bonesCoords = coords;
