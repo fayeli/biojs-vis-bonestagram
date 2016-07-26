@@ -4,6 +4,7 @@
  	 	alias: {
  	 		"app": "app",
       		"numeric": "libs/numeric-1.2.6.min",
+      		"jsfeat": "libs/jsfeat-min"
  	 	},
  	 },
     entry: './js/app/bonestagram.js',

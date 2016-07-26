@@ -200,6 +200,7 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils',
 
 		},
 		startFace: function(){
+			console.log('start face');
 			ctrack.start(vid);
 			drawFaceLoop();
 		},
@@ -227,6 +228,9 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils',
             }, false);
             
             drawHandLoop();
+		},
+		screenshot: function(){
+			console.log('Screenshot!');
 		},
 		setBonesCoords: function(coords){
 			bonesCoords = coords;
