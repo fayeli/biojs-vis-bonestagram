@@ -51,7 +51,7 @@
 				height: 300px;
 			}
 
-			.buttons_container{
+			.ui_container{
 				width: 400px;
 				height: 80px;
 				display: flex;
@@ -89,6 +89,35 @@
 				-webkit-animation-delay: 2.0s;
 				-moz-animation-delay: 2.0s;
 				animation-delay: 2.0s;
+			}
+
+			@-webkit-keyframes fadeOut {
+				from { opacity:1; }
+				to { opacity:0; }
+			}
+			@-moz-keyframes fadeOut {
+				from { opacity:1; }
+				to { opacity:0; }
+			}
+			@keyframes fadeOut {
+				from { opacity:1; }
+				to { opacity:0; }
+			}
+
+			.fadeOut{
+				opacity: 1;
+				-webkit-animation: fadeOut ease-in 1;
+				-moz-animation: fadeOut ease-in 1;
+				animation: fadeOut ease-in 1;
+				-webkit-animation-fill-mode: forwards;
+				-moz-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;
+				-webkit-animation-duration: 3s;
+				-moz-animation-duration: 3s;
+				animation-duration: 3s;
+				-webkit-animation-delay: 0.0s;
+				-moz-animation-delay: 0.0s;
+				animation-delay: 0.0s;
 			}
 
 			@-webkit-keyframes slideDown {
@@ -276,15 +305,27 @@
 				opacity: 0;
 			}
 
-			#screenshot_btn, #save_btn{
+			.ui_container{
+				position: relative;
+			}
+
+			.ui_container #ui_text{
+				color: #1a1a1a;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				position: absolute;
+				top: 20px;
+			}
+
+			#screenshot_btn, #save_btn, #ui_text{
 				display: none;
 			}
 
-			.buttons_container button{
+			.ui_container button{
 				color: #1a1a1a;
 				text-transform: uppercase;
-				background: none;
 				letter-spacing: 3px;
+				background: none;
 				padding: 15px 25px;
 				border: 1px #1a1a1a solid;
 				border-radius: 4px;
@@ -293,11 +334,11 @@
 				opacity: 0;
 			}
 
-			.buttons_container button:hover{
+			.ui_container button:hover{
 				color: #f5f5f5;
 			}
 
-			.buttons_container button:before {
+			.ui_container button:before {
 				content: "";
 				position: absolute;
 				background: #1a1a1a;
@@ -312,7 +353,7 @@
 				transition: top 0.1s ease-in;
 			}
 
-			.buttons_container button:hover:before {
+			.ui_container button:hover:before {
 				top: 0;
 			}
 		</style>
@@ -335,6 +376,8 @@
 					$('#screenshot_btn').hide();
 					$('#save_btn').css('display','block');
 					$('#save_btn').addClass('slideUp');
+					$('#ui_text').css('display','block');
+					$('#ui_text').addClass('fadeOut');
 				});
 				$('#save_btn').click(function(){
 					var a = document.createElement('a');
@@ -356,7 +399,8 @@
 				<canvas class="bonestagram_gl" width="400" height="300"></canvas>
 				<canvas class="bonestagram_hand_overlay" width="400" height="300"></canvas>
 			</div>
-			<div class="buttons_container">
+			<div class="ui_container">
+				<div id="ui_text">Screenshot!</div>
 				<button id="start_btn" class="slideUp"> Start Visualisation</button>
 				<button id="screenshot_btn" > Take Screenshot</button>
 				<button id="save_btn" > Save To Computer</button>
