@@ -179,7 +179,7 @@
 				animation-fill-mode: forwards;
 			}
 
-			#screenshot_btn{
+			#screenshot_btn, #save_btn{
 				display: none;
 			}
 
@@ -231,12 +231,26 @@
 					$('#screenshot_btn').css('display','block');
 					$('#screenshot_btn').addClass('slideUp');
 				});
+				$('#screenshot_btn').click(function(){
+					Bonestagram.screenshot();
+					$('.bonestagram_container').hide();
+					$('#screenshot_btn').hide();
+					$('#save_btn').css('display','block');
+					$('#save_btn').addClass('slideUp');
+				});
+				$('#save_btn').click(function(){
+					var a = document.createElement('a');
+					a.href = $('.bonestagram_screenshot').attr('src');
+					a.download = 'my-bonestagram.png';
+					a.click();
+				})
 			}
 			window.onload = main;
 		</script>
 	</head>
 	<body>
 		<div class="container" id="container1">
+			<img class="bonestagram_screenshot"></img>
 			<div class="bonestagram_container fadeIn">
 				<video class="bonestagram_video" width="400" height="300" preload="auto">
 				</video>
@@ -247,6 +261,7 @@
 			<div class="buttons_container">
 				<button id="start_btn" class="slideUp"> Start Visualisation</button>
 				<button id="screenshot_btn" class="slideUp"> Take Screenshot</button>
+				<button id="save_btn" class="slideUp"> Save To Computer</button>
 			</div>
 			<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
 		</div>

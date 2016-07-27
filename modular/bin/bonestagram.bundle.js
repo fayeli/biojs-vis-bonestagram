@@ -278,6 +278,21 @@ var Bonestagram =
 			},
 			screenshot: function(){
 				console.log('Screenshot!');
+				var screenshot_canvas = document.createElement('canvas');
+				screenshot_canvas.width = width;
+				screenshot_canvas.height = height;
+				var screenshotCC = screenshot_canvas.getContext('2d');
+				// Take screenshot of video
+				screenshotCC.drawImage(vid, 0, 0, width, height);
+				facePos = ctrack.getCurrentPosition(vid);
+				if (facePos) {
+					// draw mask
+					fd.draw(facePos);
+					// Combine with the screenshot of the face mask
+					screenshotCC.drawImage(gl, 0, 0, width, height);
+				}
+				var dataURL = screenshot_canvas.toDataURL();
+				$('.bonestagram_screenshot').attr('src', dataURL);
 			},
 			setBonesCoords: function(coords){
 				bonesCoords = coords;

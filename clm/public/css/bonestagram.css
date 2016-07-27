@@ -23,5 +23,12 @@
 				
 .bonestagram_container {
 	position : relative;
-	display:inline-block;
+}
+
+.bonestagram_screenshot {
+	-o-transform : scaleX(-1);
+	-webkit-transform : scaleX(-1);
+	transform : scaleX(-1);
+	-ms-filter : fliph; /*IE*/
+	filter : fliph; /*IE*/
 }
