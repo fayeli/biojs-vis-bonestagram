@@ -3,7 +3,65 @@
 	<head>
 		<title>Bonestagram</title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
+			html {
+				height: 100%;
+				margin: 0;
+			}
+			body {
+				color: white;
+				font-family: "Courier New";
+				margin: 0;
+				height: 100%;
+			}
+
+			img, embed, object, video {
+				max-width: 100%;
+			}
+			nav a, button {
+				min-width: 48px;
+				min-height: 48px;
+			}
+
+			.container {
+				display: flex;
+				display: -webkit-flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+				width: 100%;
+			}
+
+			#container1{
+				height: 100%;
+				flex-flow: column nowrap;
+				-webkit-flex-flow: column nowrap;
+				justify-content: center;
+				align-items: center;
+			}
+
+			#container2{
+				background: #4C66CC;
+				height: 100%
+			}
+
+			.bonestagram_container{
+				background: #FF9779;
+				width: 400px;
+				height: 300px;
+			}
+
+			.ui_container{
+				width: 400px;
+				height: 80px;
+				display: flex;
+				display: -webkit-flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
+			}
+
 			@-webkit-keyframes fadeIn {
 				from { opacity:0; }
 				to { opacity:1; }
@@ -33,72 +91,195 @@
 				animation-delay: 2.0s;
 			}
 
-			@-webkit-keyframes slideUp {
+			@-webkit-keyframes fadeOut {
+				from { opacity:1; }
+				to { opacity:0; }
+			}
+			@-moz-keyframes fadeOut {
+				from { opacity:1; }
+				to { opacity:0; }
+			}
+			@keyframes fadeOut {
+				from { opacity:1; }
+				to { opacity:0; }
+			}
+
+			.fadeOut{
+				opacity: 1;
+				-webkit-animation: fadeOut ease-in 1;
+				-moz-animation: fadeOut ease-in 1;
+				animation: fadeOut ease-in 1;
+				-webkit-animation-fill-mode: forwards;
+				-moz-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;
+				-webkit-animation-duration: 3s;
+				-moz-animation-duration: 3s;
+				animation-duration: 3s;
+				-webkit-animation-delay: 0.0s;
+				-moz-animation-delay: 0.0s;
+				animation-delay: 0.0s;
+			}
+
+			@-webkit-keyframes slideDown {
 				0% {
-					-webkit-transform: translate(-50%,100%);
+					-webkit-transform: translate(0,-100%);
 				}
 				50%{
-					-webkit-transform: translate(-50%,-8%);
+					-webkit-transform: translate(0,8%);
 				}
 				65%{
-					-webkit-transform: translate(-50%,4%);
+					-webkit-transform: translate(0,-4%);
 				}
 				80%{
-					-webkit-transform: translate(-50%,-4%);
+					-webkit-transform: translate(0,4%);
 				}
 				95%{
-					-webkit-transform: translate(-50%,2%);
+					-webkit-transform: translate(0,-2%);
 				}
 				100%{
-					-webkit-transform: translate(-50%,0%);
+					opacity: 1;
+					-webkit-transform: translate(0,0%);
+				}
+			}
+
+			@-moz-keyframes slideDown {
+				0% {
+					-moz-transform: translate(0,-100%);
+				}
+				50%{
+					-moz-transform: translate(0,8%);
+				}
+				65%{
+					-moz-transform: translate(0,-4%);
+				}
+				80%{
+					-moz-transform: translate(0,4%);
+				}
+				95%{
+					-moz-transform: translate(0,-2%);
+				}
+				100%{
+					opacity: 1;
+					-moz-transform: translate(0,0%);
+				}
+			}
+
+			@keyframes slideDown {
+				0% {
+					transform: translate(0,-100%);
+				}
+				50%{
+
+					transform: translate(0,8%);
+				}
+				65%{
+					transform: translate(0,-4%);
+				}
+				80%{
+					transform: translate(0,4%);
+				}
+				95%{
+					transform: translate(0,-2%);
+				}
+				100%{
+					opacity: 1;
+					transform: translate(0,0%);
+				}
+			}
+
+			.slideDown{
+
+				-webkit-animation-name: slideDown;
+				-moz-animation-name: slideDown;
+				animation-name: slideDown;
+				
+				-webkit-animation-duration: 1s;
+				-moz-animation-duration: 1s;
+				animation-duration: 1s;
+				
+				-webkit-animation-timing-function: ease;
+				-moz-animation-timing-function: ease;
+				animation-timing-function: ease;
+
+				-webkit-animation-delay: 0s;
+				-moz-animation-delay: 0s;
+				animation-delay: 0s;
+
+				-webkit-animation-fill-mode: forwards;
+				-moz-animation-fill-mode: forwards;
+				animation-fill-mode: forwards;
+			}
+
+
+			@-webkit-keyframes slideUp {
+				0% {
+					-webkit-transform: translate(0,100%);
+				}
+				50%{
+					-webkit-transform: translate(0,-8%);
+				}
+				65%{
+					-webkit-transform: translate(0,4%);
+				}
+				80%{
+					-webkit-transform: translate(0,-4%);
+				}
+				95%{
+					-webkit-transform: translate(0,2%);
+				}
+				100%{
+					opacity: 1;
+					-webkit-transform: translate(0,0%);
 				}
 			}
 
 			@-moz-keyframes slideUp {
 				0% {
-					-moz-transform: translate(-50%,100%);
+					-moz-transform: translate(0,100%);
 				}
 				50%{
-					-moz-transform: translate(-50%,-8%);
+					-moz-transform: translate(0,-8%);
 				}
 				65%{
-					-moz-transform: translate(-50%,4%);
+					-moz-transform: translate(0,4%);
 				}
 				80%{
-					-moz-transform: translate(-50%,-4%);
+					-moz-transform: translate(0,-4%);
 				}
 				95%{
-					-moz-transform: translate(-50%,2%);
+					-moz-transform: translate(0,2%);
 				}
 				100%{
-					-moz-transform: translate(-50%,0%);
+					opacity: 1;
+					-moz-transform: translate(0,0%);
 				}
 			}
 
 			@keyframes slideUp {
 				0% {
-					transform: translate(-50%,100%);
+					transform: translate(0,100%);
 				}
 				50%{
 
-					transform: translate(-50%,-8%);
+					transform: translate(0,-8%);
 				}
 				65%{
-					transform: translate(-50%,4%);
+					transform: translate(0,4%);
 				}
 				80%{
-					transform: translate(-50%,-4%);
+					transform: translate(0,-4%);
 				}
 				95%{
-					transform: translate(-50%,2%);
+					transform: translate(0,2%);
 				}
 				100%{
 					opacity: 1;
-					transform: translate(-50%,0%);
+					transform: translate(0,0%);
 				}
 			}
 
 			.slideUp{
+
 				-webkit-animation-name: slideUp;
 				-moz-animation-name: slideUp;
 				animation-name: slideUp;
@@ -120,37 +301,44 @@
 				animation-fill-mode: forwards;
 			}
 
-
-			.bonestagram_container{
-  				left: 50%;
-  				transform: translate(-50%, 40%);
+			.bonestagram_screenshot{
+				opacity: 0;
 			}
 
+			.ui_container{
+				position: relative;
+			}
 
-			#start_btn{
-				position: absolute;
-				left: 50%;
-				top: 70%;
-				transform: translate(-50%, 0);				
-
+			.ui_container #ui_text{
 				color: #1a1a1a;
 				text-transform: uppercase;
-				background: none;
 				letter-spacing: 3px;
+				position: absolute;
+				top: 20px;
+			}
+
+			#screenshot_btn, #save_btn, #ui_text{
+				display: none;
+			}
+
+			.ui_container button{
+				color: #1a1a1a;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				background: none;
 				padding: 15px 25px;
 				border: 1px #1a1a1a solid;
 				border-radius: 4px;
 				cursor: pointer;
 				outline: 0;
-
 				opacity: 0;
 			}
 
-			#start_btn:hover{
+			.ui_container button:hover{
 				color: #f5f5f5;
 			}
 
-			#start_btn:before {
+			.ui_container button:before {
 				content: "";
 				position: absolute;
 				background: #1a1a1a;
@@ -165,7 +353,7 @@
 				transition: top 0.1s ease-in;
 			}
 
-			#start_btn:hover:before {
+			.ui_container button:hover:before {
 				top: 0;
 			}
 		</style>
@@ -176,13 +364,34 @@
 			var main = function(){
 				Bonestagram.init();
 				$('#start_btn').click(function(){
-				Bonestagram.startFace();
-			});
+					Bonestagram.startFace();
+					$('#start_btn').hide();
+					$('#screenshot_btn').css('display','block');
+					$('#screenshot_btn').addClass('slideUp');
+				});
+				$('#screenshot_btn').click(function(){
+					Bonestagram.screenshot();
+					$('.bonestagram_screenshot').addClass('slideDown');
+					$('.bonestagram_container').hide();
+					$('#screenshot_btn').hide();
+					$('#save_btn').css('display','block');
+					$('#save_btn').addClass('slideUp');
+					$('#ui_text').css('display','block');
+					$('#ui_text').addClass('fadeOut');
+				});
+				$('#save_btn').click(function(){
+					var a = document.createElement('a');
+					a.href = $('.bonestagram_screenshot').attr('src');
+					a.download = 'my-bonestagram.png';
+					a.click();
+				})
 			}
 			window.onload = main;
 		</script>
 	</head>
 	<body>
+		<div class="container" id="container1">
+			<img class="bonestagram_screenshot"></img>
 			<div class="bonestagram_container fadeIn">
 				<video class="bonestagram_video" width="400" height="300" preload="auto">
 				</video>
@@ -190,7 +399,30 @@
 				<canvas class="bonestagram_gl" width="400" height="300"></canvas>
 				<canvas class="bonestagram_hand_overlay" width="400" height="300"></canvas>
 			</div>
-		<button id="start_btn" class="slideUp"> Start Visualisation</button>
-		<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
+			<div class="ui_container">
+				<div id="ui_text">Screenshot!</div>
+				<button id="start_btn" class="slideUp"> Start Visualisation</button>
+				<button id="screenshot_btn" > Take Screenshot</button>
+				<button id="save_btn" > Save To Computer</button>
+			</div>
+			<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
+		</div>
+		<div class="container" id="container2">
+			<div>
+				What is Bonestagram?
+			</div>
+			<div>
+				Create Your Own Bonestagram
+			</div>
+			<div>
+				FAQ
+			</div>
+			<div>
+				View Documentation
+			</div>
+			<div>
+				More Biological Data Visualisation
+			</div>
+		</div>
 	</body>
 </html>
