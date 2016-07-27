@@ -282,6 +282,9 @@ var Bonestagram =
 				screenshot_canvas.width = width;
 				screenshot_canvas.height = height;
 				var screenshotCC = screenshot_canvas.getContext('2d');
+				screenshotCC.translate(width/2,0);
+				screenshotCC.scale(-1,1);
+				screenshotCC.translate(-width/2,0)
 				// Take screenshot of video
 				screenshotCC.drawImage(vid, 0, 0, width, height);
 				facePos = ctrack.getCurrentPosition(vid);
