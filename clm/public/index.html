@@ -406,6 +406,15 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 		<script src="bin/bonestagram.bundle.js"></script>
 		<script>
+			var loadUserImage = function(event){
+				console.log('load user image');
+				var reader = new FileReader();
+				reader.onload = function(){
+					var dataURL = reader.result;
+					$('#userimg').attr("src", dataURL);
+				}
+				reader.readAsDataURL(event.target.files[0]);
+			}
 			var main = function(){
 				Bonestagram.init();
 				$('#start_btn').click(function(){
@@ -457,8 +466,11 @@
 			<p>Bonestagram is a web app for medical image visualisation.</p>
 			<p>We hope to encourage everyone to collect their own medical images & have some fun with them. (:</p>
 			<button id="upload_btn">Try with your image</button>
+
+			<input type="file" id="myFile" accept="image/*" mutiple="false" onChange="loadUserImage(event)">
 		</div>
 		<div class="container" id="container3">
+			<img id="userimg"></img>
 		<!-- 	
 			<h2>
 				Create Your Own Bonestagram
