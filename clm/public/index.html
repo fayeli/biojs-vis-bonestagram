@@ -4,16 +4,31 @@
 		<title>Bonestagram</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<style>
 			html {
 				height: 100%;
 				margin: 0;
 			}
 			body {
-				color: white;
-				font-family: "Courier New";
 				margin: 0;
 				height: 100%;
+			}
+
+			h2 {
+				font-family: 'Nunito', sans-serif;
+				color: #333333;
+				letter-spacing: 1px;
+				text-align: center
+			}
+
+			p {
+				font-family: 'Open Sans', sans-serif;
+				color: #5a5a5a;
+				margin: 5px;
+				text-align: center;
 			}
 
 			img, embed, object, video {
@@ -41,11 +56,37 @@
 			}
 
 			#container2{
-				background: #ececec;
+				background: #ededed;
+				flex-flow: column nowrap;
+				-webkit-flex-flow: column nowrap;
+				justify-content: center;
+				align-items: center;
+				padding-top: 40px;
+				padding-bottom: 100px;
+				position: absolute;
+			}
+
+			#upload_btn{
+				padding: 20px;
+    			width: 150px;
+    			height: 150px;
+    			border-radius: 75px;
+    			background: #FF9779;
+    			text-transform: uppercase;
+    			outline: 0;
+    			cursor: pointer;
+    			letter-spacing: 2px;
+    			color: #ffffff;
+    			border: 0px;
+    			position: absolute;
+    			top: 75%;
+			}
+			#upload_btn:hover{
+				background: #ffab93;
 			}
 
 			#container3{
-				background: #4C66CC;
+				
 				height: 100%
 			}
 
@@ -314,7 +355,7 @@
 			}
 
 			.ui_container #ui_text{
-				color: #1a1a1a;
+				color: #333333;
 				text-transform: uppercase;
 				letter-spacing: 3px;
 				position: absolute;
@@ -326,12 +367,12 @@
 			}
 
 			.ui_container button{
-				color: #1a1a1a;
+				color: #333333;
 				text-transform: uppercase;
 				letter-spacing: 3px;
 				background: none;
 				padding: 15px 25px;
-				border: 1px #1a1a1a solid;
+				border: 1px #333333 solid;
 				border-radius: 4px;
 				cursor: pointer;
 				outline: 0;
@@ -339,13 +380,13 @@
 			}
 
 			.ui_container button:hover{
-				color: #f5f5f5;
+				color: #ffffff;
 			}
 
 			.ui_container button:before {
 				content: "";
 				position: absolute;
-				background: #1a1a1a;
+				background: #333333;
 				top: 100%;
 				bottom: 0;
 				left: 0;
@@ -413,22 +454,26 @@
 		</div>
 		<div class="container" id="container2">
 			<h2>What is Bonestagram?</h2>
-			<p>Bonestagram is a visualisation project for medical images.. </p>
+			<p>Bonestagram is a web app for medical image visualisation.</p>
+			<p>We hope to encourage everyone to collect their own medical images & have some fun with them. (:</p>
+			<button id="upload_btn">Try with your image</button>
 		</div>
 		<div class="container" id="container3">
-
-			<div>
+		<!-- 	
+			<h2>
 				Create Your Own Bonestagram
-			</div>
-			<div>
+			</h2>
+			<h2>
 				FAQ
-			</div>
-			<div>
+			</h2>
+			<h2>
 				View Documentation
-			</div>
-			<div>
+			</h2>
+			<h2>
 				More Biological Data Visualisation
-			</div>
+			</h2>
+		-->
 		</div>
+
 	</body>
 </html>
