@@ -4,16 +4,30 @@
 		<title>Bonestagram</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<style>
 			html {
 				height: 100%;
 				margin: 0;
 			}
 			body {
-				color: white;
-				font-family: "Courier New";
 				margin: 0;
 				height: 100%;
+			}
+
+			h2 {
+				font-family: 'Nunito', sans-serif;
+				color: #333333;
+				letter-spacing: 1px;
+				text-align: center
+			}
+
+			p {
+				font-family: 'Open Sans', sans-serif;
+				color: #5a5a5a;
+				text-align: center;
 			}
 
 			img, embed, object, video {
@@ -27,22 +41,71 @@
 			.container {
 				display: flex;
 				display: -webkit-flex;
-				flex-flow: row wrap;
-				-webkit-flex-flow: row wrap;
+				-webkit-flex-flow: column nowrap;
+    			justify-content: center;
+    			align-items: center;
 				width: 100%;
 			}
 
 			#container1{
 				height: 100%;
-				flex-flow: column nowrap;
-				-webkit-flex-flow: column nowrap;
-				justify-content: center;
-				align-items: center;
 			}
 
 			#container2{
-				background: #4C66CC;
+				background: #ededed;
+				padding-top: 40px;
+				padding-bottom: 100px;
+				position: relative;
+			}
+
+			#container2 div{
+				background: white;
+				padding: 20px 70px 20px 70px;
+				width: 560px;
+			}
+
+			#upload_btn{
+				padding: 20px;
+    			width: 150px;
+    			height: 150px;
+    			border-radius: 75px;
+    			background: #FF9779;
+    			text-transform: uppercase;
+    			outline: 0;
+    			cursor: pointer;
+    			letter-spacing: 2px;
+    			color: #ffffff;
+    			border: 0px;
+    			position: absolute;
+    			top: 83%;
+			}
+			#upload_btn:hover{
+				background: #ffab93;
+			}
+			#upload_icon_svg{
+				display: none;
+			}
+			#upload_btn_text{
+				background: none;
+			}
+			#file_input{
+				opacity: 0;
+				overflow: hidden;
+				position: absolute;
+			}
+
+			#container3{	
 				height: 100%
+			}
+
+			#points_selector_canvas{
+				width: 640px;
+				height: 480px;
+				border: 30px solid #4C66CC;
+			}
+
+			#userimg{
+				display: none;
 			}
 
 			.bonestagram_container{
@@ -310,7 +373,7 @@
 			}
 
 			.ui_container #ui_text{
-				color: #1a1a1a;
+				color: #333333;
 				text-transform: uppercase;
 				letter-spacing: 3px;
 				position: absolute;
@@ -322,12 +385,12 @@
 			}
 
 			.ui_container button{
-				color: #1a1a1a;
+				color: #333333;
 				text-transform: uppercase;
 				letter-spacing: 3px;
 				background: none;
 				padding: 15px 25px;
-				border: 1px #1a1a1a solid;
+				border: 1px #333333 solid;
 				border-radius: 4px;
 				cursor: pointer;
 				outline: 0;
@@ -335,13 +398,13 @@
 			}
 
 			.ui_container button:hover{
-				color: #f5f5f5;
+				color: #ffffff;
 			}
 
 			.ui_container button:before {
 				content: "";
 				position: absolute;
-				background: #1a1a1a;
+				background: #333333;
 				top: 100%;
 				bottom: 0;
 				left: 0;
@@ -361,6 +424,16 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 		<script src="bin/bonestagram.bundle.js"></script>
 		<script>
+			var loadUserImage = function(event){
+				console.log('load user image');
+				var reader = new FileReader();
+				reader.onload = function(){
+					var dataURL = reader.result;
+					$('#userimg').attr("src", dataURL);
+					pointsSelector();
+				}
+				reader.readAsDataURL(event.target.files[0]);
+			}
 			var main = function(){
 				Bonestagram.init();
 				$('#start_btn').click(function(){
@@ -385,7 +458,274 @@
 					a.download = 'my-bonestagram.png';
 					a.click();
 				})
+				$('#upload_btn').on({
+					click: function(){
+						$('#file_input').click();
+					},
+					mouseenter: function(){
+						$('#upload_btn_text').toggle();
+						$('#upload_icon_svg').toggle();
+					},
+					mouseleave: function(){
+						$('#upload_btn_text').toggle()
+						$('#upload_icon_svg').toggle();
+					}
+				});
 			}
+
+			var pointsSelector = function(){
+            
+            	var coords = [[121.92799191984679,184.19216240419755],[118.74113263254269,253.7017373484083],[128.07732840700828,314.0651648786312],[145.50341586402052,377.3404382903117],[175.0470179047746,428.3720278198884],[216.26268310246033,469.2344402538887],[267.42588166495466,502.128073946532],[323.6864139765614,512.5053811316307],[381.1889691089136,499.48530971536445],[429.71357990120225,463.4214900408549],[467.1292936657478,421.537754329594],[493.2308725208873,370.6466670145585],[507.3945907183312,305.3965374123],[514.1098885852615,238.51000761747102],[507.2009944162471,174.7364492942625],[465.59705810723074,136.75665747531139],[432.10874975324265,125],[384.15174446143584,125],[351.54488594535763,135.22963355336668],[162.16177451030518,144.72103952617107],[194.70376235949394,126],[241,130],[277.5198647210173,137.82992220884094],[192.5627380181407,182.35373455399292],[225.1658086004223,166.85817167285668],[262.9021389237093,184.72604899079232],[224.82421319031323,193.62679469584918],[224.9386274222809,179.73191446260716],[443.75218061508883,177.1556294105885],[407.36102478935464,162.1785032964798],[367.3426762945685,181.37362678808685],[405.2498567443763,188.75927101523848],[404.863153412407,173.65270066194788],[314, 170],[277.2539320006613,252.0592473714927],[258.790607031229,284.0832945003201],[276.64778558874696,304.54255347445314],[317.4772090972725,307.7859653833357],[364.4959193923387,299.6561959465791],[377.27275089177823,279.043842539653],[357.1140334647449,250.14961061471956],[324,222],[296.770695143374,295.6331974142146],[350.24114846328195,290.942330984987],[248.8532880314441,372.38004806995957],[272.1557077756945,356.35352520595814],[302.9902196911147,350.59821534914704],[323.11457426149127,353.0358352022737],[338.3055779254553,347.5427982113969],[366.49269601972713,353.1538257295358],[392.63652105652415,368.4911974180641],[375.0778975047938,391.4413420753004],[352.32935954043757,405.19247889714825],[320.19499419206926,411.930992226806],[288.9192573286629,407.35752671668797],[267.61253113280924,394.527019223827],[286.6817714614754,382.82667526139215],[320.16223074694074,385.86502934549657],[359.1212544588326,380.7487964985724],[361.7270998810554,365.15603335898066],[322.91210334135167,367.2901736762333],[280.7920218316411,368.2798825278876],[320.66814785515174,277.11007275979364],[206.36606604411398,171.6086547538323],[247.5375468161923,170.29657636660522],[246.36866333618227,191.67729410789994],[205.19888043799355,189.99033691329964],[429.0603263358775,166.1691180598579],[386.8504393293843,166.2774220754911],[384.7938981921405,186.5701136634426],[426.9983448269614,184.45786533091854]];
+            	var canvas = $("#points_selector_canvas")[0];
+            	var ctx = canvas.getContext("2d");
+            	var img = $("#userimg")[0];
+            	var hRatio = canvas.width / img.width;
+				var vRatio = canvas.height / img.height;
+				var ratio  = Math.min ( hRatio, vRatio );
+				var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+   				var centerShift_y = ( canvas.height - img.height*ratio ) / 2; 
+				ctx.drawImage(img, 0,0, img.width, img.height, centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
+                ctx.fillStyle = "#4C66CC";
+                // size of the circle marker for coordinates points
+                var radius = 3;
+                drawCoordinates();
+
+                var offsetX = canvas.offsetLeft;
+                var offsetY = canvas.offsetTop;
+                var mouseX;
+                var mouseY;
+                var i;
+                var dragging;
+                var dragIndex;
+                var dragHoldX;
+                var dragHoldY;
+                var targetX;
+                var targetY;
+                var timer;
+
+
+                ctx.canvas.addEventListener('mousemove', function(e){
+                  // get mouse position on canvas
+                  mouseX = e.pageX - offsetX;
+                  mouseY = e.pageY - offsetY;
+                  // update the mouse coordinates dislayed on webpage
+                  //var mouse_coord = document.getElementById('mouse_coord');
+                  //mouse_coord.innerHTML = mouseX+" | "+mouseY;
+
+                  // when dragging a coordinate point
+                  if (dragging){
+                     var coordX;
+                     var coordY;
+                     var minX = radius;
+                     var maxX = canvas.width - radius;
+                     var minY = radius;
+                     var maxY = canvas.height - radius;
+
+                     // get mouse position on canvas
+                     mouseX = e.pageX - offsetX;
+                     mouseY = e.pageY - offsetY;
+
+                     // target position which the point will approach gradually
+                     // clamp the x y coordinates within the canvas
+                     targetX = mouseX - dragHoldX;
+                     targetX = (targetX < minX) ? minX : ((targetX > maxX) ? maxX : targetX);
+                     targetY = mouseY - dragHoldY;
+                     targetY = (targetY < minY) ? minY : ((targetY > maxY) ? maxY : targetY);
+
+                     // update the coordinates array
+                     //coords[dragIndex][0] = coordX;
+                     //coords[dragIndex][1] = coordY;
+
+                     // start timer, frame rate of 30fps
+                     timer = setInterval(onTimerTick, 1000/30); 
+
+                     // redraw on canvas
+                     //drawCoordinates();
+                  }
+                  function onTimerTick(){
+                     var easeAmount = 0.025;
+                     coords[dragIndex][0] = coords[dragIndex][0] + easeAmount*(targetX - coords[dragIndex][0]);
+                     coords[dragIndex][1] = coords[dragIndex][1] + easeAmount*(targetY - coords[dragIndex][1]);
+                     // stop timer when the point reach target
+                     if ((!dragging)&&(Math.abs(coords[dragIndex][0] - targetX) < 0.1)&&(Math.abs(coords[dragIndex][1] - targetY) < 0.1)){
+                        coords[dragIndex][0] = targetX;
+                        coords[dragIndex][1] = targetY;
+                        clearInterval(timer);
+                     }
+                     drawCoordinates();
+                  }
+               });
+
+               ctx.canvas.addEventListener('mousedown', function(e){
+                  // get mouse click position on canvas
+                  mouseX = e.pageX - offsetX;
+                  mouseY = e.pageY - offsetY;
+                  // determine which coordinate point was clicked
+                  for (i = 0; i < coords.length; i++){
+                     if (isHit(coords[i][0],coords[i][1],mouseX, mouseY)){
+                        // console.log("Coordinate point " + i + " was clicked");
+                        // start dragging
+                        dragging = true;
+                        // keep track of which coordinate point is being dragged
+                        dragIndex = i;
+                        // keep track of the mouse holding position
+                        dragHoldX = mouseX - coords[i][0];
+                        dragHoldY = mouseY - coords[i][1];
+                        targetX = mouseX - dragHoldX;
+                        targetY = mouseY - dragHoldY;
+
+                     }
+                  }
+
+                  function onTimerTick(){
+                     var easeAmount = 0.2;
+
+                  }
+
+                  // code below prevents the mouse down from having an effect on the main browser window:
+                  if (e.preventDefault) {
+                     e.preventDefault();
+                  } //standard
+                  else if (e.returnValue) {
+                     e.returnValue = false;
+                  } //older IE
+                  return false;
+               });
+   
+
+            // stop dragging when mouse is up
+            ctx.canvas.addEventListener('mouseup', function(e){
+               if (dragging){
+                  dragging = false;
+               }
+            })
+
+               // calculate whether the mouse click (x2, y2) is within the circle marker of the coordinate point (x1, y1)
+               function isHit(x1, y1, x2, y2){
+                  var distance = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
+                  return (distance < (radius+3) * (radius+3));
+               }
+                        
+            // display the coordinate points on canvas
+               function drawCoordinates(){
+                  // first clear the canvas
+                  ctx.clearRect(0,0,canvas.width,canvas.height);
+                  // redraw image 
+                  var img = $("#userimg")[0];
+            	  var hRatio = canvas.width / img.width;
+				  var vRatio = canvas.height / img.height;
+				  var ratio  = Math.min ( hRatio, vRatio );
+				  var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+   				  var centerShift_y = ( canvas.height - img.height*ratio ) / 2; 
+				  ctx.drawImage(img, 0,0, img.width, img.height, centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
+                  
+                  var currentX;
+                  var currentY;
+                  var prevX = coords[0][0];
+                  var prevY = coords[0][1];
+                  var mouthLeftCornerX = coords[44][0];
+                  var mouthLeftCornerY = coords[44][1];
+                  var mouthRightCornerX = coords[50][0];
+                  var mouthRightCornerY = coords[50][1];
+                  var nostrilLeftX = coords[36][0];
+                  var nostrilLeftY = coords[36][1];
+                  var nostrilMidX = coords[37][0];
+                  var nostrilMidY = coords[37][1];
+                  var nostrilRightX = coords[38][0];
+                  var nostrilRightY = coords[38][1];
+
+                  for (i = 0; i < coords.length; i++){
+                     currentX = coords[i][0];
+                     currentY = coords[i][1];
+
+                     // break apart those that shouln't be line segment
+                     if (i == 15 || i == 19 || (23 <= i &&  i <= 34) || i == 37 || i == 38 || i == 41 || i == 42 || i == 43 || i == 44 || i == 56 || i == 59 || i >= 62) {
+                        prevX = currentX;
+                        prevY = currentY;
+                     }
+
+                     ctx.fillStyle = "#4C66CC";
+                     ctx.strokeStyle = "#4C66CC";
+                     
+                     // draw circle markers for the coodridnates 
+                     ctx.beginPath();
+                     ctx.arc(currentX, currentY, radius, 0, 2*Math.PI, false);
+                     ctx.closePath();
+                     ctx.fill();
+
+                     // draw line connecting the markers
+                     ctx.beginPath();
+                     ctx.moveTo(prevX, prevY);
+                     ctx.lineTo(currentX,currentY);
+                     ctx.closePath();
+                     ctx.stroke();
+
+                     // draw line segments of the nose
+                     if (i == 42) {
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilLeftX, nostrilLeftY);
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilMidX, nostrilMidY);
+                        ctx.closePath();
+                        ctx.stroke();
+                     } else if ( i == 43){
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilMidX, nostrilMidY);
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(nostrilRightX, nostrilRightY);
+                        ctx.closePath();
+                        ctx.stroke();
+                     }
+
+                     // draw line segments of the mouth
+                     if ( i == 55 || i == 56 || i == 61){
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(mouthLeftCornerX, mouthLeftCornerY);
+                        ctx.closePath();
+                        ctx.stroke();
+                     }
+                     if ( i == 58 || i == 59){
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(mouthRightCornerX, mouthRightCornerY);
+                        ctx.closePath();
+                        ctx.stroke();
+                     }
+
+                     prevX = currentX;
+                     prevY = currentY;
+                  }
+                  // draw nose bridge
+                  var noseBridgeTopX = coords[33][0];
+                  var noseBridgeTopY = coords[33][1];
+                  var noseBridgeMidX = coords[41][0];
+                  var noseBridgeMidY = coords[41][1];
+                  var noseBridgeBotX = coords[62][0];
+                  var noseBridgeBotY = coords[62][1];
+                  ctx.beginPath();
+                  ctx.moveTo(noseBridgeTopX, noseBridgeTopY);
+                  ctx.lineTo(noseBridgeMidX, noseBridgeMidY);
+                  ctx.moveTo(noseBridgeMidX, noseBridgeMidY);
+                  ctx.lineTo(noseBridgeBotX, noseBridgeBotY);
+                  ctx.closePath();
+                  ctx.stroke();
+
+                  // draw eyes
+                  // ctx.beginPath();
+                  // ctx.moveTo(noseBridgeTopX, noseBridgeTopY);
+                  // ctx.lineTo(noseBridgeMidX, noseBridgeMidY);
+                  // ctx.moveTo(noseBridgeMidX, noseBridgeMidY);
+                  // ctx.lineTo(noseBridgeBotX, noseBridgeBotY)
+                  // ctx.closePath();
+                  // ctx.stroke();
+
+                  // display the coords array in html
+               //document.getElementById("coords_display").innerHTML = "var coords = " + JSON.stringify(coords) + ";";
+            }
+         }
 			window.onload = main;
 		</script>
 	</head>
@@ -401,28 +741,43 @@
 			</div>
 			<div class="ui_container">
 				<div id="ui_text">Screenshot!</div>
-				<button id="start_btn" class="slideUp"> Start Visualisation</button>
-				<button id="screenshot_btn" > Take Screenshot</button>
-				<button id="save_btn" > Save To Computer</button>
+				<button id="start_btn" class="slideUp">Start Visualisation</button>
+				<button id="screenshot_btn" >Take Screenshot</button>
+				<button id="save_btn" >Save To Computer</button>
 			</div>
-			<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
+			<img class="hide bonestagram_img" src="./media/xray.png"></img>
 		</div>
 		<div class="container" id="container2">
+			<h2>What is Bonestagram?</h2>
 			<div>
-				What is Bonestagram?
+				<p>Bonestagram is a BioJS component for medical image visualisation. </p>
+				<p>We put a "fun" spin to medical images, turning them into interactive augmented reality selfie you can experience through your webcam.</p>
+				<p>We hope that Bonestagram would inspire everybody to collect their medical images, and also, to not forget to have some fun with them.</p>
 			</div>
-			<div>
-				Create Your Own Bonestagram
-			</div>
-			<div>
-				FAQ
-			</div>
-			<div>
-				View Documentation
-			</div>
-			<div>
-				More Biological Data Visualisation
-			</div>
+			<button id="upload_btn"><text id="upload_btn_text">Try with your image</text>
+				<svg id="upload_icon_svg" enable-background="new 0 0 64 64" height="64px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="64px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="   M10,41.3v12c0,1.1,0.9,2,2,2h40c1.1,0,2-0.9,2-2v-12H10z" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="   M42.6,19.4c3.8,7.3,7.6,14.7,11.4,22c-14.7,0-29.3,0-44,0c3.8-7.3,7.6-14.7,11.4-22" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><g><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="32" x2="32" y1="8.7" y2="28.2"/><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="32" x2="35.7" y1="8.7" y2="12.4"/><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="28" x2="31.7" y1="12.4" y2="8.7"/></g><circle cx="47.3" cy="46.7" fill="none" r="2.3" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"/><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="21.4" x2="27.5" y1="19.4" y2="19.4"/><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="36.4" x2="42.5" y1="19.4" y2="19.4"/><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="21.9" x2="41.9" y1="36.4" y2="36.4"/><line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="23.5" x2="40.2" y1="32.1" y2="32.1"/></g></svg>
+    		</button>
+
+			<input type="file" id="file_input" accept="image/*" mutiple="false" onChange="loadUserImage(event)">
 		</div>
+		<div class="container" id="container3">
+			<canvas id="points_selector_canvas" width="640" height="480"></canvas>
+			<img id="userimg"></img>
+		<!-- 	
+			<h2>
+				Create Your Own Bonestagram
+			</h2>
+			<h2>
+				FAQ
+			</h2>
+			<h2>
+				View Documentation
+			</h2>
+			<h2>
+				More Biological Data Visualisation
+			</h2>
+		-->
+		</div>
+
 	</body>
 </html>

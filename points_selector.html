@@ -87,6 +87,9 @@
                var dragIndex;
                var dragHoldX;
                var dragHoldY;
+               var targetX;
+               var targetY;
+               var timer;
 
 
                ctx.canvas.addEventListener('mousemove', function(e){
@@ -102,25 +105,41 @@
                      var coordX;
                      var coordY;
                      var minX = radius;
-                  var maxX = canvas.width - radius;
-                  var minY = radius;
-                  var maxY = canvas.height - radius;
+                     var maxX = canvas.width - radius;
+                     var minY = radius;
+                     var maxY = canvas.height - radius;
 
                      // get mouse position on canvas
                      mouseX = e.pageX - offsetX;
                      mouseY = e.pageY - offsetY;
 
+                     // target position which the point will approach gradually
                      // clamp the x y coordinates within the canvas
-                     coordX = mouseX - dragHoldX;
-                     coordX = (coordX < minX) ? minX : ((coordX > maxX) ? maxX : coordX);
-                     coordY = mouseY - dragHoldY;
-                     coordY = (coordY < minY) ? minY : ((coordY > maxY) ? maxY : coordY);
+                     targetX = mouseX - dragHoldX;
+                     targetX = (targetX < minX) ? minX : ((targetX > maxX) ? maxX : targetX);
+                     targetY = mouseY - dragHoldY;
+                     targetY = (targetY < minY) ? minY : ((targetY > maxY) ? maxY : targetY);
 
                      // update the coordinates array
-                     coords[dragIndex][0] = coordX;
-                     coords[dragIndex][1] = coordY;
+                     //coords[dragIndex][0] = coordX;
+                     //coords[dragIndex][1] = coordY;
+
+                     // start timer, frame rate of 30fps
+                     timer = setInterval(onTimerTick, 1000/30); 
 
                      // redraw on canvas
+                     //drawCoordinates();
+                  }
+                  function onTimerTick(){
+                     var easeAmount = 0.025;
+                     coords[dragIndex][0] = coords[dragIndex][0] + easeAmount*(targetX - coords[dragIndex][0]);
+                     coords[dragIndex][1] = coords[dragIndex][1] + easeAmount*(targetY - coords[dragIndex][1]);
+                     // stop timer when the point reach target
+                     if ((!dragging)&&(Math.abs(coords[dragIndex][0] - targetX) < 0.1)&&(Math.abs(coords[dragIndex][1] - targetY) < 0.1)){
+                        coords[dragIndex][0] = targetX;
+                        coords[dragIndex][1] = targetY;
+                        clearInterval(timer);
+                     }
                      drawCoordinates();
                   }
                });
@@ -140,17 +159,25 @@
                         // keep track of the mouse holding position
                         dragHoldX = mouseX - coords[i][0];
                         dragHoldY = mouseY - coords[i][1];
+                        targetX = mouseX - dragHoldX;
+                        targetY = mouseY - dragHoldY;
+
                      }
                   }
 
+                  function onTimerTick(){
+                     var easeAmount = 0.2;
+
+                  }
+
                   // code below prevents the mouse down from having an effect on the main browser window:
-               if (e.preventDefault) {
-                  e.preventDefault();
-               } //standard
-               else if (e.returnValue) {
-                  e.returnValue = false;
-               } //older IE
-               return false;
+                  if (e.preventDefault) {
+                     e.preventDefault();
+                  } //standard
+                  else if (e.returnValue) {
+                     e.returnValue = false;
+                  } //older IE
+                  return false;
                });
    
 
