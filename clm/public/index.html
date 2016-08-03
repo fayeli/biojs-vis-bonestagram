@@ -27,8 +27,6 @@
 			p {
 				font-family: 'Open Sans', sans-serif;
 				color: #5a5a5a;
-				margin: 5px;
-				text-align: center;
 			}
 
 			img, embed, object, video {
@@ -66,6 +64,12 @@
 				position: absolute;
 			}
 
+			#container2 div{
+				background: white;
+				padding: 20px 70px 20px 70px;
+				width: 600px;
+			}
+
 			#upload_btn{
 				padding: 20px;
     			width: 150px;
@@ -79,10 +83,16 @@
     			color: #ffffff;
     			border: 0px;
     			position: absolute;
-    			top: 75%;
+    			top: 83%;
 			}
 			#upload_btn:hover{
 				background: #ffab93;
+			}
+
+			#file_input{
+				opacity: 0;
+				overflow: hidden;
+				position: absolute;
 			}
 
 			#container3{
@@ -439,6 +449,9 @@
 					a.download = 'my-bonestagram.png';
 					a.click();
 				})
+				$('#upload_btn').click(function(){
+					$('#file_input').click();
+				});
 			}
 			window.onload = main;
 		</script>
@@ -455,19 +468,22 @@
 			</div>
 			<div class="ui_container">
 				<div id="ui_text">Screenshot!</div>
-				<button id="start_btn" class="slideUp"> Start Visualisation</button>
-				<button id="screenshot_btn" > Take Screenshot</button>
-				<button id="save_btn" > Save To Computer</button>
+				<button id="start_btn" class="slideUp">Start Visualisation</button>
+				<button id="screenshot_btn" >Take Screenshot</button>
+				<button id="save_btn" >Save To Computer</button>
 			</div>
-			<img id="myImg" class="hide bonestagram_img" src="./media/xray.png"></img>
+			<img class="hide bonestagram_img" src="./media/xray.png"></img>
 		</div>
 		<div class="container" id="container2">
 			<h2>What is Bonestagram?</h2>
-			<p>Bonestagram is a web app for medical image visualisation.</p>
-			<p>We hope to encourage everyone to collect their own medical images & have some fun with them. (:</p>
+			<div>
+				<p>Bonestagram is a web app for medical image visualisation. </p>
+				<p>If you have previously taken a medical scan, Bonestagram can turn your image into a fun, interactive augmented reality selfie through your webcam.</p>
+				<p>The above example defaults to a stock image, but we'd like to encourage you to collect your own medical image so you can create a personalised Bonestagram of your own! (:</p>
+			</div>
 			<button id="upload_btn">Try with your image</button>
 
-			<input type="file" id="myFile" accept="image/*" mutiple="false" onChange="loadUserImage(event)">
+			<input type="file" id="file_input" accept="image/*" mutiple="false" onChange="loadUserImage(event)">
 		</div>
 		<div class="container" id="container3">
 			<img id="userimg"></img>
