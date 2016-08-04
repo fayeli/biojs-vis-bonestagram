@@ -490,8 +490,8 @@
                 var radius = 3;
                 drawCoordinates();
 
-                var offsetX = canvas.offsetLeft;
-                var offsetY = canvas.offsetTop;
+                var offset = $("#points_selector_canvas").offset();
+                var border = parseInt($("#points_selector_canvas").css("border-width"));
                 var mouseX;
                 var mouseY;
                 var i;
@@ -506,8 +506,9 @@
 
                 ctx.canvas.addEventListener('mousemove', function(e){
                   // get mouse position on canvas
-                  mouseX = e.pageX - offsetX;
-                  mouseY = e.pageY - offsetY;
+                  mouseX = Math.round(e.pageX - offset.left - border);
+                  mouseY = Math.round(e.pageY - offset.top - border);
+                  console.log("mouseX:"+mouseX+" mouseY:"+mouseY);
                   // update the mouse coordinates dislayed on webpage
                   //var mouse_coord = document.getElementById('mouse_coord');
                   //mouse_coord.innerHTML = mouseX+" | "+mouseY;
@@ -520,10 +521,6 @@
                      var maxX = canvas.width - radius;
                      var minY = radius;
                      var maxY = canvas.height - radius;
-
-                     // get mouse position on canvas
-                     mouseX = e.pageX - offsetX;
-                     mouseY = e.pageY - offsetY;
 
                      // target position which the point will approach gradually
                      // clamp the x y coordinates within the canvas
@@ -558,8 +555,8 @@
 
                ctx.canvas.addEventListener('mousedown', function(e){
                   // get mouse click position on canvas
-                  mouseX = e.pageX - offsetX;
-                  mouseY = e.pageY - offsetY;
+                  mouseX = Math.round(e.pageX - offset.left - border);
+                  mouseY = Math.round(e.pageY - offset.top - border);
                   // determine which coordinate point was clicked
                   for (i = 0; i < coords.length; i++){
                      if (isHit(coords[i][0],coords[i][1],mouseX, mouseY)){
@@ -575,11 +572,6 @@
                         targetY = mouseY - dragHoldY;
 
                      }
-                  }
-
-                  function onTimerTick(){
-                     var easeAmount = 0.2;
-
                   }
 
                   // code below prevents the mouse down from having an effect on the main browser window:
