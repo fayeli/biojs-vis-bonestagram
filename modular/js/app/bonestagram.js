@@ -230,7 +230,6 @@ define(['libs/clm','model/model_pca_20_svm', 'libs/face_deformer', 'libs/utils',
             drawHandLoop();
 		},
 		screenshot: function(){
-			console.log('Screenshot!');
 			var screenshot_canvas = document.createElement('canvas');
 			screenshot_canvas.width = width;
 			screenshot_canvas.height = height;
