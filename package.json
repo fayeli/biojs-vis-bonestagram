@@ -39,7 +39,7 @@
   }, 
   "sniper": {
     "js": [ "/build/bonestagram.js"],
-    "css": ["/build/bundle.css"], 
+    "css": [], 
     "snippets": ["examples"],
     "first": "simple"
    }, 
