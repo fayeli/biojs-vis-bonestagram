@@ -8,6 +8,12 @@
 Try it at https://www.bonestagram.com
 
 ## Getting Started
+Bonestagram requires jQuery to run the visualisation. Include a HTML script tag to import the jQuery library.
+
+```html
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+```
+
 Install the module with: `npm install biojs-vis-bonestagram`
 
 ```javascript

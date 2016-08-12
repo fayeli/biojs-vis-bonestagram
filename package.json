@@ -38,8 +38,8 @@
 		"parcelify": "0.x"
   }, 
   "sniper": {
-    "js": [ "/build/bonestagram.js"],
-    "css": [], 
+    "js": [ "/build/bonestagram.js", "/lib/jquery-3.1.0.min.js"],
+    "css": ["/css/bonestagram.css"], 
     "snippets": ["examples"],
     "first": "simple"
    }, 
