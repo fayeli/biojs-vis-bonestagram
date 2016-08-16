@@ -2,4 +2,4 @@
 
 var app = require("biojs-vis-bonestagram");
 var instance = new app({el: rootDiv, text: 'biojs'});
-app.startFace();
+//app.startFace();
