@@ -19240,11 +19240,6 @@ var  biojsvisbonestagram;
 module.exports = biojsvisbonestagram = function(opts){
   this.el = opts.el;
   this.el.textContent = biojsvisbonestagram.hello(opts.text);
-  //console.log(cornerstone);
-  //console.log(dicomParser);
-  //console.log(OpenJPEG);
-  //console.log(CharLS);
-  //console.log(cornerstoneWADOImageLoader);
 };
 
 /**
