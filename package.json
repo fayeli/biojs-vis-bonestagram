@@ -1,7 +1,7 @@
 {
   "name": "biojs-vis-bonestagram",
   "description": "AR Web Visualisation of DICOM Medical Images",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/fayeli/biojs-vis-bonestagram",
   "author": {
     "name": "fayelisifi",
@@ -24,7 +24,6 @@
 		"watch": "watchify -r ./:biojs-vis-bonestagram -v -o build/bonestagram.js",
 		"w": "prunner \"npm run sniper\" \"npm run watch\" \"npm run watch-css\"",
 		"sniper": "sniper .",
-		"install": "undefined && npm run css",
 		"css": "parcelify ./ -c build/bundle.css",
 		"watch-css": "parcelify -w ./ -c build/bundle.css --loglevel verbose"
   },

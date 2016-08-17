@@ -2,7 +2,8 @@
 
 var app = require("biojs-vis-bonestagram");
 var instance = new app({text: 'biojs'});
+var containerDiv = $(".bonestagram_container").get(0);
+app.create({container: containerDiv, width: "640", height: "480"});
 $("#start_button").click(function(){
 	app.start();
 });
-console.log(instance);

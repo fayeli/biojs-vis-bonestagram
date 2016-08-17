@@ -1,4 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/bonestagramVisCore.js":[function(require,module,exports){
 var bonestagramVisCore;
 module.exports = bonestagramVisCore = 
 /******/ (function(modules) { // webpackBootstrap
@@ -5462,7 +5462,7 @@ module.exports = bonestagramVisCore =
 /******/ ]);
 
 
-},{}],2:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstone.js":[function(require,module,exports){
 /*! cornerstone - v0.9.0 - 2016-02-03 | (c) 2014 Chris Hafey | https://github.com/chafey/cornerstone */
 if(typeof cornerstone === 'undefined'){
     cornerstone = {
@@ -7544,7 +7544,7 @@ if(typeof cornerstone === 'undefined'){
 }(cornerstone));
 
 module.exports = cornerstone;
-},{}],3:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneMath.js":[function(require,module,exports){
 /*! cornerstoneMath - v0.1.3 - 2016-02-04 | (c) 2014 Chris Hafey | https://github.com/chafey/cornerstoneMath */
 // Begin Source: src/vector3.js
 // Based on THREE.JS
@@ -9542,7 +9542,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 }(cornerstoneMath)); 
 // End Source; src/rect.js
 
-},{}],4:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneTools.js":[function(require,module,exports){
 /*! cornerstoneTools - v0.7.8 - 2016-02-12 | (c) 2014 Chris Hafey | https://github.com/chafey/cornerstoneTools */
 // Begin Source: src/header.js
 var cornerstoneMath = require("./cornerstoneMath");
@@ -20079,7 +20079,7 @@ Display scroll progress bar across bottom of image.
  
 // End Source; src/util/setContextToDisplayFontSize.js
 module.exports = cornerstoneTools;
-},{"./cornerstoneMath":3}],5:[function(require,module,exports){
+},{"./cornerstoneMath":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneMath.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneWADOImageLoader.js":[function(require,module,exports){
 /*! cornerstone-wado-image-loader - v0.13.3 - 2016-06-02 | (c) 2014 Chris Hafey | https://github.com/chafey/cornerstoneWADOImageLoader */
 //
 // This is a cornerstone image loader for WADO-URI requests.  It has limited support for compressed
@@ -24864,12 +24864,12 @@ if(typeof cornerstoneWADOImageLoader === 'undefined'){
 module.exports = cornerstoneWADOImageLoader;
 
 
-},{"./dicomParser.min":6}],6:[function(require,module,exports){
+},{"./dicomParser.min":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/dicomParser.min.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/dicomParser.min.js":[function(require,module,exports){
 (function (Buffer){
 /*! dicom-parser - v1.6.1 - 2016-05-24 | (c) 2014 Chris Hafey | https://github.com/chafey/dicomParser */
 !function(a,b){"undefined"!=typeof module&&module.exports?module.exports=b():"function"==typeof define&&define.amd?define([],b):("undefined"==typeof cornerstone&&(dicomParser={},"undefined"!=typeof Package&&(a.dicomParser=dicomParser)),dicomParser=b())}(this,function(){var a=function(a){return void 0===a&&(a={}),a.parseDicom=function(b,c){function d(c){if(void 0===c.elements.x00020010)throw"dicomParser.parseDicom: missing required meta header attribute 0002,0010";var d=c.elements.x00020010;return a.readFixedString(b,d.dataOffset,d.length)}function e(a){return"1.2.840.10008.1.2"!==a}function f(d,e){if("1.2.840.10008.1.2.1.99"===d){if(c&&c.inflater){var f=c.inflater(b,e);return new a.ByteStream(a.littleEndianByteArrayParser,f,0)}if("undefined"!=typeof module&&this.module!==module){var g=require("zlib"),h=a.sharedCopy(b,e,b.length-e),i=g.inflateRawSync(h),j=a.alloc(b,i.length+e);return b.copy(j,0,0,e),i.copy(j,e),new a.ByteStream(a.littleEndianByteArrayParser,j,0)}if("undefined"!=typeof pako){var k=b.slice(e),l=pako.inflateRaw(k),m=a.alloc(b,l.length+e);return m.set(b.slice(0,e),0),m.set(l,e),new a.ByteStream(a.littleEndianByteArrayParser,m,0)}throw"dicomParser.parseDicom: no inflater available to handle deflate transfer syntax"}return"1.2.840.10008.1.2.2"===d?new a.ByteStream(a.bigEndianByteArrayParser,b,e):new a.ByteStream(a.littleEndianByteArrayParser,b,e)}function g(a,b){for(var c in a.elements)a.elements.hasOwnProperty(c)&&(b.elements[c]=a.elements[c]);return void 0!==a.warnings&&(b.warnings=a.warnings.concat(b.warnings)),b}function h(b){var g=d(b),h=e(g),i=f(g,b.position),j={},k=new a.DataSet(i.byteArrayParser,i.byteArray,j);k.warnings=i.warnings;try{h?a.parseDicomDataSetExplicit(k,i,i.byteArray.length,c):a.parseDicomDataSetImplicit(k,i,i.byteArray.length,c)}catch(l){var m={exception:l,dataSet:k};throw m}return k}function i(){var d=a.readPart10Header(b,c),e=h(d);return g(d,e)}if(void 0===b)throw"dicomParser.parseDicom: missing required parameter 'byteArray'";return i()},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.explicitDataSetToJS=function(b,c){if(void 0===b)throw"dicomParser.explicitDataSetToJS: missing required parameter dataSet";c=c||{omitPrivateAttibutes:!0,maxElementLength:128};var d={};for(var e in b.elements){var f=b.elements[e];if(c.omitPrivateAttibutes!==!0||!a.isPrivateTag(e))if(f.items){for(var g=[],h=0;h<f.items.length;h++)g.push(a.explicitDataSetToJS(f.items[h].dataSet,c));d[e]=g}else{var i;i=void 0,f.length<c.maxElementLength&&(i=a.explicitElementToString(b,f)),void 0!==i?d[e]=i:d[e]={dataOffset:f.dataOffset,length:f.length}}}return d},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.explicitElementToString=function(b,c){function d(a,c){for(var d="",e=0;a>e;e++)0!==e&&(d+="/"),d+=c.call(b,g,e).toString();return d}if(void 0===b||void 0===c)throw"dicomParser.explicitElementToString: missing required parameters";if(void 0===c.vr)throw"dicomParser.explicitElementToString: cannot convert implicit element to string";var e,f=c.vr,g=c.tag;if(a.isStringVr(f)===!0)e=b.string(g);else{if("AT"==f){var h=b.uint32(g);if(void 0===h)return;return 0>h&&(h=4294967295+h+1),"x"+h.toString(16).toUpperCase()}"US"==f?e=d(c.length/2,b.uint16):"SS"===f?e=d(c.length/2,b.int16):"UL"==f?e=d(c.length/4,b.uint32):"SL"===f?e=d(c.length/4,b.int32):"FD"==f?e=d(c.length/8,b["double"]):"FL"==f&&(e=d(c.length/4,b["float"]))}return e},a}(a),a=function(a){"use strict";function b(a,b){switch(a){case 2:return b%4==0&&b%100||b%400==0?29:28;case 9:case 4:case 6:case 11:return 30;default:return 31}}function c(a,c,d){return isNaN(d)?!1:c>0&&12>=c&&a>0&&a<=b(c,d)}return void 0===a&&(a={}),a.parseDA=function(a,b){if(a&&8===a.length){var d=parseInt(a.substring(0,4),10),e=parseInt(a.substring(4,6),10),f=parseInt(a.substring(6,8),10);if(b&&c(f,e,d)!==!0)throw"invalid DA '"+a+"'";return{year:d,month:e,day:f}}if(b)throw"invalid DA '"+a+"'"},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.parseTM=function(a,b){if(a.length>=2){var c=parseInt(a.substring(0,2),10),d=a.length>=4?parseInt(a.substring(2,4),10):void 0,e=a.length>=6?parseInt(a.substring(4,6),10):void 0,f=a.length>=8?parseInt(a.substring(7,13),10):void 0;if(b&&(isNaN(c)||void 0!==d&&isNaN(d)||void 0!==e&&isNaN(e)||void 0!==f&&isNaN(f)||0>c||c>23||d&&(0>d||d>59)||e&&(0>e||e>59)||f&&(0>f||f>999999)))throw"invalid TM '"+a+"'";return{hours:c,minutes:d,seconds:e,fractionalSeconds:f}}if(b)throw"invalid TM '"+a+"'"},a}(a),a=function(a){"use strict";void 0===a&&(a={});var b={AE:!0,AS:!0,AT:!1,CS:!0,DA:!0,DS:!0,DT:!0,FL:!1,FD:!1,IS:!0,LO:!0,LT:!0,OB:!1,OD:!1,OF:!1,OW:!1,PN:!0,SH:!0,SL:!1,SQ:!1,SS:!1,ST:!0,TM:!0,UI:!0,UL:!1,UN:void 0,UR:!0,US:!1,UT:!0};return a.isStringVr=function(a){return b[a]},a.isPrivateTag=function(a){var b=parseInt(a[4]),c=b%2===1;return c},a.parsePN=function(a){if(void 0!==a){var b=a.split("^");return{familyName:b[0],givenName:b[1],middleName:b[2],prefix:b[3],suffix:b[4]}}},a}(a),a=function(a){"use strict";void 0===a&&(a={});var b=!1;return a.readEncapsulatedPixelData=function(c,d,e){if(b||(b=!0,console&&console.log&&console.log("WARNING: dicomParser.readEncapsulatedPixelData() has been deprecated")),void 0===c)throw"dicomParser.readEncapsulatedPixelData: missing required parameter 'dataSet'";if(void 0===d)throw"dicomParser.readEncapsulatedPixelData: missing required parameter 'element'";if(void 0===e)throw"dicomParser.readEncapsulatedPixelData: missing required parameter 'frame'";if("x7fe00010"!==d.tag)throw"dicomParser.readEncapsulatedPixelData: parameter 'element' refers to non pixel data tag (expected tag = x7fe00010'";if(d.encapsulatedPixelData!==!0)throw"dicomParser.readEncapsulatedPixelData: parameter 'element' refers to pixel data element that does not have encapsulated pixel data";if(d.hadUndefinedLength!==!0)throw"dicomParser.readEncapsulatedPixelData: parameter 'element' refers to pixel data element that does not have encapsulated pixel data";if(void 0===d.basicOffsetTable)throw"dicomParser.readEncapsulatedPixelData: parameter 'element' refers to pixel data element that does not have encapsulated pixel data";if(void 0===d.fragments)throw"dicomParser.readEncapsulatedPixelData: parameter 'element' refers to pixel data element that does not have encapsulated pixel data";if(0>e)throw"dicomParser.readEncapsulatedPixelData: parameter 'frame' must be >= 0";return 0!==d.basicOffsetTable.length?a.readEncapsulatedImageFrame(c,d,e):a.readEncapsulatedPixelDataFromFragments(c,d,0,d.fragments.length)},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.alloc=function(a,b){if("undefined"!=typeof Buffer&&a instanceof Buffer)return Buffer.alloc(b);if(a instanceof Uint8Array)return new Uint8Array(b);throw"dicomParser.alloc: unknown type for byteArray"},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.bigEndianByteArrayParser={readUint16:function(a,b){if(0>b)throw"bigEndianByteArrayParser.readUint16: position cannot be less than 0";if(b+2>a.length)throw"bigEndianByteArrayParser.readUint16: attempt to read past end of buffer";return(a[b]<<8)+a[b+1]},readInt16:function(a,b){if(0>b)throw"bigEndianByteArrayParser.readInt16: position cannot be less than 0";if(b+2>a.length)throw"bigEndianByteArrayParser.readInt16: attempt to read past end of buffer";var c=(a[b]<<8)+a[b+1];return 32768&c&&(c=c-65535-1),c},readUint32:function(a,b){if(0>b)throw"bigEndianByteArrayParser.readUint32: position cannot be less than 0";if(b+4>a.length)throw"bigEndianByteArrayParser.readUint32: attempt to read past end of buffer";var c=256*(256*(256*a[b]+a[b+1])+a[b+2])+a[b+3];return c},readInt32:function(a,b){if(0>b)throw"bigEndianByteArrayParser.readInt32: position cannot be less than 0";if(b+4>a.length)throw"bigEndianByteArrayParser.readInt32: attempt to read past end of buffer";var c=(a[b]<<24)+(a[b+1]<<16)+(a[b+2]<<8)+a[b+3];return c},readFloat:function(a,b){if(0>b)throw"bigEndianByteArrayParser.readFloat: position cannot be less than 0";if(b+4>a.length)throw"bigEndianByteArrayParser.readFloat: attempt to read past end of buffer";var c=new Uint8Array(4);c[3]=a[b],c[2]=a[b+1],c[1]=a[b+2],c[0]=a[b+3];var d=new Float32Array(c.buffer);return d[0]},readDouble:function(a,b){if(0>b)throw"bigEndianByteArrayParser.readDouble: position cannot be less than 0";if(b+8>a.length)throw"bigEndianByteArrayParser.readDouble: attempt to read past end of buffer";var c=new Uint8Array(8);c[7]=a[b],c[6]=a[b+1],c[5]=a[b+2],c[4]=a[b+3],c[3]=a[b+4],c[2]=a[b+5],c[1]=a[b+6],c[0]=a[b+7];var d=new Float64Array(c.buffer);return d[0]}},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.readFixedString=function(a,b,c){if(0>c)throw"dicomParser.readFixedString - length cannot be less than 0";if(b+c>a.length)throw"dicomParser.readFixedString: attempt to read past end of buffer";for(var d,e="",f=0;c>f;f++){if(d=a[b+f],0===d)return b+=c,e;e+=String.fromCharCode(d)}return e},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.ByteStream=function(a,b,c){if(void 0===a)throw"dicomParser.ByteStream: missing required parameter 'byteArrayParser'";if(void 0===b)throw"dicomParser.ByteStream: missing required parameter 'byteArray'";if(b instanceof Uint8Array==!1&&b instanceof Buffer==!1)throw"dicomParser.ByteStream: parameter byteArray is not of type Uint8Array or Buffer";if(0>c)throw"dicomParser.ByteStream: parameter 'position' cannot be less than 0";if(c>=b.length)throw"dicomParser.ByteStream: parameter 'position' cannot be greater than or equal to 'byteArray' length";this.byteArrayParser=a,this.byteArray=b,this.position=c?c:0,this.warnings=[]},a.ByteStream.prototype.seek=function(a){if(this.position+a<0)throw"dicomParser.ByteStream.prototype.seek: cannot seek to position < 0";this.position+=a},a.ByteStream.prototype.readByteStream=function(b){if(this.position+b>this.byteArray.length)throw"dicomParser.ByteStream.prototype.readByteStream: readByteStream - buffer overread";var c=a.sharedCopy(this.byteArray,this.position,b);return this.position+=b,new a.ByteStream(this.byteArrayParser,c)},a.ByteStream.prototype.readUint16=function(){var a=this.byteArrayParser.readUint16(this.byteArray,this.position);return this.position+=2,a},a.ByteStream.prototype.readUint32=function(){var a=this.byteArrayParser.readUint32(this.byteArray,this.position);return this.position+=4,a},a.ByteStream.prototype.readFixedString=function(b){var c=a.readFixedString(this.byteArray,this.position,b);return this.position+=b,c},a}(a),a=function(a){"use strict";function b(a,b){return void 0!==a.parser?a.parser:b}return void 0===a&&(a={}),a.DataSet=function(a,b,c){this.byteArrayParser=a,this.byteArray=b,this.elements=c},a.DataSet.prototype.uint16=function(a,c){var d=this.elements[a];return c=void 0!==c?c:0,d&&0!==d.length?b(d,this.byteArrayParser).readUint16(this.byteArray,d.dataOffset+2*c):void 0},a.DataSet.prototype.int16=function(a,c){var d=this.elements[a];return c=void 0!==c?c:0,d&&0!==d.length?b(d,this.byteArrayParser).readInt16(this.byteArray,d.dataOffset+2*c):void 0},a.DataSet.prototype.uint32=function(a,c){var d=this.elements[a];return c=void 0!==c?c:0,d&&0!==d.length?b(d,this.byteArrayParser).readUint32(this.byteArray,d.dataOffset+4*c):void 0},a.DataSet.prototype.int32=function(a,c){var d=this.elements[a];return c=void 0!==c?c:0,d&&0!==d.length?b(d,this.byteArrayParser).readInt32(this.byteArray,d.dataOffset+4*c):void 0},a.DataSet.prototype["float"]=function(a,c){var d=this.elements[a];return c=void 0!==c?c:0,d&&0!==d.length?b(d,this.byteArrayParser).readFloat(this.byteArray,d.dataOffset+4*c):void 0},a.DataSet.prototype["double"]=function(a,c){var d=this.elements[a];return c=void 0!==c?c:0,d&&0!==d.length?b(d,this.byteArrayParser).readDouble(this.byteArray,d.dataOffset+8*c):void 0},a.DataSet.prototype.numStringValues=function(b){var c=this.elements[b];if(c&&c.length>0){var d=a.readFixedString(this.byteArray,c.dataOffset,c.length),e=d.match(/\\/g);return null===e?1:e.length+1}},a.DataSet.prototype.string=function(b,c){var d=this.elements[b];if(d&&d.length>0){var e=a.readFixedString(this.byteArray,d.dataOffset,d.length);if(c>=0){var f=e.split("\\");return f[c].trim()}return e.trim()}},a.DataSet.prototype.text=function(b,c){var d=this.elements[b];if(d&&d.length>0){var e=a.readFixedString(this.byteArray,d.dataOffset,d.length);if(c>=0){var f=e.split("\\");return f[c].replace(/ +$/,"")}return e.replace(/ +$/,"")}},a.DataSet.prototype.floatString=function(a,b){var c=this.elements[a];if(c&&c.length>0){b=void 0!==b?b:0;var d=this.string(a,b);if(void 0!==d)return parseFloat(d)}},a.DataSet.prototype.intString=function(a,b){var c=this.elements[a];if(c&&c.length>0){b=void 0!==b?b:0;var d=this.string(a,b);if(void 0!==d)return parseInt(d)}},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.findEndOfEncapsulatedElement=function(b,c,d){if(void 0===b)throw"dicomParser.findEndOfEncapsulatedElement: missing required parameter 'byteStream'";if(void 0===c)throw"dicomParser.findEndOfEncapsulatedElement: missing required parameter 'element'";c.encapsulatedPixelData=!0,c.basicOffsetTable=[],c.fragments=[];var e=a.readTag(b);if("xfffee000"!==e)throw"dicomParser.findEndOfEncapsulatedElement: basic offset table not found";for(var f=b.readUint32(),g=f/4,h=0;g>h;h++){var i=b.readUint32();c.basicOffsetTable.push(i)}for(var j=b.position;b.position<b.byteArray.length;){var k=a.readTag(b),l=b.readUint32();if("xfffee0dd"===k)return b.seek(l),void(c.length=b.position-c.dataOffset);if("xfffee000"!==k)return d&&d.push("unexpected tag "+k+" while searching for end of pixel data element with undefined length"),l>b.byteArray.length-b.position&&(l=b.byteArray.length-b.position),c.fragments.push({offset:b.position-j-8,position:b.position,length:l}),b.seek(l),void(c.length=b.position-c.dataOffset);c.fragments.push({offset:b.position-j-8,position:b.position,length:l}),b.seek(l)}d&&d.push("pixel data element "+c.tag+" missing sequence delimiter tag xfffee0dd")},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.findItemDelimitationItemAndSetElementLength=function(a,b){if(void 0===a)throw"dicomParser.readDicomElementImplicit: missing required parameter 'byteStream'";for(var c=8,d=a.byteArray.length-c;a.position<=d;){var e=a.readUint16();if(65534===e){var f=a.readUint16();if(57357===f){var g=a.readUint32();return 0!==g&&a.warnings("encountered non zero length following item delimiter at position"+a.position-4+" while reading element of undefined length with tag ' + element.tag"),void(b.length=a.position-b.dataOffset)}}}b.length=a.byteArray.length-b.dataOffset,a.seek(a.byteArray.length-a.position)},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.littleEndianByteArrayParser={readUint16:function(a,b){if(0>b)throw"littleEndianByteArrayParser.readUint16: position cannot be less than 0";if(b+2>a.length)throw"littleEndianByteArrayParser.readUint16: attempt to read past end of buffer";return a[b]+256*a[b+1]},readInt16:function(a,b){if(0>b)throw"littleEndianByteArrayParser.readInt16: position cannot be less than 0";if(b+2>a.length)throw"littleEndianByteArrayParser.readInt16: attempt to read past end of buffer";var c=a[b]+(a[b+1]<<8);return 32768&c&&(c=c-65535-1),c},readUint32:function(a,b){if(0>b)throw"littleEndianByteArrayParser.readUint32: position cannot be less than 0";if(b+4>a.length)throw"littleEndianByteArrayParser.readUint32: attempt to read past end of buffer";var c=a[b]+256*a[b+1]+256*a[b+2]*256+256*a[b+3]*256*256;return c},readInt32:function(a,b){if(0>b)throw"littleEndianByteArrayParser.readInt32: position cannot be less than 0";if(b+4>a.length)throw"littleEndianByteArrayParser.readInt32: attempt to read past end of buffer";var c=a[b]+(a[b+1]<<8)+(a[b+2]<<16)+(a[b+3]<<24);return c},readFloat:function(a,b){if(0>b)throw"littleEndianByteArrayParser.readFloat: position cannot be less than 0";if(b+4>a.length)throw"littleEndianByteArrayParser.readFloat: attempt to read past end of buffer";var c=new Uint8Array(4);c[0]=a[b],c[1]=a[b+1],c[2]=a[b+2],c[3]=a[b+3];var d=new Float32Array(c.buffer);return d[0]},readDouble:function(a,b){if(0>b)throw"littleEndianByteArrayParser.readDouble: position cannot be less than 0";if(b+8>a.length)throw"littleEndianByteArrayParser.readDouble: attempt to read past end of buffer";var c=new Uint8Array(8);c[0]=a[b],c[1]=a[b+1],c[2]=a[b+2],c[3]=a[b+3],c[4]=a[b+4],c[5]=a[b+5],c[6]=a[b+6],c[7]=a[b+7];var d=new Float64Array(c.buffer);return d[0]}},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.parseDicomDataSetExplicit=function(b,c,d,e){if(d=void 0===d?c.byteArray.length:d,e=e||{},void 0===c)throw"dicomParser.parseDicomDataSetExplicit: missing required parameter 'byteStream'";if(d<c.position||d>c.byteArray.length)throw"dicomParser.parseDicomDataSetExplicit: invalid value for parameter 'maxPosition'";for(var f=b.elements;c.position<d;){var g=a.readDicomElementExplicit(c,b.warnings,e.untilTag);if(f[g.tag]=g,g.tag===e.untilTag)return}if(c.position>d)throw"dicomParser:parseDicomDataSetExplicit: buffer overrun"},a.parseDicomDataSetImplicit=function(b,c,d,e){if(d=void 0===d?b.byteArray.length:d,e=e||{},void 0===c)throw"dicomParser.parseDicomDataSetImplicit: missing required parameter 'byteStream'";if(d<c.position||d>c.byteArray.length)throw"dicomParser.parseDicomDataSetImplicit: invalid value for parameter 'maxPosition'";for(var f=b.elements;c.position<d;){var g=a.readDicomElementImplicit(c,e.untilTag,e.vrCallback);if(f[g.tag]=g,g.tag===e.untilTag)return}},a}(a),a=function(a){"use strict";function b(a){return"OB"===a||"OW"===a||"SQ"===a||"OF"===a||"UT"===a||"UN"===a?4:2}return void 0===a&&(a={}),a.readDicomElementExplicit=function(c,d,e){if(void 0===c)throw"dicomParser.readDicomElementExplicit: missing required parameter 'byteStream'";var f={tag:a.readTag(c),vr:c.readFixedString(2)},g=b(f.vr);return 2===g?(f.length=c.readUint16(),f.dataOffset=c.position):(c.seek(2),f.length=c.readUint32(),f.dataOffset=c.position),4294967295===f.length&&(f.hadUndefinedLength=!0),f.tag===e?f:"SQ"===f.vr?(a.readSequenceItemsExplicit(c,f,d),f):4294967295===f.length?"x7fe00010"===f.tag?(a.findEndOfEncapsulatedElement(c,f,d),f):(a.findItemDelimitationItemAndSetElementLength(c,f),f):(c.seek(f.length),f)},a}(a),a=function(a){"use strict";function b(b,c,d){if("undefined"!=typeof d)return"SQ"===d(b.tag);if(c.position+4<=c.byteArray.length){var e=a.readTag(c);return c.seek(-4),"xfffee000"===e||"xfffee0dd"===e}return c.warnings.push("eof encountered before finding sequence item tag or sequence delimiter tag in peeking to determine VR"),!1}return void 0===a&&(a={}),a.readDicomElementImplicit=function(c,d,e){if(void 0===c)throw"dicomParser.readDicomElementImplicit: missing required parameter 'byteStream'";var f={tag:a.readTag(c),length:c.readUint32(),dataOffset:c.position};return 4294967295===f.length&&(f.hadUndefinedLength=!0),f.tag===d?f:b(f,c,e)?(a.readSequenceItemsImplicit(c,f),f):f.hadUndefinedLength?(a.findItemDelimitationItemAndSetElementLength(c,f),f):(c.seek(f.length),f)},a}(a),a=function(a){"use strict";function b(a,b){for(var c=0;c<a.length;c++)if(a[c].offset===b)return c}function c(a,b,c,d,e,f){if(c===d.length-1)return e.length-f;for(var g=d[c+1],h=f+1;h<e.length;h++)if(e[h].offset===g)return h-f;throw"dicomParser.calculateNumberOfFragments: could not find fragment with offset matching basic offset table"}return void 0===a&&(a={}),a.readEncapsulatedImageFrame=function(d,e,f,g,h){if(g=g||e.basicOffsetTable,h=e.fragments,void 0===d)throw"dicomParser.readEncapsulatedImageFrame: missing required parameter 'dataSet'";if(void 0===e)throw"dicomParser.readEncapsulatedImageFrame: missing required parameter 'pixelDataElement'";if(void 0===f)throw"dicomParser.readEncapsulatedImageFrame: missing required parameter 'frame'";if(void 0===g)throw"dicomParser.readEncapsulatedImageFrame: parameter 'pixelDataElement' does not have basicOffsetTable";if("x7fe00010"!==e.tag)throw"dicomParser.readEncapsulatedImageFrame: parameter 'pixelDataElement' refers to non pixel data tag (expected tag = x7fe00010'";if(e.encapsulatedPixelData!==!0)throw"dicomParser.readEncapsulatedImageFrame: parameter 'pixelDataElement' refers to pixel data element that does not have encapsulated pixel data";if(e.hadUndefinedLength!==!0)throw"dicomParser.readEncapsulatedImageFrame: parameter 'pixelDataElement' refers to pixel data element that does not have undefined length";if(void 0===e.fragments)throw"dicomParser.readEncapsulatedImageFrame: parameter 'pixelDataElement' refers to pixel data element that does not have fragments";if(0===g.length)throw"dicomParser.readEncapsulatedImageFrame: basicOffsetTable has zero entries";if(0>f)throw"dicomParser.readEncapsulatedImageFrame: parameter 'frame' must be >= 0";if(f>=g.length)throw"dicomParser.readEncapsulatedImageFrame: parameter 'frame' must be < basicOffsetTable.length";var i=g[f],j=b(h,i);if(void 0===j)throw"dicomParser.readEncapsulatedImageFrame: unable to find fragment that matches basic offset table entry";var k=c(d,e,f,g,h,j);return a.readEncapsulatedPixelDataFromFragments(d,e,j,k,h)},a}(a),a=function(a){"use strict";function b(a,b,c){for(var d=0,e=b;b+c>e;e++)d+=a[e].length;return d}return void 0===a&&(a={}),a.readEncapsulatedPixelDataFromFragments=function(c,d,e,f,g){if(f=f||1,g=g||d.fragments,void 0===c)throw"dicomParser.readEncapsulatedPixelDataFromFragments: missing required parameter 'dataSet'";if(void 0===d)throw"dicomParser.readEncapsulatedPixelDataFromFragments: missing required parameter 'pixelDataElement'";if(void 0===e)throw"dicomParser.readEncapsulatedPixelDataFromFragments: missing required parameter 'startFragmentIndex'";if(void 0===f)throw"dicomParser.readEncapsulatedPixelDataFromFragments: missing required parameter 'numFragments'";if("x7fe00010"!==d.tag)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'pixelDataElement' refers to non pixel data tag (expected tag = x7fe00010'";if(d.encapsulatedPixelData!==!0)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'pixelDataElement' refers to pixel data element that does not have encapsulated pixel data";if(d.hadUndefinedLength!==!0)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'pixelDataElement' refers to pixel data element that does not have encapsulated pixel data";if(void 0===d.basicOffsetTable)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'pixelDataElement' refers to pixel data element that does not have encapsulated pixel data";if(void 0===d.fragments)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'pixelDataElement' refers to pixel data element that does not have encapsulated pixel data";if(d.fragments.length<=0)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'pixelDataElement' refers to pixel data element that does not have encapsulated pixel data";if(0>e)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'startFragmentIndex' must be >= 0";if(e>=d.fragments.length)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'startFragmentIndex' must be < number of fragments";if(1>f)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'numFragments' must be > 0";if(e+f>d.fragments.length)throw"dicomParser.readEncapsulatedPixelDataFromFragments: parameter 'startFragment' + 'numFragments' < number of fragments";var h=new a.ByteStream(c.byteArrayParser,c.byteArray,d.dataOffset),i=a.readSequenceItem(h);if("xfffee000"!==i.tag)throw"dicomParser.readEncapsulatedPixelData: missing basic offset table xfffee000";h.seek(i.length);var j=h.position,k=8;if(1===f)return a.sharedCopy(h.byteArray,j+g[e].offset+k,g[e].length);for(var l=b(g,e,f),m=a.alloc(h.byteArray,l),n=0,o=e;e+f>o;o++)for(var p=j+g[o].offset+k,q=0;q<g[o].length;q++)m[n++]=h.byteArray[p++];return m},a}(a),a=function(a){return void 0===a&&(a={}),a.readPart10Header=function(b,c){function d(){f.seek(128);var a=f.readFixedString(4);if("DICM"!==a)throw"dicomParser.readPart10Header: DICM prefix not found at location 132 - this is not a valid DICOM P10 file."}function e(){d();for(var b=[],c={};f.position<f.byteArray.length;){var e=f.position,g=a.readDicomElementExplicit(f,b);if(g.tag>"x0002ffff"){f.position=e;break}g.parser=a.littleEndianByteArrayParser,c[g.tag]=g}var h=new a.DataSet(f.byteArrayParser,f.byteArray,c);return h.warnings=f.warnings,h.position=f.position,h}if(void 0===b)throw"dicomParser.readPart10Header: missing required parameter 'byteArray'";var f=new a.ByteStream(a.littleEndianByteArrayParser,b);return e()},a}(a),a=function(a){"use strict";function b(b,c){for(var d={};b.position<b.byteArray.length;){var e=a.readDicomElementExplicit(b,c);if(d[e.tag]=e,"xfffee00d"===e.tag)return new a.DataSet(b.byteArrayParser,b.byteArray,d)}return c.push("eof encountered before finding item delimiter tag while reading sequence item of undefined length"),new a.DataSet(b.byteArrayParser,b.byteArray,d)}function c(c,d){var e=a.readSequenceItem(c);return 4294967295===e.length?(e.hadUndefinedLength=!0,e.dataSet=b(c,d),e.length=c.position-e.dataOffset):(e.dataSet=new a.DataSet(c.byteArrayParser,c.byteArray,{}),a.parseDicomDataSetExplicit(e.dataSet,c,c.position+e.length)),e}function d(b,d,e){for(;b.position+4<=b.byteArray.length;){var f=a.readTag(b);if(b.seek(-4),"xfffee0dd"===f)return d.length=b.position-d.dataOffset,b.seek(8),d;var g=c(b,e);d.items.push(g)}e.push("eof encountered before finding sequence delimitation tag while reading sequence of undefined length"),d.length=b.position-d.dataOffset}function e(a,b,d){for(var e=b.dataOffset+b.length;a.position<e;){var f=c(a,d);b.items.push(f)}}return void 0===a&&(a={}),a.readSequenceItemsExplicit=function(a,b,c){if(void 0===a)throw"dicomParser.readSequenceItemsExplicit: missing required parameter 'byteStream'";if(void 0===b)throw"dicomParser.readSequenceItemsExplicit: missing required parameter 'element'";b.items=[],4294967295===b.length?d(a,b,c):e(a,b,c)},a}(a),a=function(a){"use strict";function b(b,c){for(var d={};b.position<b.byteArray.length;){var e=a.readDicomElementImplicit(b,void 0,c);if(d[e.tag]=e,"xfffee00d"===e.tag)return new a.DataSet(b.byteArrayParser,b.byteArray,d)}return b.warnings.push("eof encountered before finding sequence item delimiter in sequence item of undefined length"),new a.DataSet(b.byteArrayParser,b.byteArray,d)}function c(c,d){var e=a.readSequenceItem(c);return 4294967295===e.length?(e.hadUndefinedLength=!0,e.dataSet=b(c,d),e.length=c.position-e.dataOffset):(e.dataSet=new a.DataSet(c.byteArrayParser,c.byteArray,{}),a.parseDicomDataSetImplicit(e.dataSet,c,c.position+e.length,{vrCallback:d})),e}function d(b,d,e){for(;b.position+4<=b.byteArray.length;){var f=a.readTag(b);if(b.seek(-4),"xfffee0dd"===f)return d.length=b.position-d.dataOffset,b.seek(8),d;var g=c(b,e);d.items.push(g)}b.warnings.push("eof encountered before finding sequence delimiter in sequence of undefined length"),d.length=b.byteArray.length-d.dataOffset}function e(a,b,d){for(var e=b.dataOffset+b.length;a.position<e;){var f=c(a,d);b.items.push(f)}}return void 0===a&&(a={}),a.readSequenceItemsImplicit=function(a,b,c){if(void 0===a)throw"dicomParser.readSequenceItemsImplicit: missing required parameter 'byteStream'";if(void 0===b)throw"dicomParser.readSequenceItemsImplicit: missing required parameter 'element'";b.items=[],4294967295===b.length?d(a,b,c):e(a,b,c)},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.readSequenceItem=function(b){if(void 0===b)throw"dicomParser.readSequenceItem: missing required parameter 'byteStream'";var c={tag:a.readTag(b),length:b.readUint32(),dataOffset:b.position};if("xfffee000"!==c.tag){var d=b.position;throw"dicomParser.readSequenceItem: item tag (FFFE,E000) not found at offset "+d}return c},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.readTag=function(a){if(void 0===a)throw"dicomParser.readTag: missing required parameter 'byteStream'";var b=256*a.readUint16()*256,c=a.readUint16(),d="x"+("00000000"+(b+c).toString(16)).substr(-8);return d},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.sharedCopy=function(a,b,c){if("undefined"!=typeof Buffer&&a instanceof Buffer)return a.slice(b,b+c);if(a instanceof Uint8Array)return new Uint8Array(a.buffer,a.byteOffset+b,c);throw"dicomParser.from: unknown type for byteArray"},a}(a),a=function(a){"use strict";return void 0===a&&(a={}),a.version="1.6.1",a}(a);return a});
 }).call(this,require("buffer").Buffer)
-},{"buffer":15,"zlib":13}],7:[function(require,module,exports){
+},{"buffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js","zlib":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browserify-zlib/src/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libCharLS.js":[function(require,module,exports){
 (function (process,__dirname){
 var CharLS;
 module.exports = CharLS = function(Module) {
@@ -24901,7 +24901,7 @@ var Ib=[Iu,Eo,Io,Cp,Gp,Lp,Np,ls,ws,Iu,Iu,Iu,Iu,Iu,Iu,Iu];var Jb=[Ju,pg,dg,Tf,Hf,
 };
 
 }).call(this,require('_process'),"/lib")
-},{"_process":35,"fs":14,"path":34}],8:[function(require,module,exports){
+},{"_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","fs":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/browserify/lib/_empty.js","path":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/path-browserify/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libopenjpeg.js":[function(require,module,exports){
 (function (process,__dirname){
 
 var OpenJPEG;
@@ -24932,7 +24932,7 @@ var _a=[yj,od,ef,yj];var $a=[zj,Li,di,bi,Kb,Lb,Mb,Nb,Rc,Sc,Uc,jd,xd,Ye,lf,yd,zd,
 };
 
 }).call(this,require('_process'),"/lib")
-},{"_process":35,"fs":14,"path":34}],9:[function(require,module,exports){
+},{"_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","fs":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/browserify/lib/_empty.js","path":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/path-browserify/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/assert/assert.js":[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -25294,7 +25294,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":49}],10:[function(require,module,exports){
+},{"util/":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/util/util.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/base64-js/lib/b64.js":[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -25416,9 +25416,9 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],11:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browser-resolve/empty.js":[function(require,module,exports){
 
-},{}],12:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browserify-zlib/src/binding.js":[function(require,module,exports){
 (function (process,Buffer){
 var msg = require('pako/lib/zlib/messages');
 var zstream = require('pako/lib/zlib/zstream');
@@ -25658,7 +25658,7 @@ Zlib.prototype._error = function(status) {
 exports.Zlib = Zlib;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":35,"buffer":15,"pako/lib/zlib/constants":25,"pako/lib/zlib/deflate.js":27,"pako/lib/zlib/inflate.js":29,"pako/lib/zlib/messages":31,"pako/lib/zlib/zstream":33}],13:[function(require,module,exports){
+},{"_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","buffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js","pako/lib/zlib/constants":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/constants.js","pako/lib/zlib/deflate.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/deflate.js","pako/lib/zlib/inflate.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/inflate.js","pako/lib/zlib/messages":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/messages.js","pako/lib/zlib/zstream":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/zstream.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browserify-zlib/src/index.js":[function(require,module,exports){
 (function (process,Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -26272,9 +26272,7 @@ util.inherits(InflateRaw, Zlib);
 util.inherits(Unzip, Zlib);
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./binding":12,"_process":35,"_stream_transform":44,"assert":9,"buffer":15,"util":49}],14:[function(require,module,exports){
-module.exports=require(11)
-},{"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browser-resolve/empty.js":11}],15:[function(require,module,exports){
+},{"./binding":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browserify-zlib/src/binding.js","_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","_stream_transform":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/transform.js","assert":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/assert/assert.js","buffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js","util":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/util/util.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js":[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -27328,7 +27326,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":10,"ieee754":18,"is-array":20}],16:[function(require,module,exports){
+},{"base64-js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/base64-js/lib/b64.js","ieee754":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/ieee754/index.js","is-array":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/is-array/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/core-util-is/lib/util.js":[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -27439,7 +27437,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":21}],17:[function(require,module,exports){
+},{"../../is-buffer/index.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/is-buffer/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/events/events.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -27742,7 +27740,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],18:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/ieee754/index.js":[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -27828,7 +27826,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],19:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js":[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -27853,7 +27851,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],20:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/is-array/index.js":[function(require,module,exports){
 
 /**
  * isArray
@@ -27888,7 +27886,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],21:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/is-buffer/index.js":[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -27911,12 +27909,12 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],22:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/isarray/index.js":[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],23:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/utils/common.js":[function(require,module,exports){
 'use strict';
 
 
@@ -28020,7 +28018,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],24:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/adler32.js":[function(require,module,exports){
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -28054,7 +28052,7 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],25:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/constants.js":[function(require,module,exports){
 'use strict';
 
 
@@ -28106,7 +28104,7 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],26:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/crc32.js":[function(require,module,exports){
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -28149,7 +28147,7 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],27:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/deflate.js":[function(require,module,exports){
 'use strict';
 
 var utils   = require('../utils/common');
@@ -30006,7 +30004,7 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":23,"./adler32":24,"./crc32":26,"./messages":31,"./trees":32}],28:[function(require,module,exports){
+},{"../utils/common":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/utils/common.js","./adler32":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/adler32.js","./crc32":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/crc32.js","./messages":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/messages.js","./trees":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/trees.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/inffast.js":[function(require,module,exports){
 'use strict';
 
 // See state defs from inflate.js
@@ -30334,7 +30332,7 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],29:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/inflate.js":[function(require,module,exports){
 'use strict';
 
 
@@ -31874,7 +31872,7 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":23,"./adler32":24,"./crc32":26,"./inffast":28,"./inftrees":30}],30:[function(require,module,exports){
+},{"../utils/common":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/utils/common.js","./adler32":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/adler32.js","./crc32":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/crc32.js","./inffast":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/inffast.js","./inftrees":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/inftrees.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/inftrees.js":[function(require,module,exports){
 'use strict';
 
 
@@ -32203,7 +32201,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":23}],31:[function(require,module,exports){
+},{"../utils/common":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/utils/common.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/messages.js":[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -32218,7 +32216,7 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],32:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/trees.js":[function(require,module,exports){
 'use strict';
 
 
@@ -33422,7 +33420,7 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":23}],33:[function(require,module,exports){
+},{"../utils/common":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/utils/common.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/pako/lib/zlib/zstream.js":[function(require,module,exports){
 'use strict';
 
 
@@ -33453,7 +33451,7 @@ function ZStream() {
 
 module.exports = ZStream;
 
-},{}],34:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/path-browserify/index.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -33681,98 +33679,10 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":35}],35:[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canMutationObserver = typeof window !== 'undefined'
-    && window.MutationObserver;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    var queue = [];
-
-    if (canMutationObserver) {
-        var hiddenDiv = document.createElement("div");
-        var observer = new MutationObserver(function () {
-            var queueList = queue.slice();
-            queue.length = 0;
-            queueList.forEach(function (fn) {
-                fn();
-            });
-        });
-
-        observer.observe(hiddenDiv, { attributes: true });
-
-        return function nextTick(fn) {
-            if (!queue.length) {
-                hiddenDiv.setAttribute('yes', 'no');
-            }
-            queue.push(fn);
-        };
-    }
-
-    if (canPost) {
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-
-},{}],36:[function(require,module,exports){
+},{"_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/duplex.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":37}],37:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_duplex.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_duplex.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -33865,7 +33775,7 @@ function forEach (xs, f) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_readable":39,"./_stream_writable":41,"_process":35,"core-util-is":16,"inherits":19}],38:[function(require,module,exports){
+},{"./_stream_readable":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_readable.js","./_stream_writable":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_writable.js","_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","core-util-is":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/core-util-is/lib/util.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_passthrough.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -33913,7 +33823,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":40,"core-util-is":16,"inherits":19}],39:[function(require,module,exports){
+},{"./_stream_transform":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_transform.js","core-util-is":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/core-util-is/lib/util.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_readable.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -34868,7 +34778,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":37,"_process":35,"buffer":15,"core-util-is":16,"events":17,"inherits":19,"isarray":22,"stream":46,"string_decoder/":47,"util":11}],40:[function(require,module,exports){
+},{"./_stream_duplex":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_duplex.js","_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","buffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js","core-util-is":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/core-util-is/lib/util.js","events":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/events/events.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js","isarray":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/isarray/index.js","stream":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/stream-browserify/index.js","string_decoder/":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/string_decoder/index.js","util":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browser-resolve/empty.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_transform.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -35079,7 +34989,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":37,"core-util-is":16,"inherits":19}],41:[function(require,module,exports){
+},{"./_stream_duplex":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_duplex.js","core-util-is":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/core-util-is/lib/util.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_writable.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -35560,10 +35470,10 @@ function endWritable(stream, state, cb) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":37,"_process":35,"buffer":15,"core-util-is":16,"inherits":19,"stream":46}],42:[function(require,module,exports){
+},{"./_stream_duplex":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_duplex.js","_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","buffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js","core-util-is":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/core-util-is/lib/util.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js","stream":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/stream-browserify/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/passthrough.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":38}],43:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_passthrough.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/readable.js":[function(require,module,exports){
 (function (process){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = require('stream');
@@ -35577,13 +35487,13 @@ if (!process.browser && process.env.READABLE_STREAM === 'disable') {
 }
 
 }).call(this,require('_process'))
-},{"./lib/_stream_duplex.js":37,"./lib/_stream_passthrough.js":38,"./lib/_stream_readable.js":39,"./lib/_stream_transform.js":40,"./lib/_stream_writable.js":41,"_process":35,"stream":46}],44:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_duplex.js","./lib/_stream_passthrough.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_passthrough.js","./lib/_stream_readable.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_readable.js","./lib/_stream_transform.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_transform.js","./lib/_stream_writable.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_writable.js","_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","stream":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/stream-browserify/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/transform.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":40}],45:[function(require,module,exports){
+},{"./lib/_stream_transform.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_transform.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/writable.js":[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":41}],46:[function(require,module,exports){
+},{"./lib/_stream_writable.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/lib/_stream_writable.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/stream-browserify/index.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -35712,7 +35622,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":17,"inherits":19,"readable-stream/duplex.js":36,"readable-stream/passthrough.js":42,"readable-stream/readable.js":43,"readable-stream/transform.js":44,"readable-stream/writable.js":45}],47:[function(require,module,exports){
+},{"events":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/events/events.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js","readable-stream/duplex.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/duplex.js","readable-stream/passthrough.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/passthrough.js","readable-stream/readable.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/readable.js","readable-stream/transform.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/transform.js","readable-stream/writable.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/readable-stream/writable.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/string_decoder/index.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -35935,14 +35845,14 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":15}],48:[function(require,module,exports){
+},{"buffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/buffer/index.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/util/support/isBufferBrowser.js":[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],49:[function(require,module,exports){
+},{}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/util/util.js":[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -36532,7 +36442,74 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":48,"_process":35,"inherits":19}],"biojs-vis-bonestagram":[function(require,module,exports){
+},{"./support/isBuffer":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/util/support/isBufferBrowser.js","_process":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js","inherits":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/inherits/inherits_browser.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
+module.exports=require("/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browser-resolve/empty.js")
+},{"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browser-resolve/empty.js":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/browser-resolve/empty.js"}],"/Users/fayelisifi/Documents/biojs-vis-bonestagram/node_modules/watchify/node_modules/process/browser.js":[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}],"biojs-vis-bonestagram":[function(require,module,exports){
 /*
  * biojs-vis-bonestagram
  * https://github.com/fayeli/biojs-vis-bonestagram
@@ -36571,8 +36548,17 @@ var cornerstoneWADOImageLoader = require("./cornerstoneWADOImageLoader");
 var  biojsvisbonestagram;
 module.exports = biojsvisbonestagram = function(opts){
   //this.el = opts.el;
+  // if (typeof opts.width === 'undefined'){
+  // 	this.width = 400;
+  // } else {
+  // 	this.width = opts.width;
+  // }
+  // if (typeof opts.height === 'undefined'){
+  // 	this.height = 300;
+  // } else {
+  // 	this.height = opts.height;
+  // }
   console.log(biojsvisbonestagram.hello(opts.text));
-  visCore.init();
 };
 
 /**
@@ -36587,6 +36573,11 @@ module.exports = biojsvisbonestagram = function(opts){
 		}, function(err) { alert(err);
 	});
  }
+ function setWidthHeight(element, width, height){
+ 	element.setAttribute("width", width);
+  	element.setAttribute("height", height);
+  	return element;
+ }
 
 /*
  * Public Methods
@@ -36600,7 +36591,7 @@ module.exports = biojsvisbonestagram = function(opts){
  *     biojsvisbonestagram.hello('biojs');
  *
  * @method hello
- * @param {String} name Name of a person
+ * @param {String} name - Name of a person
  * @return {String} Returns hello name
  */
 
@@ -36610,26 +36601,85 @@ biojsvisbonestagram.hello = function (name) {
   return 'hello ' + name;
 };
 
+biojsvisbonestagram.create = function(opts){
+	if (typeof opts === 'undefined' || typeof opts.container === 'undefined'){
+  		this.container = $(".bonestagram_container").get(0);
+  	} else {
+  		this.container = opts.container;
+  	}
+  	if (typeof opts === 'undefined' || typeof opts.width === 'undefined'){
+  		this.width = 400;
+  	} else {
+  		this.width = opts.width;
+  	}
+  	if (typeof opts === 'undefined' || typeof opts.height === 'undefined'){
+  		this.height = 300;
+  	} else {
+  		this.height = opts.height;
+  	}
+
+  	// create HTML elements needed
+  	var vid = document.createElement("video");
+  	vid.className = "bonestagram_video";
+  	vid.setAttribute("preload", "auto");
+  	console.log(this.width);
+  	vid = setWidthHeight(vid, this.width, this.height);
+  	var canvas1 = document.createElement("canvas");
+  	canvas1.className = "bonestagram_face_overlay";
+  	canvas1 = setWidthHeight(canvas1, this.width, this.height);
+  	var canvas2 = document.createElement("canvas");
+  	canvas2.className = "bonestagram_gl";
+  	canvas2 = setWidthHeight(canvas2, this.width, this.height);
+  	var canvas3 = document.createElement("canvas");
+  	canvas3.className = "bonestagram_hand_overlay";
+  	canvas3 = setWidthHeight(canvas3, this.width, this.height);
+
+  	// add the elements in the DOM under bonestagram container
+  	this.container.appendChild(vid);
+  	this.container.appendChild(canvas1);
+  	this.container.appendChild(canvas2);
+  	this.container.appendChild(canvas3);
+  	console.log(this.container);
+
+  	visCore.init();
+};
 /**
- * Method to start visualisation
+ * Method to start the Bonestagram visualisation
  *
  * @example
  *
  *     biojsvisbonestagram.start();
  *
- * @method startFace
+ * @method start
  */
-
 biojsvisbonestagram.start = function() {
 	visCore.startFace();
-}
+};
 
+/**
+ * Method to enable DICOM image preview on an HTML <div> element with id = "dicomImage"
+ *
+ * @example
+ *
+ *     biojsvisbonestagram.enableDICOMPreview();
+ *
+ * @method enableDICOMPreview
+ */
 biojsvisbonestagram.enableDICOMPreview = function() {
 	console.log("enable DICOM preview");
 	var element = $('#dicomImage').get(0);
     cornerstone.enable(element);
-}
+};
 
+/**
+ * Method to enable DICOM image upload. 
+ * @example
+ *
+ *     biojsvisbonestagram.enableDICOMUpload(fileInput);
+ *
+ * @method enableDICOMUpload
+ * @param {Object} fileInput - An HTML <input> element with type="file"
+ */
 biojsvisbonestagram.enableDICOMUpload = function (fileInput) {
 	console.log("enable DICOM upload");
 	fileInput.onchange = function(event){
@@ -36638,7 +36688,7 @@ biojsvisbonestagram.enableDICOMUpload = function (fileInput) {
 		var imageId = cornerstoneWADOImageLoader.fileManager.add(file);
 		showDICOM(imageId);
 	};
-}
+};
 
 
-},{"./bonestagramVisCore":1,"./cornerstone":2,"./cornerstoneMath":3,"./cornerstoneTools":4,"./cornerstoneWADOImageLoader":5,"./libCharLS":7,"./libopenjpeg":8}]},{},[]);
+},{"./bonestagramVisCore":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/bonestagramVisCore.js","./cornerstone":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstone.js","./cornerstoneMath":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneMath.js","./cornerstoneTools":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneTools.js","./cornerstoneWADOImageLoader":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneWADOImageLoader.js","./libCharLS":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libCharLS.js","./libopenjpeg":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libopenjpeg.js"}]},{},[]);
