@@ -23,6 +23,46 @@ bonestagram.hello("biojs"); // "hello biojs"
 
 ## Documentation
 
+#### .start()
+
+The 'start' method is responsible for starting the bonestagram visualisation
+
+How to use this method
+
+```javascript
+bonestagram.start();
+```
+
+#### .enableDICOMPreview()
+
+The 'enableDICOMPreview' method is responsible for enabling preview of user uploaded DICOM image. The DICOM preview will be shown in an HTML <div> element with id="dicomImage"
+
+How to use this method
+```html
+<div id="dicomImage"></div>
+```
+```javascript
+bonestagram.enableDICOMPreview();
+```
+
+#### .enableDICOMUpload()
+
+**Parameter**: `fileInput`
+**Type**: `Object`
+
+The 'enableDICOMUpload' method is responsible for enabling upload of DICOM image. DICOM image uploaded through the file input will be displayed in the div element with id="dicomImage"
+
+How to use this method
+```html
+<input id="fileInput" type="file"></input>
+<div id="dicomImage"></div>
+```
+```javascript
+bonestagram.enableDICOMPreview();
+var fileInput = $("#fileInput").get(0);
+bonestagram.enableDICOMUpload(fileInput);
+```
+
 #### .hello(name)
 
 **Parameter**: `name`
