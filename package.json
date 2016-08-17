@@ -43,5 +43,5 @@
     "snippets": ["examples"],
     "first": "simple"
    }, 
-  "keywords": ["biojs","dicom","visualisation","augmented reality","web cam","medical image","biojs"]
+  "keywords": ["biojs","dicom","visualisation","augmented reality","AR","web cam","medical image"]
 }
