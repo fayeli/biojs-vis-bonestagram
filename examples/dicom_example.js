@@ -2,23 +2,17 @@
 
 var app = require("biojs-vis-bonestagram");
 var instance = new app({text: 'biojs'});
-
+app.create();
 $("#start_button").click(function(){
 	app.start();
 });
 
-// create a file input for DICOM upload
-var fileInput = document.createElement("input");
-fileInput.setAttribute("type", "file");
-fileInput.setAttribute("multiple", "false");
-rootDiv.appendChild(fileInput);
+// select a file input for DICOM upload
+var fileInput = $("#file_input").get(0);
 app.enableDICOMUpload(fileInput);
 
-// create a div in the DOM for the DICOM preview
-var div = document.createElement("div");
-div.id = "dicomImage";
-rootDiv.appendChild(div);
-app.enableDICOMPreview();
+// select a div for the DICOM preview
+var div = $("#dicomImage").get(0);
+app.enableDICOMPreview(div);
 
-//rootDiv.append($('<div><div/>').attr("id", "dicomImage"));
-//app.startFace();
+
