@@ -36548,16 +36548,6 @@ var cornerstoneWADOImageLoader = require("./cornerstoneWADOImageLoader");
 var  biojsvisbonestagram;
 module.exports = biojsvisbonestagram = function(opts){
   //this.el = opts.el;
-  // if (typeof opts.width === 'undefined'){
-  // 	this.width = 400;
-  // } else {
-  // 	this.width = opts.width;
-  // }
-  // if (typeof opts.height === 'undefined'){
-  // 	this.height = 300;
-  // } else {
-  // 	this.height = opts.height;
-  // }
   console.log(biojsvisbonestagram.hello(opts.text));
 };
 
@@ -36622,7 +36612,6 @@ biojsvisbonestagram.create = function(opts){
   	var vid = document.createElement("video");
   	vid.className = "bonestagram_video";
   	vid.setAttribute("preload", "auto");
-  	console.log(this.width);
   	vid = setWidthHeight(vid, this.width, this.height);
   	var canvas1 = document.createElement("canvas");
   	canvas1.className = "bonestagram_face_overlay";
@@ -36639,8 +36628,14 @@ biojsvisbonestagram.create = function(opts){
   	this.container.appendChild(canvas1);
   	this.container.appendChild(canvas2);
   	this.container.appendChild(canvas3);
-  	console.log(this.container);
 
+    // check if bonestagram_img exists
+    var img = document.getElementsByClassName("bonestagram_img")[0];
+    if (typeof img === 'undefined'){
+      img = document.createElement("img");
+      img.className = "bonestagram_img hide";
+      this.container.appendChild(img);
+    }
   	visCore.init();
 };
 /**
@@ -36654,6 +36649,20 @@ biojsvisbonestagram.create = function(opts){
  */
 biojsvisbonestagram.start = function() {
 	visCore.startFace();
+};
+
+/**
+ * Method to set a custom image for Bonestagram visualisation
+ * @example
+ *
+ *     biojsvisbonestagram.setBonesImg({img: myBonesImg, coords: myBonesCoords});
+ *
+ * @method setBonesImg
+ * @param {Object} img - An HTML <img> element containing the image, {Object} coords - An array of the orrespondence points coordinates from the image.
+ */
+biojsvisbonestagram.setBonesImg = function(opts) {
+  visCore.setBonesImg(opts.img);
+  visCore.setBonesCoords(opts.coords);
 };
 
 /**
@@ -36689,6 +36698,8 @@ biojsvisbonestagram.enableDICOMUpload = function (fileInput) {
 		showDICOM(imageId);
 	};
 };
+
+
 
 
 },{"./bonestagramVisCore":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/bonestagramVisCore.js","./cornerstone":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstone.js","./cornerstoneMath":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneMath.js","./cornerstoneTools":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneTools.js","./cornerstoneWADOImageLoader":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneWADOImageLoader.js","./libCharLS":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libCharLS.js","./libopenjpeg":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libopenjpeg.js"}]},{},[]);
