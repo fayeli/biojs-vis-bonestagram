@@ -14,5 +14,3 @@ app.enableDICOMUpload(fileInput);
 // select a div for the DICOM preview
 var div = $("#dicomImage").get(0);
 app.enableDICOMPreview(div);
-
-
