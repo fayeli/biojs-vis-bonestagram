@@ -36928,6 +36928,19 @@ biojsvisbonestagram.visualiseDICOM = function (){
   visCore.startFace();
 }
 
+/**
+ * Method to take a screenshot of the Bonestagram visualisation. The screenshot will be shown in the HTML <img> element with class "bonestagram_screenshot".
+ * @example
+ *
+ *     biojsvisbonestagram.screenshot();
+ *
+ * @method screenshot
+ */
+biojsvisbonestagram.screenshot = function (){
+  console.log('screenshot');
+  visCore.screenshot();
+}
+
 
 
 },{"./bonestagramVisCore":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/bonestagramVisCore.js","./cornerstone":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstone.js","./cornerstoneMath":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneMath.js","./cornerstoneTools":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneTools.js","./cornerstoneWADOImageLoader":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/cornerstoneWADOImageLoader.js","./libCharLS":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libCharLS.js","./libopenjpeg":"/Users/fayelisifi/Documents/biojs-vis-bonestagram/lib/libopenjpeg.js"}]},{},[]);

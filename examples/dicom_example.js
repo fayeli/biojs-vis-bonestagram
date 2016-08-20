@@ -12,6 +12,7 @@ app.enableDICOMUpload(fileInput);
 var div = $("#dicomImage").get(0);
 app.enableDICOMPreview(div);
 
+// visualise DICOM when user click start
 $("#start_button").click(function(){
 	app.visualiseDICOM();
 });
