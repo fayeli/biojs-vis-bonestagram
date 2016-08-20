@@ -40,7 +40,7 @@
     "js": [ "/build/bonestagram.js", "/lib/jquery-3.1.0.min.js"],
     "css": ["/css/bonestagram.css"], 
     "snippets": ["examples"],
-    "first": "simple"
+    "first": "default_visualisation"
    }, 
   "keywords": ["biojs","dicom","visualisation","augmented reality","AR","web cam","medical image"]
 }

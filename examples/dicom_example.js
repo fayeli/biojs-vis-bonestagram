@@ -1,7 +1,7 @@
 // if you don't specify a html file, the sniper will generate a div with id "rootDiv"
 
 var app = require("biojs-vis-bonestagram");
-var instance = new app({text: 'biojs'});
+var instance = new app();
 app.create();
 
 // select a file input for DICOM upload
