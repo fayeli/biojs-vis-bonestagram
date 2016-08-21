@@ -30,16 +30,16 @@ bonestagram.create();
 ```
 After calling the 'create' method, the web cam stream should apper in the container div.
 
-The method creates a visualisation of 300px by 400px, but you may customize the width and height by passing in options. 
+The method creates a visualisation of 300px by 400px by default, but you may customize the width and height by passing in options. 
 e.g.
 ```javascript
 bonestagram.create({width: "640", height: "480"}); // Works best when set to the same ratio as the web cam dimension
 ```
-To create the bonestagram visualisation in your own div, you may also pass a reference though the option.
+To create the bonestagram visualisation in your own div, you may also pass a reference though the options.
 e.g.
 ```javascript
 var myDiv = $("#myDiv").get(0);
-app.creat({container: myDiv, width: "640", height: "480"});
+bonestagram.create({container: myDiv, width: "640", height: "480"});
 ```
 
 #### .start()
