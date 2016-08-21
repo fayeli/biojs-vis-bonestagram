@@ -84,6 +84,35 @@ e.g.
 bonestagram.setCustomImg({img: myImg, coords: myCoords});
 ```
 
+#### .enablePointsSelector(canvas)
+
+**Parameter**: `canvas`
+**Type**: `Object`
+
+The 'enablePointsSelector' method is responsible for initialising a points selector tool on an HTML canvas element. The points selector tool allows you to manually select best fitted correspondence points by simple dragging. 
+
+e.g.
+```javascript
+var canvas = $("#myCanvas").get(0);
+bonestagram.enablePointsSelector(canvas);
+```
+
+#### .getPointsSelectorCoords()
+
+**Return**: `coords`
+**Type**: `Array`
+
+The 'getPointsSelectorCoords' method returns the coordinates of the user selected points in an array. It is meant to be called after a points selector tool has been enabled on an HTML canvas with the 'enablePointsSelector' method.
+
+e.g. 
+```javascript
+var canvas = $("#myCanvas").get(0);
+bonestagram.enablePointsSelector(canvas);
+// After user selected the points
+var coords = bonestagram.getPointsSelectorCoords();
+console.log(coords);
+```
+
 #### .enableDICOMPreview(div)
 
 **Parameter**: `div`
