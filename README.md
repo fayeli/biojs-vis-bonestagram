@@ -22,6 +22,7 @@ var bonestagram = require("biojs-vis-bonestagram");
 #### .create()
 
 The 'create' method is responsible for creating a new bonestagram visualisation. By default, it looks for an HTML div with class "bonestagram_container", prompts user for web cam permission, checks browser support, and prepares the div for bonestagram visualisation.
+
 e.g.
 ```html
 <div class="bonestagram_container"></div>
@@ -69,16 +70,20 @@ $("#screenshot_button").click(function(){
 });	
 ```
 
-#### .enableDICOMPreview()
+#### .enableDICOMPreview(div)
 
-The 'enableDICOMPreview' method is responsible for enabling preview of user uploaded DICOM image. The DICOM preview will be shown in an HTML div element with id="dicomImage". 
+**Parameter**: `div`
+**Type**: `Object`
+
+The 'enableDICOMPreview' method is responsible for enabling preview of user uploaded DICOM image. This method takes a reference to an HTML div element, which will be where the preview is shown when user uploads an DICOM image.
 
 e.g.
 ```html
-<div id="dicomImage"></div>
+<div id="myDiv"></div>
 ```
 ```javascript
-bonestagram.enableDICOMPreview();
+var myDiv = $("#myDiv").get(0);
+bonestagram.enableDICOMPreview(myDiv);
 ```
 
 #### .enableDICOMUpload(fileInput)
@@ -86,14 +91,14 @@ bonestagram.enableDICOMPreview();
 **Parameter**: `fileInput`
 **Type**: `Object`
 
-The 'enableDICOMUpload' method is responsible for enabling upload of DICOM image. DICOM image uploaded through the file input will be displayed in the HTML div element with id="dicomImage".
+The 'enableDICOMUpload' method is responsible for enabling upload of DICOM image. DICOM image uploaded through the file input will be displayed in the DICOM preview div. The point selector tool will also be enabled, so that user can pick the coordinates during preview.
 
-How to use this method
 ```html
 <input id="fileInput" type="file"></input>
-<div id="dicomImage"></div>
+<div id="myDiv"></div>
 ```
 ```javascript
+var myDiv = $("#myDiv").get(0);
 bonestagram.enableDICOMPreview();
 var fileInput = $("#fileInput").get(0);
 bonestagram.enableDICOMUpload(fileInput);
