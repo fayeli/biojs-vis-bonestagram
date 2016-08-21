@@ -4,15 +4,10 @@
 
 > AR Web Visualisation of DICOM Medical Images
 
-## Working Demo
-Try it at https://www.bonestagram.com
+## Demo
+Try the demo at <http://www.bonestagram.com>
 
 ## Getting Started
-Bonestagram requires jQuery to run the visualisation. Include a HTML script tag to import the jQuery library.
-
-```html
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-```
 
 Install the module with: `npm install biojs-vis-bonestagram`
 
@@ -23,11 +18,35 @@ bonestagram.hello("biojs"); // "hello biojs"
 
 ## Documentation
 
+#### .create()
+
+The 'create' method is responsible for creating a new bonestagram visualisation. By default, it looks for an HTML div with class "bonestagram_container", prompts user for web cam permission, checks browser support, and prepares the div for bonestagram visualisation.
+e.g.
+```html
+<div class="bonestagram_container"></div>
+```
+```javascript
+bonestagram.create();
+```
+After calling the 'create' method, the web cam stream should apper in the container div.
+
+The method creates a visualisation of 300px by 400px, but you may customize the width and height by passing in options. 
+e.g.
+```javascript
+bonestagram.create({width: "640", height: "480"}); // Works best when set to the same ratio as the web cam dimension
+```
+To create the bonestagram visualisation in your own div, you may also pass a reference though the option.
+e.g.
+```javascript
+var myDiv = $("#myDiv").get(0);
+app.creat({container: myDiv, width: "640", height: "480"});
+```
+
 #### .start()
 
-The 'start' method is responsible for starting the bonestagram visualisation.
+The 'start' method is responsible for starting the bonestagram visualisation. 
 
-How to use this method
+e.g.
 
 ```javascript
 bonestagram.start();
@@ -35,9 +54,9 @@ bonestagram.start();
 
 #### .enableDICOMPreview()
 
-The 'enableDICOMPreview' method is responsible for enabling preview of user uploaded DICOM image. The DICOM preview will be shown in an HTML div element with id="dicomImage".
+The 'enableDICOMPreview' method is responsible for enabling preview of user uploaded DICOM image. The DICOM preview will be shown in an HTML div element with id="dicomImage". 
 
-How to use this method
+e.g.
 ```html
 <div id="dicomImage"></div>
 ```
@@ -45,7 +64,7 @@ How to use this method
 bonestagram.enableDICOMPreview();
 ```
 
-#### .enableDICOMUpload()
+#### .enableDICOMUpload(fileInput)
 
 **Parameter**: `fileInput`
 **Type**: `Object`
@@ -63,20 +82,6 @@ var fileInput = $("#fileInput").get(0);
 bonestagram.enableDICOMUpload(fileInput);
 ```
 
-#### .hello(name)
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `biojs`
-
-The 'hello' method is responsible for showing a name.
-
-How to use this method
-
-```javascript
-bonestagram.hello('biojs'); // "hello biojs"
-```
-
 ## Contributing
 
 All contributions are welcome.
@@ -84,6 +89,8 @@ All contributions are welcome.
 ## Support
 
 If you have any problem or suggestion please open an issue [here](https://github.com/fayeli/biojs-vis-bonestagram/issues).
+
+## Credits
 
 ## License 
 
