@@ -8,13 +8,14 @@
 Try the demo at <http://www.bonestagram.com>
 
 ## Getting Started
-
 Install the module with: `npm install biojs-vis-bonestagram`
 
+## Usage Example
+
 ```javascript
-var bonestagram = require('biojs-vis-bonestagram');
-bonestagram.hello("biojs"); // "hello biojs"
+var bonestagram = require("biojs-vis-bonestagram");
 ```
+
 
 ## Documentation
 
@@ -31,11 +32,13 @@ bonestagram.create();
 After calling the 'create' method, the web cam stream should apper in the container div.
 
 The method creates a visualisation of 300px by 400px by default, but you may customize the width and height by passing in options. 
+
 e.g.
 ```javascript
 bonestagram.create({width: "640", height: "480"}); // Works best when set to the same ratio as the web cam dimension
 ```
 To create the bonestagram visualisation in your own div, you may also pass a reference though the options.
+
 e.g.
 ```javascript
 var myDiv = $("#myDiv").get(0);
@@ -45,8 +48,8 @@ bonestagram.create({container: myDiv, width: "640", height: "480"});
 #### .start()
 
 The 'start' method is responsible for starting the bonestagram visualisation. 
-e.g.
 
+e.g.
 ```javascript
 bonestagram.start();
 ```
@@ -54,6 +57,7 @@ bonestagram.start();
 #### .screenshot()
 
 The 'screenshot' method is responsible for capturing the current screenshot of the bonestagram visualisation. The method looks for an HTML img element with class "bonestagram_screenshot" and set its src to the dataURL of the screenshot. After calling this method, the screenshot should apper in the img element.
+
 e.g.
 ```html
 <button id="screenshot_button">Take a Screenshot</button>
@@ -93,6 +97,17 @@ How to use this method
 bonestagram.enableDICOMPreview();
 var fileInput = $("#fileInput").get(0);
 bonestagram.enableDICOMUpload(fileInput);
+```
+
+#### .visualiseDICOM()
+
+The 'visualiseDICOM' method is responsible for starting the visualisation of a DICOM image. The method is meant to be used with the other bonestagram DICOM methods, enableDICOMUpload() and enableDICOMPreview(). The method takes the user uploaded DICOM image, and based on the user selected points during preview, starts the visualisation of that DICOM image. After calling this method, the visualisation should appear in the bonestagram container div.
+
+e.g.
+```javascript
+$("#start_button").click(function(){
+	bonestagram.visualiseDICOM();
+}
 ```
 
 ## Contributing
