@@ -70,6 +70,20 @@ $("#screenshot_button").click(function(){
 });	
 ```
 
+#### .setCustomImg()
+
+**Parameter**: `img`
+**Type**: `Object`
+**Parameter**: `coords`
+**Type**: `Array`
+
+The 'setCustomImg' method allows for setting custom image for bonestagram visualisation. The method takes two options parameters, img and coords. img is a reference to an HTML img element containing the custom image, and coords is an array of the correspondence points. To find good correspondence points for an image, bonestagram provides a points selector tool. See the 'enablePointsSelector' method.
+
+e.g.
+```javascript
+bonestagram.setCustomImg({img: myImg, coords: myCoords});
+```
+
 #### .enableDICOMPreview(div)
 
 **Parameter**: `div`
