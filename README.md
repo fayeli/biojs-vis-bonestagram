@@ -45,11 +45,24 @@ bonestagram.create({container: myDiv, width: "640", height: "480"});
 #### .start()
 
 The 'start' method is responsible for starting the bonestagram visualisation. 
-
 e.g.
 
 ```javascript
 bonestagram.start();
+```
+
+#### .screenshot()
+
+The 'screenshot' method is responsible for capturing the current screenshot of the bonestagram visualisation. The method looks for an HTML img element with class "bonestagram_screenshot" and set its src to the dataURL of the screenshot. After calling this method, the screenshot should apper in the img element.
+e.g.
+```html
+<button id="screenshot_button">Take a Screenshot</button>
+<img class="bonestagram_screenshot"></img>
+```
+```javascript
+$("#screenshot_button").click(function(){
+	bonestagram.screenshot();
+});	
 ```
 
 #### .enableDICOMPreview()
