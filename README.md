@@ -221,14 +221,14 @@ If you have any problem or suggestion please open an issue [here](https://github
 
 ## Credits
 
-[clmtrackr](https://github.com/auduno/clmtrackr) - Javascript library for precise tracking of facial features via Constrained Local Models
-[jsfeat](https://github.com/inspirit/jsfeat) - JavaScript Computer Vision library
-[cornerstoneWADOImageLoader](https://github.com/chafey/cornerstoneWADOImageLoader) - DICOM WADO Image Loader 
++ [clmtrackr](https://github.com/auduno/clmtrackr) - Javascript library for precise tracking of facial features via Constrained Local Models
++ [jsfeat](https://github.com/inspirit/jsfeat) - JavaScript Computer Vision library
++ [cornerstoneWADOImageLoader](https://github.com/chafey/cornerstoneWADOImageLoader) - DICOM WADO Image Loader 
 
 ## Special Thanks
-Thanks to the amazing [BioJS](https://biojsnet.herokuapp.com/) open source community for all the support.
-Thanks to [Google Summer of Code 2016](https://summerofcode.withgoogle.com/) for making this 15-week long program possible.
-Thanks to my great GSoC mentors Christian and Hesam, for the weekly muti-timezones Google Hangout calls, invaluable help & advice, and also, for providing the quite intriguing personal DICOM images.
++ Thanks to the amazing [BioJS](https://biojsnet.herokuapp.com/) open source community for all the support.
++ Thanks to [Google Summer of Code 2016](https://summerofcode.withgoogle.com/) for making this 15-week long program possible.
++ Thanks to my great GSoC mentors Christian and Hesam, for the weekly muti-timezones Google Hangout calls, invaluable help & advice, and also, for providing the quite intriguing personal DICOM images.
 
 ## License 
 
