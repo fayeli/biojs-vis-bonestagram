@@ -64,6 +64,7 @@ Bonestagram will prompt the user to give permission to the webcam, and checks fo
 		bonestagram.screenshot();
 	});
 	```
+	
 Hope you enjoy this quick start guide! The full code of this tutorial is available in quickstart.html.
 
 For more examples, please feel free to check out the snippets in the examples folder. There are examples about how to load a standard medical image DICOM file (.dcm), how to use the points selector tool, etc. 
