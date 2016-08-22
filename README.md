@@ -10,13 +10,6 @@ Try the demo at <http://www.bonestagram.com>
 ## Getting Started
 Install the module with: `npm install biojs-vis-bonestagram`
 
-## Usage Example
-
-```javascript
-var bonestagram = require("biojs-vis-bonestagram");
-```
-
-
 ## Documentation
 
 #### .create()

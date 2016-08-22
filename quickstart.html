@@ -1,0 +1,21 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bonestagram Quick Start Usage Example</title>
+  <!-- Bonestagram needs its css file to run properly. Include a link referencing the file (bonestagram.css in the css folder).-->
+  <link rel="stylesheet" href="./css/bonestagram.css">
+</head>
+<body>
+	<button id="start_button">Start Visualisation</button>
+	<button id="screenshot_button">Take a Screenshot</button>
+	<div class="bonestagram_container"></div>
+	<img class="bonestagram_screenshot"><img>
+	<img class="hide bonestagram_img" src="./examples/img/xray.png"></img>
+
+	<!-- Bonestagram depends on jQuery for most of the features. Include a script tag to load the jQuery library before loading the Bonestagram library (bonestagram.js in the build folder). -->
+	<script src="./lib/jquery-3.1.0.min.js"></script>
+	<script src="./build/bonestagram"></script>
+</body>
+</html>
