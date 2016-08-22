@@ -39,7 +39,7 @@ This is a step-by-step quick start guide on how to develop a web app with the bo
 ```
 2. Serve the file to local host to check it out. I like to use `python -m SimpleHTTPServer` 
 3. Next, you may start writing the javascript to create the visualisation. Let's create a visualisation of 640px by 480px. 
-```
+```javascript
 bonestagram.create({width: 640, height:480});
 ```
 Bonestagram will prompt the user to give permission to the webcam, and checks for browser support. After that, you should see the webcam stream appears in the div with class "bonestagram_container".
