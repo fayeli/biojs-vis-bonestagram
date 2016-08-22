@@ -64,7 +64,7 @@ Bonestagram will prompt the user to give permission to the webcam, and checks fo
 		bonestagram.screenshot();
 	});
 	```
-	
+
 Hope you enjoy this quick start guide! The full code of this tutorial is available in quickstart.html.
 
 For more examples, please feel free to check out the snippets in the examples folder. There are examples about how to load a standard medical image DICOM file (.dcm), how to use the points selector tool, etc. 
@@ -220,6 +220,15 @@ All contributions are welcome.
 If you have any problem or suggestion please open an issue [here](https://github.com/fayeli/biojs-vis-bonestagram/issues).
 
 ## Credits
+
+[clmtrackr](https://github.com/auduno/clmtrackr) - Javascript library for precise tracking of facial features via Constrained Local Models
+[jsfeat](https://github.com/inspirit/jsfeat) - JavaScript Computer Vision library
+[cornerstoneWADOImageLoader](https://github.com/chafey/cornerstoneWADOImageLoader) - DICOM WADO Image Loader 
+
+## Special Thanks
+Thanks to the amazing [BioJS](https://biojsnet.herokuapp.com/) open source community for all the support.
+Thanks to [Google Summer of Code 2016](https://summerofcode.withgoogle.com/) for making this 15-week long program possible.
+Thanks to my great GSoC mentors Christian and Hesam, for the weekly muti-timezones Google Hangout calls, invaluable help & advice, and also, for providing the quite intriguing personal DICOM images.
 
 ## License 
 
