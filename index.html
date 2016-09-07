@@ -32,7 +32,7 @@
 			img, embed, object, video {
 				max-width: 100%;
 			}
-			nav a, button {
+			nav a {
 				min-width: 48px;
 				min-height: 48px;
 			}
@@ -61,6 +61,23 @@
 				background: white;
 				padding: 20px 70px 20px 70px;
 				width: 560px;
+			}
+
+			#exit_btn{
+				padding: 7px;
+			    width: 30px;
+			    height: 30px;
+			    outline: 0;
+			    cursor: pointer;
+			    border: none;
+			    border-radius: 15px;
+			    position: absolute;
+			    top: -15px;
+			    left: -15px;
+			}
+
+			#exit_btn svg{
+				fill: white;
 			}
 
 			#upload_btn{
@@ -357,7 +374,7 @@
 				animation-fill-mode: forwards;
 			}
 
-			.bonestagram_screenshot{
+			.screenshot_container{
 				opacity: 0;
 			}
 
@@ -435,7 +452,8 @@
 				});
 				$('#screenshot_btn').click(function(){
 					bonestagram.screenshot();
-					$('.bonestagram_screenshot').addClass('slideDown');
+					$('.screenshot_container').addClass('slideDown');
+					$('.screenshot_container').show();
 					$('.bonestagram_container').hide();
 					$('#screenshot_btn').hide();
 					$('#save_btn').css('display','block');
@@ -448,10 +466,22 @@
 					a.href = $('.bonestagram_screenshot').attr('src');
 					a.download = 'my-bonestagram.png';
 					a.click();
-				})
+				});
+				$('#exit_btn').click(function(){
+					$('.screenshot_container').css("opacity", 0);
+					$('.screenshot_container').hide();
+					$('.screenshot_container').removeClass('slideDown');
+					$('#ui_text').removeClass('fadeOut');
+					$('#ui_text').hide();
+					$('#save_btn').hide();
+					$('.bonestagram_container').removeClass('fadeIn');
+					$('.bonestagram_container').show();
+					$('#screenshot_btn').show();
+				});
 				$('#upload_btn').on({
 					click: function(){
 						$('#file_input').click();
+						$('#points_selector_button').addClass('slideUp');
 					},
 					mouseenter: function(){
 						$('#upload_btn_text').toggle();
@@ -473,7 +503,12 @@
 	</head>
 	<body>
 		<div class="container" id="container1">
-			<img class="bonestagram_screenshot"></img>
+			<div class="screenshot_container">
+				<button id="exit_btn">
+					<svg enable-background="new 0 0 256 256" id="Layer_1" version="1.1" viewBox="0 0 256 256"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M137.051,128l75.475-75.475c2.5-2.5,2.5-6.551,0-9.051s-6.551-2.5-9.051,0L128,118.949L52.525,43.475  c-2.5-2.5-6.551-2.5-9.051,0s-2.5,6.551,0,9.051L118.949,128l-75.475,75.475c-2.5,2.5-2.5,6.551,0,9.051  c1.25,1.25,2.888,1.875,4.525,1.875s3.275-0.625,4.525-1.875L128,137.051l75.475,75.475c1.25,1.25,2.888,1.875,4.525,1.875  s3.275-0.625,4.525-1.875c2.5-2.5,2.5-6.551,0-9.051L137.051,128z"/></svg>
+				</button>
+				<img class="bonestagram_screenshot"></img>
+			</div>
 			<div class="bonestagram_container fadeIn">
 				<video class="bonestagram_video" width="400" height="300" preload="auto">
 				</video>
@@ -506,7 +541,7 @@
 		<div class="container" id="container3">
 			<div id="dicomImage" style="width:640px;height:480px;"></div>
 			<div class="ui_container">
-            	<button id="points_selector_button" class="slideUp">Done Selecting Points</button>
+            	<button id="points_selector_button">Done Selecting Points</button>
         	</div>
 		</div>
 
