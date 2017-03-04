@@ -5,7 +5,7 @@
 > AR Web Visualisation of DICOM Medical Images
 
 ## Demo
-Try the demo at <http://www.bonestagram.com>
+Try the demo at <https://bonestagram.herokuapp.com/>
 
 ## Getting Started
 Install the module with: `npm install biojs-vis-bonestagram`
