@@ -1,3 +1,5 @@
+
+
 # biojs-vis-bonestagram
 
 [![NPM version](http://img.shields.io/npm/v/biojs-vis-bonestagram.svg)](https://www.npmjs.org/package/biojs-vis-bonestagram) 
@@ -195,7 +197,7 @@ The 'enableDICOMUpload' method is responsible for enabling upload of DICOM image
 ```
 ```javascript
 var myDiv = $("#myDiv").get(0);
-bonestagram.enableDICOMPreview();
+bonestagram.enableDICOMPreview(myDiv);
 var fileInput = $("#fileInput").get(0);
 bonestagram.enableDICOMUpload(fileInput);
 ```
